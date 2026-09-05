@@ -713,10 +713,13 @@ function renderConfig(){
         <div class="kpi" style="text-align:left;padding:14px"><span>Conta conectada</span><b style="font-size:14px">${escHtml(gUserEmail||'—')}</b></div>
         <div class="kpi" style="text-align:left;padding:14px"><span>Status</span><b style="font-size:14px">${gSyncStatus==='synced'?'✅ Sincronizado':gSyncStatus==='connecting'?'🔄 Sincronizando…':'⚠️ Erro de sincronização'}${gLastSync?` <span class="hint">(última vez às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})})</span>`:''}</b></div>
       </div>
+      ${gSyncStatus==='error'&&gLastError?`<div class="drive-setup-box" style="border-color:#fca5a5;background:#fef2f2;color:#991b1b;margin-bottom:10px">⚠️ Detalhe técnico do erro: ${escHtml(gLastError)}</div>`:''}
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn" data-action="driveSyncNow">☁️ Salvar agora no Drive</button>
+        ${gSyncStatus==='error'?`<button class="btn" data-action="googleSignIn">🔑 Tentar reconectar</button>`:`<button class="btn" data-action="driveSyncNow">☁️ Salvar agora no Drive</button>`}
+        ${gDriveFileLink?`<a href="${escAttr(gDriveFileLink)}" target="_blank" rel="noopener" class="btn ghost" style="text-decoration:none;display:inline-block">📄 Abrir arquivo no Google Drive</a>`:''}
         <button class="btn ghost" data-action="googleSignOut">Desconectar</button>
       </div>
+      <p class="hint" style="margin-top:6px">O arquivo se chama <code>${DRIVE_FILE_NAME}</code> e fica na raiz do seu Google Drive (pasta "Meu Drive"). Se não achar procurando manualmente, use o botão "Abrir arquivo no Google Drive" acima, ou busque exatamente por esse nome na barra de busca do Drive.</p>
       <p class="hint" style="margin-top:8px">As alterações são salvas automaticamente no Google Drive alguns segundos depois de você editar qualquer campo. Ao abrir este mesmo link em outro aparelho e entrar com a mesma conta, os dados mais recentes do Drive substituem os locais.</p>`}
   </div>
   <div class="card">
@@ -1371,9 +1374,10 @@ const GOOGLE_OAUTH_SCOPES='https://www.googleapis.com/auth/drive.file email prof
 const DRIVE_FILE_NAME='controle-financeiro-dados.json';
 const GOOGLE_CONFIGURED=!!(GOOGLE_CLIENT_ID && !GOOGLE_CLIENT_ID.startsWith('COLE_AQUI'));
 
-let gTokenClient=null, gAccessToken=null, gTokenExpiry=0, gDriveFileId=null, gUserEmail=null;
+let gTokenClient=null, gAccessToken=null, gTokenExpiry=0, gDriveFileId=null, gDriveFileLink=null, gUserEmail=null;
 let gSyncStatus='offline'; // offline | connecting | synced | error
 let gLastSync=null;
+let gLastError=null;
 let driveSaveTimer=null;
 
 function renderSyncBadge(){
@@ -1384,6 +1388,14 @@ function renderSyncBadge(){
   const labels={offline:'Não conectado',connecting:'Sincronizando…',synced: gLastSync?`Sincronizado às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`:'Sincronizado',error:'Erro de sincronização'};
   txt.textContent=labels[gSyncStatus]||'';
 }
+async function readApiError(resp){
+  try{
+    const data=await resp.json();
+    return data?.error?.message || data?.error_description || data?.error || `HTTP ${resp.status}`;
+  }catch(e){
+    try{return `HTTP ${resp.status} ${resp.statusText||''}`.trim();}catch(e2){return 'Erro desconhecido';}
+  }
+}
 
 function initGoogleAuth(){
   if(!GOOGLE_CONFIGURED||typeof google==='undefined'||!google.accounts||!google.accounts.oauth2)return;
@@ -1391,14 +1403,14 @@ function initGoogleAuth(){
     client_id:GOOGLE_CLIENT_ID,
     scope:GOOGLE_OAUTH_SCOPES,
     callback:handleGoogleToken,
-    error_callback:(err)=>{console.error('Erro de login Google',err);gSyncStatus='error';renderSyncBadge();}
+    error_callback:(err)=>{console.error('Erro de login Google',err);gLastError=err?.message||err?.type||'Falha ao abrir a tela de login do Google';gSyncStatus='error';renderSyncBadge();}
   });
   if(localStorage.getItem('gdrive_connected')==='1'){
     try{gTokenClient.requestAccessToken({prompt:''});}catch(e){}
   }
 }
 async function handleGoogleToken(resp){
-  if(!resp||resp.error){gSyncStatus='error';renderSyncBadge();return;}
+  if(!resp||resp.error){gLastError=resp?.error_description||resp?.error||'Login cancelado ou não autorizado';gSyncStatus='error';renderSyncBadge();return;}
   gAccessToken=resp.access_token;
   gTokenExpiry=Date.now()+((resp.expires_in||3600)*1000)-60000;
   localStorage.setItem('gdrive_connected','1');
@@ -1407,8 +1419,8 @@ async function handleGoogleToken(resp){
     await fetchGoogleUserInfo();
     await ensureDriveFile();
     await loadFromDrive();
-    gSyncStatus='synced';gLastSync=new Date();
-  }catch(e){console.error(e);gSyncStatus='error';}
+    gSyncStatus='synced';gLastSync=new Date();gLastError=null;
+  }catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';}
   renderSyncBadge();
   renderCurrent();
 }
@@ -1422,33 +1434,39 @@ async function ensureDriveFile(){
   const cachedId=localStorage.getItem('gdrive_file_id');
   if(cachedId){
     try{
-      const check=await fetch(`https://www.googleapis.com/drive/v3/files/${cachedId}?fields=id,trashed`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
-      if(check.ok){const d=await check.json();if(!d.trashed){gDriveFileId=cachedId;return;}}
+      const check=await fetch(`https://www.googleapis.com/drive/v3/files/${cachedId}?fields=id,trashed,webViewLink`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
+      if(check.ok){const d=await check.json();if(!d.trashed){gDriveFileId=cachedId;gDriveFileLink=d.webViewLink||null;if(gDriveFileLink)localStorage.setItem('gdrive_file_link',gDriveFileLink);return;}}
     }catch(e){}
   }
   const q=encodeURIComponent(`name='${DRIVE_FILE_NAME}' and trashed=false`);
-  const listResp=await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name)`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
+  const listResp=await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&fields=files(id,name,webViewLink)`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
+  if(!listResp.ok)throw new Error('Falha ao buscar arquivo no Drive: '+await readApiError(listResp));
   const listData=await listResp.json();
   if(listData.files&&listData.files.length){
     gDriveFileId=listData.files[0].id;
+    gDriveFileLink=listData.files[0].webViewLink||null;
   }else{
     const metadata={name:DRIVE_FILE_NAME,mimeType:'application/json'};
     const boundary='-------cf'+Date.now();
     const body=`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n${JSON.stringify(state)}\r\n--${boundary}--`;
-    const createResp=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{
+    const createResp=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webViewLink',{
       method:'POST',
       headers:{Authorization:`Bearer ${gAccessToken}`,'Content-Type':`multipart/related; boundary=${boundary}`},
       body
     });
+    if(!createResp.ok)throw new Error('Falha ao criar arquivo no Drive: '+await readApiError(createResp));
     const createData=await createResp.json();
+    if(!createData.id)throw new Error('O Drive não retornou um ID de arquivo válido ao criar');
     gDriveFileId=createData.id;
+    gDriveFileLink=createData.webViewLink||null;
   }
+  if(gDriveFileLink)localStorage.setItem('gdrive_file_link',gDriveFileLink);
   if(gDriveFileId)localStorage.setItem('gdrive_file_id',gDriveFileId);
 }
 async function loadFromDrive(){
-  if(!gDriveFileId)return;
+  if(!gDriveFileId)throw new Error('Nenhum arquivo do Drive identificado para carregar');
   const r=await fetch(`https://www.googleapis.com/drive/v3/files/${gDriveFileId}?alt=media`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
-  if(!r.ok)throw new Error('Falha ao carregar do Drive');
+  if(!r.ok)throw new Error('Falha ao carregar do Drive: '+await readApiError(r));
   const text=await r.text();
   if(!text.trim())return;
   const remote=JSON.parse(text);
@@ -1456,21 +1474,28 @@ async function loadFromDrive(){
 }
 async function withFreshToken(fn){
   if(gAccessToken&&Date.now()<gTokenExpiry)return fn();
-  if(!gTokenClient)return;
+  if(!gTokenClient){gLastError='Cliente de login do Google não inicializado — tente recarregar a página';gSyncStatus='error';renderSyncBadge();return;}
   return new Promise((resolve)=>{
     const prevCb=gTokenClient.callback;
     gTokenClient.callback=async(resp)=>{
       gTokenClient.callback=prevCb;
-      if(!resp||resp.error){gSyncStatus='error';renderSyncBadge();resolve();return;}
+      if(!resp||resp.error){
+        gLastError='Sua sessão com o Google expirou e não foi possível renovar automaticamente. Clique em "Tentar reconectar".';
+        gSyncStatus='error';renderSyncBadge();resolve();return;
+      }
       gAccessToken=resp.access_token;
       gTokenExpiry=Date.now()+((resp.expires_in||3600)*1000)-60000;
       resolve(await fn());
     };
-    try{gTokenClient.requestAccessToken({prompt:''});}catch(e){resolve();}
+    try{gTokenClient.requestAccessToken({prompt:''});}catch(e){gLastError=e?.message||String(e);gSyncStatus='error';renderSyncBadge();resolve();}
   });
 }
 async function doSaveToDrive(){
-  if(!gDriveFileId||!gAccessToken)return;
+  if(!gAccessToken){gLastError='Não há uma sessão ativa do Google — conecte-se novamente.';gSyncStatus='error';renderSyncBadge();return;}
+  if(!gDriveFileId){
+    gSyncStatus='connecting';renderSyncBadge();
+    try{await ensureDriveFile();}catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';renderSyncBadge();return;}
+  }
   gSyncStatus='connecting';renderSyncBadge();
   try{
     const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${gDriveFileId}?uploadType=media`,{
@@ -1478,9 +1503,9 @@ async function doSaveToDrive(){
       headers:{Authorization:`Bearer ${gAccessToken}`,'Content-Type':'application/json'},
       body:JSON.stringify(state)
     });
-    if(!r.ok)throw new Error('Falha ao salvar no Drive');
-    gLastSync=new Date();gSyncStatus='synced';
-  }catch(e){console.error(e);gSyncStatus='error';}
+    if(!r.ok)throw new Error('Falha ao salvar no Drive: '+await readApiError(r));
+    gLastSync=new Date();gSyncStatus='synced';gLastError=null;
+  }catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';}
   renderSyncBadge();
 }
 function saveToDrive(){return withFreshToken(doSaveToDrive);}
@@ -1491,6 +1516,7 @@ function scheduleDriveSave(){
 }
 function signInGoogle(){
   if(!GOOGLE_CONFIGURED){alert('A sincronização com o Google Drive ainda não foi configurada neste arquivo. Veja as instruções no card "☁️ Sincronização" em Configuração.');return;}
+  gLastError=null;
   if(!gTokenClient)initGoogleAuth();
   if(gTokenClient)gTokenClient.requestAccessToken({prompt:'consent'});
 }
@@ -1498,9 +1524,10 @@ function signOutGoogle(){
   if(gAccessToken&&typeof google!=='undefined'&&google.accounts&&google.accounts.oauth2){
     try{google.accounts.oauth2.revoke(gAccessToken,()=>{});}catch(e){}
   }
-  gAccessToken=null;gDriveFileId=null;gUserEmail=null;gSyncStatus='offline';gLastSync=null;
+  gAccessToken=null;gDriveFileId=null;gDriveFileLink=null;gUserEmail=null;gSyncStatus='offline';gLastSync=null;gLastError=null;
   localStorage.removeItem('gdrive_connected');
   localStorage.removeItem('gdrive_file_id');
+  localStorage.removeItem('gdrive_file_link');
   renderSyncBadge();
   renderCurrent();
 }
