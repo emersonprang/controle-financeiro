@@ -1518,8 +1518,12 @@ function signInGoogle(){
   if(!GOOGLE_CONFIGURED){alert('A sincronização com o Google Drive ainda não foi configurada neste arquivo. Veja as instruções no card "☁️ Sincronização" em Configuração.');return;}
   gLastError=null;
   if(!gTokenClient)initGoogleAuth();
-  if(gTokenClient)gTokenClient.requestAccessToken({prompt:'consent'});
+  // Sem "prompt:'consent'" forçado: se você já autorizou antes neste navegador,
+  // o Google pula a tela de consentimento completa (incluindo o aviso de app
+  // não verificado) e só pede para escolher a conta / confirmar rapidamente.
+  if(gTokenClient)gTokenClient.requestAccessToken();
 }
+
 function signOutGoogle(){
   if(gAccessToken&&typeof google!=='undefined'&&google.accounts&&google.accounts.oauth2){
     try{google.accounts.oauth2.revoke(gAccessToken,()=>{});}catch(e){}
