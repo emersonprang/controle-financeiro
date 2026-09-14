@@ -2,9 +2,9 @@
 <html lang="pt-BR"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Controle Financeiro</title>
+<title>Controle Financeiro 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://accounts.google.com/gsi/client" async="" defer=""></script>
 <style>
 :root{--bg:#f1f5f9;--card:#fff;--primary:#4f46e5;--primary-dark:#4338ca;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--green:#16a34a;--red:#dc2626;}
 *{box-sizing:border-box;}
@@ -29,7 +29,7 @@ main#app{padding:18px;max-width:1400px;margin:0 auto;}
 .cardhead h3{margin:0;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 @media (max-width:900px){.grid2{grid-template-columns:1fr;}}
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px;}
 @media (max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr);}}
 .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
 .kpi span{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px;}
@@ -51,6 +51,9 @@ select.inp{min-width:100px;}
 canvas{max-width:100%;}
 .chartbox{height:280px;}
 .dashboard-hero{background:linear-gradient(135deg,#312e81,#7c3aed);color:#fff;border:none;}
+.dashboard-hero .kpi{background:#fff;border-color:var(--border);}
+.dashboard-hero .kpi span{color:var(--muted);}
+.dashboard-hero .kpi b:not(.pos):not(.neg){color:var(--text);}
 .dashboard-hero h2{margin:0 0 6px;font-size:24px}.dashboard-hero p{margin:0;opacity:.85;font-size:13px}
 .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.metric{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}.metric .label{font-size:12px;color:var(--muted)}.metric .value{font-size:22px;font-weight:700;margin-top:7px}.metric .subvalue{font-size:11px;color:var(--muted);margin-top:5px}
 @media(max-width:900px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
@@ -71,9 +74,9 @@ nav#nav{position:fixed;left:0;top:0;width:250px;height:100vh;padding:12px;backgr
 #nav .nav-section{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.08em;padding:14px 10px 4px;}
 #nav .tabbtn{width:100%;text-align:left;border:none;background:transparent;border-radius:9px;padding:9px 11px;font-size:13px;}
 #nav .tabbtn:hover{background:#f1f5f9;}#nav .tabbtn.active{background:var(--primary);color:#fff;}
-body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:68px;}body.sidebar-collapsed #nav .nav-label,body.sidebar-collapsed #nav .nav-section,body.sidebar-collapsed #nav .nav-brand-text{display:none;}body.sidebar-collapsed #nav .tabbtn{text-align:center;padding:10px 5px;font-size:0;}body.sidebar-collapsed #nav .tabbtn .nav-icon{font-size:18px;}body.sidebar-collapsed #nav .nav-brand{justify-content:center;padding-bottom:10px;}
-@media(max-width:760px){body{padding-left:68px;}nav#nav{width:68px;}body:not(.mobile-sidebar-open) #nav .nav-label,body:not(.mobile-sidebar-open) #nav .nav-section,body:not(.mobile-sidebar-open) #nav .nav-brand-text{display:none;}body:not(.mobile-sidebar-open) #nav .tabbtn{text-align:center;padding:10px 5px;font-size:0;}body:not(.mobile-sidebar-open) #nav .tabbtn .nav-icon{font-size:18px;}body:not(.mobile-sidebar-open) #nav .nav-brand{justify-content:center;padding-bottom:10px;}body.mobile-sidebar-open nav#nav{width:min(280px,82vw);box-shadow:8px 0 24px rgba(0,0,0,.18);}body.mobile-sidebar-open{padding-left:68px;} }
-.month-picker{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;margin:2px 0 6px}.month-picker select{flex:1;border:none;background:transparent;color:var(--text);font-size:13px;font-weight:600;outline:none;min-width:0;cursor:pointer}body.sidebar-collapsed .month-picker{padding:8px 5px;justify-content:center}body.sidebar-collapsed .month-picker select{display:none}@media(max-width:760px){body:not(.mobile-sidebar-open) .month-picker{padding:8px 5px;justify-content:center}body:not(.mobile-sidebar-open) .month-picker select{display:none}}
+body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:68px;}body.sidebar-collapsed #nav .nav-label,body.sidebar-collapsed #nav .nav-section,body.sidebar-collapsed #nav .nav-brand-text{display:none;}body.sidebar-collapsed #nav .tabbtn{width:40px;height:40px;margin:2px auto;padding:0;display:flex;align-items:center;justify-content:center;font-size:0;border-radius:10px;}body.sidebar-collapsed #nav .tabbtn .nav-icon{font-size:19px;}body.sidebar-collapsed #nav .nav-brand{justify-content:center;padding-bottom:10px;}
+@media(max-width:760px){body{padding-left:68px;}nav#nav{width:68px;}body:not(.mobile-sidebar-open) #nav .nav-label,body:not(.mobile-sidebar-open) #nav .nav-section,body:not(.mobile-sidebar-open) #nav .nav-brand-text{display:none;}body:not(.mobile-sidebar-open) #nav .tabbtn{width:40px;height:40px;margin:2px auto;padding:0;display:flex;align-items:center;justify-content:center;font-size:0;border-radius:10px;}body:not(.mobile-sidebar-open) #nav .tabbtn .nav-icon{font-size:19px;}body:not(.mobile-sidebar-open) #nav .nav-brand{justify-content:center;padding-bottom:10px;}body.mobile-sidebar-open nav#nav{width:min(280px,82vw);box-shadow:8px 0 24px rgba(0,0,0,.18);}body.mobile-sidebar-open{padding-left:68px;} }
+.month-picker{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;margin:2px 0 6px}.month-picker select{flex:1;border:none;background:transparent;color:var(--text);font-size:13px;font-weight:600;outline:none;min-width:0;cursor:pointer}body.sidebar-collapsed .month-picker{padding:8px 3px;justify-content:center;gap:2px}body.sidebar-collapsed .month-picker .nav-icon{display:none}body.sidebar-collapsed .month-picker select{display:block;flex:none;width:100%;font-size:10.5px;padding:2px 0;text-align:center}@media(max-width:760px){body:not(.mobile-sidebar-open) .month-picker{padding:8px 3px;justify-content:center;gap:2px}body:not(.mobile-sidebar-open) .month-picker .nav-icon{display:none}body:not(.mobile-sidebar-open) .month-picker select{display:block;flex:none;width:100%;font-size:10.5px;padding:2px 0;text-align:center}}
 .header-search{position:relative;flex:1 1 260px;max-width:380px}
 .search-input{width:100%;padding:9px 12px;border-radius:9px;border:none;font-size:13px;box-sizing:border-box}
 .search-results{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;color:var(--text);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.18);max-height:340px;overflow-y:auto;z-index:60}
@@ -116,7 +119,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
 .drive-setup-box{background:#f8fafc;border:1px dashed var(--border);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--muted);line-height:1.6}
 .drive-setup-box code{background:#e2e8f0;padding:1px 5px;border-radius:5px;font-size:11.5px}
 </style>
-</head>
+<style id="googleidentityservice_button_styles">.qJTHM{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;color:#202124;direction:ltr;-webkit-touch-callout:none;font-family:Roboto-Regular,arial,sans-serif;-webkit-font-smoothing:antialiased;font-weight:400;margin:0;overflow:hidden;-webkit-text-size-adjust:100%}.ynRLnc{left:-9999px;position:absolute;top:-9999px}.L6cTce{display:none}.bltWBb{overflow-wrap:break-word;word-break:break-word}.hSRGPd{color:#1a73e8;cursor:pointer;font-weight:500;text-decoration:none}.Bz112c-W3lGp{height:16px;width:16px}.Bz112c-E3DyYd{height:20px;width:20px}.Bz112c-r9oPif{height:24px;width:24px}.Bz112c-u2z5K{height:36px;width:36px}.Bz112c-uaxL4e{border-radius:10px}.LgbsSe-Bz112c{display:block}.S9gUrf-YoZ4jf{border:none;margin:0;padding:0}.S9gUrf-YoZ4jf *{border:none;margin:0;padding:0}.fFW7wc-ibnC6b>.aZ2wEe>div{border-color:#4285f4}.P1ekSe-ZMv3u{-webkit-transition:height .2s linear;transition:height .2s linear}.P1ekSe-ZMv3u>div:first-child{background-color:#1a73e8!important;-webkit-transition:width .3s linear;transition:width .3s linear}.P1ekSe-ZMv3u>div:nth-child(2){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.P1ekSe-ZMv3u>div:nth-child(3){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.haAclf{display:inline-block}.nsm7Bb-HzV7m-LgbsSe{border-radius:4px;box-sizing:border-box;-webkit-transition:background-color .218s,border-color .218s;transition:background-color .218s,border-color .218s;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#fff;background-image:none;border:1px solid #dadce0;color:#3c4043;cursor:pointer;font-family:Google Sans,arial,sans-serif;font-size:.875rem;height:40px;letter-spacing:.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;vertical-align:middle;white-space:nowrap;width:auto}.nsm7Bb-HzV7m-LgbsSe.TzA9Ye-LgbsSe{font-size:14px}@media screen and (-ms-high-contrast:active){.nsm7Bb-HzV7m-LgbsSe{border:2px solid windowText;color:windowText}}@media screen and (preferes-contrast:more){.nsm7Bb-HzV7m-LgbsSe{color:#000}}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe{font-size:.875rem;height:32px;letter-spacing:.25px;padding:0 10px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.TzA9Ye-LgbsSe{font-size:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe{font-size:.6875rem;height:20px;letter-spacing:.3px;padding:0 8px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.TzA9Ye-LgbsSe{font-size:11px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe{padding:0;width:40px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe{width:32px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe{width:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK{border-radius:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe{border-radius:16px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe{border-radius:10px}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc{border:1px solid #8e918f;background-color:#131314;color:#e3e3e3}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc{border:none;color:#fff}.nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc{background-color:#1a73e8}.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{background-color:#202124;color:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{color:#fff}}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:18px;margin-right:8px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:14px;min-width:14px;width:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:10px;min-width:10px;width:10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin-left:8px;margin-right:-4px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:10px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:8px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:4px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:3px;border-bottom-left-radius:3px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center;background-color:#fff;height:36px;margin-left:-10px;margin-right:12px;min-width:36px;width:36px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:28px;margin-left:-8px;margin-right:10px;min-width:28px;width:28px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:16px;margin-left:-6px;margin-right:8px;min-width:16px;width:16px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:3px;margin-left:2px;margin-right:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:8px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;position:relative;width:100%}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX{-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:1;-webkit-box-flex:1;flex-grow:1;font-family:Google Sans,arial,sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-weight:300}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:0;-webkit-box-flex:0;flex-grow:0}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe{-webkit-transition:background-color .218s;transition:background-color .218s;bottom:0;left:0;position:absolute;right:0;top:0}.nsm7Bb-HzV7m-LgbsSe:focus,.nsm7Bb-HzV7m-LgbsSe:hover{box-shadow:none;border-color:rgb(210,227,252);outline:none}.nsm7Bb-HzV7m-LgbsSe:focus-within{outline:2px solid #00639b;border-color:transparent}.nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.08)}.nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.1)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.08)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.12)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.24)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.32)}.nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY{border-radius:50%;display:-webkit-box;display:-webkit-flex;display:flex;height:20px;margin-left:-4px;margin-right:8px;min-width:20px;width:20px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-family:Roboto;font-size:12px;text-align:left}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS,.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf{overflow:hidden;text-overflow:ellipsis}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;color:#5f6368;fill:#5f6368;font-size:11px;font-weight:400}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.i5vt6e-to915-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#c4c7c5;fill:#c4c7c5}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#e8eaed;fill:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff,.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#000;fill:#000}}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c{height:18px;margin:-3px -3px -3px 2px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-bottom-right-radius:3px;margin-left:12px;margin-right:-10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.L5Fo6c-sM5MNb{border:0;display:block;left:0;position:relative;top:0}.L5Fo6c-bF1uUb{border-radius:4px;bottom:0;cursor:pointer;left:0;position:absolute;right:0;top:0}.L5Fo6c-bF1uUb:focus{border:none;outline:none}sentinel{}</style></head>
 <body>
 <header class="top">
   <div>
@@ -134,89 +137,36 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
     <button class="btn" data-action="save">💾 Salvar</button>
   </div>
 </header>
-<nav id="nav"><button class="tabbtn" data-tab="config">⚙️ Configuração</button><button class="tabbtn active" data-tab="salario">💰 Salário</button><button class="tabbtn" data-tab="planner">📋 Planejamento</button><button class="tabbtn" data-tab="m0">Jan</button><button class="tabbtn" data-tab="m1">Fev</button><button class="tabbtn" data-tab="m2">Mar</button><button class="tabbtn" data-tab="m3">Abr</button><button class="tabbtn" data-tab="m4">Mai</button><button class="tabbtn" data-tab="m5">Jun</button><button class="tabbtn" data-tab="m6">Jul</button><button class="tabbtn" data-tab="m7">Ago</button><button class="tabbtn" data-tab="m8">Set</button><button class="tabbtn" data-tab="m9">Out</button><button class="tabbtn" data-tab="m10">Nov</button><button class="tabbtn" data-tab="m11">Dez</button><button class="tabbtn" data-tab="resumo">📊 Resumo Anual</button></nav>
+<nav id="nav"><div class="nav-brand"><span class="nav-brand-text">💼 Controle Financeiro</span><button class="nav-toggle" data-action="toggleSidebar" title="Recolher/expandir">☰</button></div><div class="nav-section">GESTÃO FINANCEIRA</div><button class="tabbtn active" data-tab="home" title="Visão Geral"><span class="nav-icon">🏠</span> <span class="nav-label">Visão Geral</span></button><button class="tabbtn" data-tab="salario" title="Salário"><span class="nav-icon">💰</span> <span class="nav-label">Salário</span></button><button class="tabbtn" data-tab="planner" title="Planejamento"><span class="nav-icon">📋</span> <span class="nav-label">Planejamento</span></button><button class="tabbtn" data-tab="metas" title="Metas Financeiras"><span class="nav-icon">🎯</span> <span class="nav-label">Metas Financeiras</span></button><button class="tabbtn" data-tab="resumo" title="Resumo Anual"><span class="nav-icon">📊</span> <span class="nav-label">Resumo Anual</span></button><div class="nav-section">LANÇAMENTOS</div><div class="month-picker"><span class="nav-icon">📅</span><select id="monthSelect" aria-label="Selecionar mês"><option value="m0">Janeiro</option><option value="m1">Fevereiro</option><option value="m2">Março</option><option value="m3">Abril</option><option value="m4">Maio</option><option value="m5">Junho</option><option value="m6">Julho</option><option value="m7">Agosto</option><option value="m8" selected="">Setembro</option><option value="m9">Outubro</option><option value="m10">Novembro</option><option value="m11">Dezembro</option></select></div><div class="nav-section">SISTEMA</div><button class="tabbtn" data-tab="config" title="Configurações"><span class="nav-icon">⚙️</span> <span class="nav-label">Configurações</span></button></nav>
 <main id="app">
-  <div class="card"><h3>Salário Mensal</h3><div class="scrollx"><table class="tbl">
-  <thead><tr><th>Campo</th><th>Jan</th><th>Fev</th><th>Mar</th><th>Abr</th><th>Mai</th><th>Jun</th><th>Jul</th><th>Ago</th><th>Set</th><th>Out</th><th>Nov</th><th>Dez</th></tr></thead><tbody>
-  <tr><td>Horas Normais (R$)</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.hn" data-num="1" value="2405.3333"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.hn" data-num="1" value="4059"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.hn" data-num="1" value="4509.999"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.hn" data-num="1" value="4900"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.hn" data-num="1" value="4900"></td></tr>
-  <tr><td>Extras (R$)</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.extras" data-num="1" value="-36.38"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.extras" data-num="1" value="-36.38"></td></tr>
-  <tr><td>Outros Descontos</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.descOc" data-num="1" value="54.78"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.descOc" data-num="1" value="123.95"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.descOc" data-num="1" value="45.71"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.descOc" data-num="1" value="-0.89"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.descOc" data-num="1" value="-113.66"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.descOc" data-num="1" value="0.11"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.descOc" data-num="1" value="0.11"></td></tr>
-  <tr class="calc"><td>Salário Bruto</td><td>R$&nbsp;2.368,95</td><td>R$&nbsp;4.022,62</td><td>R$&nbsp;4.473,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td><td>R$&nbsp;4.863,62</td></tr>
-  <tr class="calc"><td>INSS</td><td>R$&nbsp;188,89</td><td>R$&nbsp;371,31</td><td>R$&nbsp;427,82</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td><td>R$&nbsp;482,42</td></tr>
-  <tr class="calc"><td>Base IRRF</td><td>R$&nbsp;2.180,06</td><td>R$&nbsp;3.651,31</td><td>R$&nbsp;4.045,80</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td><td>R$&nbsp;4.381,20</td></tr>
-  <tr class="calc"><td>IRRF</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td></tr>
-  <tr class="calc"><td>Salário Líquido</td><td>R$&nbsp;2.125,28</td><td>R$&nbsp;3.527,36</td><td>R$&nbsp;4.000,09</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.382,09</td><td>R$&nbsp;4.494,86</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.381,09</td><td>R$&nbsp;4.381,09</td></tr>
-  </tbody></table></div>
-  <p class="hint">"Horas Normais" já em R$ (equivalente ao bruto de horas trabalhadas). INSS/IRRF calculados de forma progressiva sobre as faixas abaixo.</p>
+  <div class="card dashboard-hero"><h2>Olá! Aqui está sua visão financeira.</h2><p>Setembro de 2026 • acompanhe patrimônio, orçamento e pendências em um só lugar.</p>
+  <div class="quick-actions"><button class="btn" data-tab-go="m8">📅 Abrir Setembro</button><button class="btn" data-tab-go="planner">📋 Planejamento</button><button class="btn" data-tab-go="metas">🎯 Metas</button><button class="btn" data-tab-go="resumo">📊 Resumo anual</button></div></div>
+  <div class="metric-grid">
+    <div class="metric"><div class="label">Patrimônio líquido estimado</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Disponível + investimentos − cartões</div></div>
+    <div class="metric"><div class="label">Caixa disponível</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Contas e carteiras • somente movimentações recebidas/pagas</div></div>
+    <div class="metric"><div class="label">Investimentos</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Valor projetado até Setembro</div></div>
+    <div class="metric"><div class="label">Resultado do mês</div><div class="value pos">R$&nbsp;0,00</div><div class="subvalue">Somente receitas recebidas − despesas pagas</div></div>
   </div>
-
-  <div class="card"><h3>Férias</h3><div class="scrollx"><table class="tbl">
-  <thead><tr><th>Campo</th><th>Jan</th><th>Fev</th><th>Mar</th><th>Abr</th><th>Mai</th><th>Jun</th><th>Jul</th><th>Ago</th><th>Set</th><th>Out</th><th>Nov</th><th>Dez</th></tr></thead><tbody>
-  <tr><td>Horas</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.fh" data-num="1" value="80.6667"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.fh" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.fh" data-num="1" value="110"></td></tr>
-  <tr><td>R$/Hora</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.fr" data-num="1" value="10.9333"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.fr" data-num="1" value="18.45"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.fr" data-num="1" value="20.5"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.fr" data-num="1" value="22.2727"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.fr" data-num="1" value="22.2727"></td></tr>
-  <tr><td>Descontos</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.fd" data-num="1" value="-123.73"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.fd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.fd" data-num="1" value="0"></td></tr>
-  <tr class="calc"><td>Valor Bruto</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;2.395,56</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;3.266,67</td></tr>
-  <tr class="calc"><td>INSS</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;191,29</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;280,60</td></tr>
-  <tr class="calc"><td>IRRF</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td></tr>
-  <tr class="calc"><td>Férias Líquido</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;2.328,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;2.986,07</td></tr>
-  </tbody></table></div></div>
-
-  <div class="card"><h3>13º Salário</h3><div class="scrollx"><table class="tbl">
-  <thead><tr><th>Campo</th><th>Jan</th><th>Fev</th><th>Mar</th><th>Abr</th><th>Mai</th><th>Jun</th><th>Jul</th><th>Ago</th><th>Set</th><th>Out</th><th>Nov</th><th>Dez</th></tr></thead><tbody>
-  <tr><td>Valor Bruto</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.dv" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.dv" data-num="1" value="4899.999"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.dv" data-num="1" value="0"></td></tr>
-  <tr><td>Descontos</td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.0.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.1.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.2.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.3.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.4.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.5.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.6.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.7.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.8.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.9.dd" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.10.dd" data-num="1" value="-38.03"></td><td><input type="number" step="0.01" class="inp" data-path="salario.meses.11.dd" data-num="1" value="0"></td></tr>
-  <tr class="calc"><td>INSS</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;487,51</td><td>R$&nbsp;0,00</td></tr>
-  <tr class="calc"><td>IRRF</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td></tr>
-  <tr class="calc"><td>13º Líquido</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;0,00</td><td>R$&nbsp;4.450,52</td><td>R$&nbsp;0,00</td></tr>
-  </tbody></table></div></div>
-
   <div class="grid2">
-  <div class="card">
-    <div class="cardhead"><h3>Tabela INSS</h3><button class="btn small" data-action="addFaixa" data-path="salario.inss">+ Faixa</button></div>
-    <table class="tbl"><thead><tr><th>De</th><th>Até</th><th>%</th><th>Dedução</th><th></th></tr></thead><tbody>
-    <tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.0.de" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.0.ate" data-num="1" value="1621"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.0.pct" data-num="1" value="7.5"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.0.ded" data-num="1" value="0"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.inss" data-i="0">✕</button></td>
-    </tr><tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.1.de" data-num="1" value="1621.01"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.1.ate" data-num="1" value="2902.84"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.1.pct" data-num="1" value="9"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.1.ded" data-num="1" value="24.32"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.inss" data-i="1">✕</button></td>
-    </tr><tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.2.de" data-num="1" value="2902.85"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.2.ate" data-num="1" value="4354.27"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.2.pct" data-num="1" value="12"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.2.ded" data-num="1" value="111.4"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.inss" data-i="2">✕</button></td>
-    </tr><tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.3.de" data-num="1" value="4354.28"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.3.ate" data-num="1" value="8475.55"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.inss.3.pct" data-num="1" value="14"></td><td><input type="number" step="0.01" class="inp" data-path="salario.inss.3.ded" data-num="1" value="198.49"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.inss" data-i="3">✕</button></td>
-    </tr>
-    </tbody></table>
+    <div class="card"><div class="cardhead"><h3>🎯 Orçamento de Setembro</h3><span class="badge ok">Dentro do planejado</span></div>
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>R$&nbsp;5.911,00</b></div><div class="kpi"><span>Realizado</span><b>R$&nbsp;0,00</b></div><div class="kpi"><span>Restante</span><b class="pos">R$&nbsp;5.911,00</b></div></div>
+    <div class="status-list" style="margin-top:14px"><div class="status-item"><span>Moradia</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.146,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Alimentação</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.200,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Lazer</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;600,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Educação</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;200,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Transporte</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.200,00 <span class="badge ok">0%</span></span></div></div></div>
+    <div class="card"><div class="cardhead"><h3>🔔 Pendências do mês</h3><span class="badge warn">15 pendência(s)</span></div>
+    <div class="kpis pending-totals" style="grid-template-columns:repeat(2,1fr);margin:0 0 14px">
+      <div class="kpi"><span>💚 Total a receber</span><b class="pos">R$&nbsp;0,00</b></div>
+      <div class="kpi"><span>🔴 Total a pagar</span><b class="neg">R$&nbsp;0,00</b></div>
+    </div>
+    <div class="status-list"><div class="status-item"><span>Salário</span><span>R$&nbsp;0,00 • A Receber</span></div><div class="status-item"><span>Férias</span><span>R$&nbsp;0,00 • A Receber</span></div><div class="status-item"><span>Décimo Terceiro</span><span>R$&nbsp;0,00 • A Receber</span></div><div class="status-item"><span>Vale Alimentação</span><span>R$&nbsp;0,00 • A Receber</span></div><div class="status-item"><span>Complemento Salário</span><span>R$&nbsp;0,00 • A Receber</span></div><div class="status-item"><span>Prestação Apartamento</span><span>R$&nbsp;0,00 • A Pagar</span></div><div class="status-item"><span>Condomínio</span><span>R$&nbsp;0,00 • A Pagar</span></div><div class="status-item"><span>Energia</span><span>R$&nbsp;0,00 • A Pagar</span></div></div></div>
   </div>
-  <div class="card">
-    <div class="cardhead"><h3>Tabela IRRF</h3><button class="btn small" data-action="addFaixa" data-path="salario.irrf">+ Faixa</button></div>
-    <table class="tbl"><thead><tr><th>De</th><th>Até</th><th>%</th><th>Dedução</th><th></th></tr></thead><tbody>
-    <tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.0.de" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.0.ate" data-num="1" value="5000"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.0.pct" data-num="1" value="0"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.0.ded" data-num="1" value="0"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.irrf" data-i="0">✕</button></td>
-    </tr><tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.1.de" data-num="1" value="5000"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.1.ate" data-num="1" value="7350"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.1.pct" data-num="1" value="27.5"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.1.ded" data-num="1" value="978.62"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.irrf" data-i="1">✕</button></td>
-    </tr><tr>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.2.de" data-num="1" value="7350.01"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.2.ate" data-num="1" value="10000"></td>
-      <td><input type="number" step="0.01" class="inp" data-path="salario.irrf.2.pct" data-num="1" value="27.5"></td><td><input type="number" step="0.01" class="inp" data-path="salario.irrf.2.ded" data-num="1" value="0"></td>
-      <td><button class="btn danger small" data-action="removeFaixa" data-path="salario.irrf" data-i="2">✕</button></td>
-    </tr>
-    </tbody></table>
-  </div>
+  <div class="grid2">
+    <div class="card"><h3>📈 Evolução do saldo</h3><div class="chartbox"><canvas id="chDashSaldo" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
+    <div class="card"><h3>🍰 Despesas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
   </div></main>
 <button id="fabQuickAdd" class="fab" data-action="openQuickAdd" title="Novo lançamento rápido">+</button>
 <div id="quickAddOverlay" class="qa-overlay" style="display:none">
   <div id="quickAddRoot"></div>
 </div>
-<script type="application/json" id="app-state">{"meta":{"saldoInicial":0,"ano":2026},"contas":[{"nome":"Carteira R$","tipo":"Pagamento","saldo":30},{"nome":"CC Caixa","tipo":"Pagamento","saldo":0.89},{"nome":"CC Viacredi","tipo":"Pagamento","saldo":0.17},{"nome":"Nubank","tipo":"Pagamento","saldo":500.72},{"nome":"Crédito Nubank","tipo":"Cartão","saldo":0},{"nome":"C6Bank","tipo":"Pagamento","saldo":100.67},{"nome":"Crédito C6Bank","tipo":"Cartão","saldo":0},{"nome":"Inter","tipo":"Pagamento","saldo":0.03},{"nome":"Crédito Inter","tipo":"Cartão","saldo":0},{"nome":"Wiipo","tipo":"Pagamento","saldo":40.61},{"nome":"Cofre","tipo":"Pagamento","saldo":5},{"nome":"Cotas Viacredi","tipo":"Investimento","saldo":876.56},{"nome":"RDB CX Reserva","tipo":"Investimento","saldo":18332.42},{"nome":"RDB CX Condomínio","tipo":"Investimento","saldo":3550.64},{"nome":"RDB CX Manu","tipo":"Investimento","saldo":731.91},{"nome":"Inter CDB Digimais 26","tipo":"Investimento","saldo":603.16},{"nome":"Tesouro Direto C6","tipo":"Investimento","saldo":114.61},{"nome":"Mercado Pago","tipo":"Pagamento","saldo":0},{"nome":"Mercado Pago Cofre","tipo":"Investimento","saldo":0}],"catR":["Proventos","Juros","Receitas","Outros","Ajustes"],"catD":["Moradia","Alimentação","Lazer","Educação","Transporte","Geral","Ajustes"],"subD":[{"nome":"Ajustes","cat":"Ajustes"},{"nome":"Prestação Casa","cat":"Moradia"},{"nome":"Contas Casa","cat":"Moradia"},{"nome":"Comunicação","cat":"Moradia"},{"nome":"Manutenção AP","cat":"Moradia"},{"nome":"Mercado","cat":"Alimentação"},{"nome":"Restaurante","cat":"Alimentação"},{"nome":"Delivery","cat":"Alimentação"},{"nome":"Festas","cat":"Lazer"},{"nome":"Viagens","cat":"Lazer"},{"nome":"Bares/Rest.","cat":"Lazer"},{"nome":"Outros Lazer","cat":"Lazer"},{"nome":"Cursos/Livros","cat":"Educação"},{"nome":"Passagens","cat":"Transporte"},{"nome":"App Transporte","cat":"Transporte"},{"nome":"Outros Transp.","cat":"Transporte"},{"nome":"Combustível","cat":"Transporte"},{"nome":"Manutenção Carro","cat":"Transporte"},{"nome":"Prestação Carro","cat":"Transporte"},{"nome":"Estacionamento","cat":"Transporte"},{"nome":"Academia","cat":"Geral"},{"nome":"Streammings","cat":"Geral"},{"nome":"Pet","cat":"Geral"},{"nome":"Vestuário","cat":"Geral"},{"nome":"Diversos","cat":"Geral"},{"nome":"Farmácia","cat":"Geral"},{"nome":"Saúde","cat":"Geral"},{"nome":"Higiêne","cat":"Geral"},{"nome":"Limpeza","cat":"Geral"},{"nome":"Presentes","cat":"Geral"},{"nome":"Doações","cat":"Geral"},{"nome":"Condomínio","cat":"Moradia"},{"nome":"Energia","cat":"Moradia"},{"nome":"Água","cat":"Moradia"},{"nome":"Internet","cat":"Moradia"},{"nome":"Celular","cat":"Moradia"}],"salario":{"inss":[{"de":0,"ate":1621,"pct":7.5,"ded":0},{"de":1621.01,"ate":2902.84,"pct":9,"ded":24.32},{"de":2902.85,"ate":4354.27,"pct":12,"ded":111.4},{"de":4354.28,"ate":8475.55,"pct":14,"ded":198.49}],"irrf":[{"de":0,"ate":5000,"pct":0,"ded":0},{"de":5000,"ate":7350,"pct":27.5,"ded":978.62},{"de":7350.01,"ate":10000,"pct":27.5,"ded":0}],"meses":[{"hn":2405.3333,"extras":-36.38,"descOc":54.78,"fh":0,"fr":10.9333,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-01-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4059,"extras":-36.38,"descOc":123.95,"fh":0,"fr":18.45,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-02-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4509.999,"extras":-36.38,"descOc":45.71,"fh":0,"fr":20.5,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-03-06","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"Nubank","rStatus":"Recebido","rData":"2026-04-07","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":-0.89,"fh":80.6667,"fr":22.2727,"fd":-123.73,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-05-06","fConta":"CC Viacredi","fStatus":"Recebido","fData":"2026-05-14","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":-113.66,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-06-03","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-08-06","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"2026-10-03","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":0,"fr":22.2727,"fd":0,"dv":4899.999,"dd":-38.03,"rConta":"","rStatus":"A Receber","rData":"2026-11-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":"2026-11-24"},{"hn":4900,"extras":-36.38,"descOc":0.11,"fh":110,"fr":22.2727,"fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""}]},"planner":{"despD":[[0,0,0,0,0,0,0,0,0,0,0,0],[850,850,850,850,850,850,850,850,850,850,850,850],[200,200,200,200,200,200,200,200,200,200,200,200],[96,96,96,96,96,96,96,96,96,96,96,96],[0,0,0,0,0,0,0,0,0,0,0,0],[1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,380,0,0,0,0,0,0,0,0,0,0],[600,600,600,600,600,600,600,600,600,600,600,600],[0,0,0,0,0,0,0,0,0,0,0,0],[200,200,200,200,200,200,200,200,200,200,200,200],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,200,200,200,200,200,200,200,200,200,200],[500,500,500,500,500,500,500,500,500,500,500,500],[0,0,0,0,0,0,0,500,500,500,500,500],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[220,220,220,220,220,220,220,220,220,220,220,220],[65,65,150,65,65,65,65,65,65,65,65,65],[280,280,280,280,280,280,280,280,280,280,280,280],[0,0,0,0,0,0,0,0,0,0,0,0],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1500,2500],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],"despI":[[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7,7,7,7,7],[900,100,600,900,2000,900,900,900,900,300,2000,900],[50,50,50,50,50,50,50,50,50,50,50,50],[25,25,25,25,25,25,25,25,25,25,25,25],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],"vale":[1620,1620,1620,1620,1620,1620,1620,1620,1620,1620,1620,1620],"extras":[1400,0,0,0,1400,0,0,0,1400,0,0,0]},"recorrentes":{"rec":[{"id":"rec_vale","nome":"Vale Alimentação","valor":500,"cat":"Proventos","conta":"Wiipo","ativo":true,"gerado":[]},{"id":"rec_compl","nome":"Complemento Salário","valor":0,"cat":"Proventos","conta":"","ativo":true,"gerado":[]}],"desp":[{"id":"desp_prest","nome":"Prestação Apartamento","valor":850.94,"sub":"Prestação Casa","conta":"CC Caixa","ativo":true,"gerado":[]},{"id":"desp_cond","nome":"Condomínio","valor":0,"sub":"Condomínio","conta":"","ativo":true,"gerado":[]},{"id":"desp_energia","nome":"Energia","valor":0,"sub":"Energia","conta":"","ativo":true,"gerado":[]},{"id":"desp_agua","nome":"Água","valor":0,"sub":"Água","conta":"","ativo":true,"gerado":[]},{"id":"desp_internet","nome":"Internet","valor":0,"sub":"Internet","conta":"","ativo":true,"gerado":[]},{"id":"desp_celular","nome":"Celular","valor":0,"sub":"Celular","conta":"","ativo":true,"gerado":[]},{"id":"desp_spotify","nome":"Spotify","valor":23.9,"sub":"Streammings","conta":"Crédito C6Bank","ativo":true,"gerado":[]},{"id":"desp_meli","nome":"Meli+","valor":0,"sub":"Streammings","conta":"","ativo":true,"gerado":[]},{"id":"desp_adobe","nome":"Adobe","valor":0,"sub":"Streammings","conta":"","ativo":true,"gerado":[]},{"id":"desp_academia","nome":"Academia","valor":0,"sub":"Academia","conta":"","ativo":true,"gerado":[]}]},"meses":[{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]},{"rec":[],"desp":[]}]}</script>
+<script type="application/json" id="app-state">{"meta":{"saldoInicial":0,"ano":2026},"contas":[{"nome":"Carteira R$","tipo":"Pagamento","saldo":0},{"nome":"CC Caixa","tipo":"Pagamento","saldo":0},{"nome":"CC Viacredi","tipo":"Pagamento","saldo":0},{"nome":"Nubank","tipo":"Pagamento","saldo":0},{"nome":"Crédito Nubank","tipo":"Cartão","saldo":0},{"nome":"C6Bank","tipo":"Pagamento","saldo":0},{"nome":"Crédito C6Bank","tipo":"Cartão","saldo":0},{"nome":"Inter","tipo":"Pagamento","saldo":0},{"nome":"Crédito Inter","tipo":"Cartão","saldo":0},{"nome":"Wiipo","tipo":"Pagamento","saldo":0},{"nome":"Cofre","tipo":"Pagamento","saldo":0},{"nome":"Cotas Viacredi","tipo":"Investimento","saldo":0},{"nome":"RDB CX Reserva","tipo":"Investimento","saldo":0},{"nome":"RDB CX Condomínio","tipo":"Investimento","saldo":0},{"nome":"RDB CX Manu","tipo":"Investimento","saldo":0},{"nome":"Inter CDB Digimais 26","tipo":"Investimento","saldo":0},{"nome":"Tesouro Direto C6","tipo":"Investimento","saldo":0},{"nome":"Mercado Pago","tipo":"Pagamento","saldo":0},{"nome":"Mercado Pago Cofre","tipo":"Investimento","saldo":0}],"catR":["Proventos","Juros","Receitas","Outros","Ajustes"],"catD":["Moradia","Alimentação","Lazer","Educação","Transporte","Geral","Ajustes"],"subD":[{"nome":"Ajustes","cat":"Ajustes"},{"nome":"Prestação Casa","cat":"Moradia"},{"nome":"Contas Casa","cat":"Moradia"},{"nome":"Comunicação","cat":"Moradia"},{"nome":"Manutenção AP","cat":"Moradia"},{"nome":"Mercado","cat":"Alimentação"},{"nome":"Restaurante","cat":"Alimentação"},{"nome":"Delivery","cat":"Alimentação"},{"nome":"Festas","cat":"Lazer"},{"nome":"Viagens","cat":"Lazer"},{"nome":"Bares/Rest.","cat":"Lazer"},{"nome":"Outros Lazer","cat":"Lazer"},{"nome":"Cursos/Livros","cat":"Educação"},{"nome":"Passagens","cat":"Transporte"},{"nome":"App Transporte","cat":"Transporte"},{"nome":"Outros Transp.","cat":"Transporte"},{"nome":"Combustível","cat":"Transporte"},{"nome":"Manutenção Carro","cat":"Transporte"},{"nome":"Prestação Carro","cat":"Transporte"},{"nome":"Estacionamento","cat":"Transporte"},{"nome":"Academia","cat":"Geral"},{"nome":"Streammings","cat":"Geral"},{"nome":"Pet","cat":"Geral"},{"nome":"Vestuário","cat":"Geral"},{"nome":"Diversos","cat":"Geral"},{"nome":"Farmácia","cat":"Geral"},{"nome":"Saúde","cat":"Geral"},{"nome":"Higiêne","cat":"Geral"},{"nome":"Limpeza","cat":"Geral"},{"nome":"Presentes","cat":"Geral"},{"nome":"Doações","cat":"Geral"}],"salario":{"inss":[{"de":0,"ate":1621,"pct":7.5,"ded":0},{"de":1621.01,"ate":2902.84,"pct":9,"ded":24.32},{"de":2902.85,"ate":4354.27,"pct":12,"ded":111.4},{"de":4354.28,"ate":8475.55,"pct":14,"ded":198.49}],"irrf":[{"de":0,"ate":2428.80,"pct":0,"ded":0},{"de":2428.81,"ate":2826.65,"pct":7.5,"ded":182.16},{"de":2826.66,"ate":3751.05,"pct":15.0,"ded":394.16},{"de":3751.06,"ate":4664.68,"pct":22.5,"ded":675.49},{"de":4664.69,"ate":99999999,"pct":27.5,"ded":908.73}],"descontoSimplificado":607.20,"reducaoIR":{"limite1":5000,"teto1":312.89,"limite2":7350,"constante":978.62,"coef":0.133145},"meses":[{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-01-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-02-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-03-06","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"Nubank","rStatus":"Recebido","rData":"2026-04-07","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-05-06","fConta":"CC Viacredi","fStatus":"Recebido","fData":"2026-05-14","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-06-03","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"CC Viacredi","rStatus":"Recebido","rData":"2026-08-06","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"2026-10-03","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"2026-11-05","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":"2026-11-24"},{"hn":0,"extras":0,"descOc":0,"fdias":0,"fvalorDia":"","fd":0,"dv":0,"dd":0,"rConta":"","rStatus":"A Receber","rData":"","fConta":"","fStatus":"A Receber","fData":"","dConta":"","dStatus":"A Receber","dData":""}]},"planner":{"despD":[[0,0,0,0,0,0,0,0,0,0,0,0],[850,850,850,850,850,850,850,850,850,850,850,850],[200,200,200,200,200,200,200,200,200,200,200,200],[96,96,96,96,96,96,96,96,96,96,96,96],[0,0,0,0,0,0,0,0,0,0,0,0],[1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,380,0,0,0,0,0,0,0,0,0,0],[600,600,600,600,600,600,600,600,600,600,600,600],[0,0,0,0,0,0,0,0,0,0,0,0],[200,200,200,200,200,200,200,200,200,200,200,200],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,200,200,200,200,200,200,200,200,200,200],[500,500,500,500,500,500,500,500,500,500,500,500],[0,0,0,0,0,0,0,500,500,500,500,500],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[220,220,220,220,220,220,220,220,220,220,220,220],[65,65,150,65,65,65,65,65,65,65,65,65],[280,280,280,280,280,280,280,280,280,280,280,280],[0,0,0,0,0,0,0,0,0,0,0,0],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1500,2500],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],"despI":[[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7,7,7,7,7],[900,100,600,900,2000,900,900,900,900,300,2000,900],[50,50,50,50,50,50,50,50,50,50,50,50],[25,25,25,25,25,25,25,25,25,25,25,25],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],"vale":[1620,1620,1620,1620,1620,1620,1620,1620,1620,1620,1620,1620],"extras":[1400,0,0,0,1400,0,0,0,1400,0,0,0]},"recorrentes":{"rec":[{"id":"rec_vale","nome":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"rec_compl","nome":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]}],"desp":[{"id":"desp_prest","nome":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_cond","nome":"Condomínio","valor":0,"sub":"Condomínio","conta":"","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_energia","nome":"Energia","valor":0,"sub":"Energia","conta":"","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_agua","nome":"Água","valor":0,"sub":"Água","conta":"","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_internet","nome":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_celular","nome":"Celular","valor":0,"sub":"Celular","conta":"","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_spotify","nome":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_meli","nome":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_adobe","nome":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]},{"id":"desp_academia","nome":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","ativo":true,"gerado":["2026-0","2026-1","2026-2","2026-3","2026-4","2026-5","2026-6","2026-7","2026-8","2026-9","2026-10","2026-11"]}]},"meses":[{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]},{"rec":[{"desc":"Vale Alimentação","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_vale","customizado":false},{"desc":"Complemento Salário","valor":0,"cat":"Proventos","conta":"Wiipo","status":"A Receber","data":"","recId":"rec_compl","customizado":false}],"desp":[{"desc":"Prestação Apartamento","valor":0,"sub":"Prestação Casa","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_prest","customizado":false},{"desc":"Condomínio","valor":0,"sub":"Condomínio","conta":"","status":"A Pagar","data":"","recId":"desp_cond","customizado":false},{"desc":"Energia","valor":0,"sub":"Energia","conta":"","status":"A Pagar","data":"","recId":"desp_energia","customizado":false},{"desc":"Água","valor":0,"sub":"Água","conta":"","status":"A Pagar","data":"","recId":"desp_agua","customizado":false},{"desc":"Internet","valor":0,"sub":"Internet","conta":"CC Caixa","status":"A Pagar","data":"","recId":"desp_internet","customizado":false},{"desc":"Celular","valor":0,"sub":"Celular","conta":"","status":"A Pagar","data":"","recId":"desp_celular","customizado":false},{"desc":"Spotify","valor":0,"sub":"Streammings","conta":"Crédito C6Bank","status":"A Pagar","data":"","recId":"desp_spotify","customizado":false},{"desc":"Meli+","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_meli","customizado":false},{"desc":"Adobe","valor":0,"sub":"Streammings","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_adobe","customizado":false},{"desc":"Academia","valor":0,"sub":"Academia","conta":"Crédito Nubank","status":"A Pagar","data":"","recId":"desp_academia","customizado":false}]}],"log":[{"ts":"2026-09-09T23:09:57.585Z","desc":"Meta \"Manutenção\" excluída"},{"ts":"2026-09-09T23:09:40.947Z","desc":"Meta \"Viagem Europa\" excluída"},{"ts":"2026-09-09T23:09:10.244Z","desc":"Folha de Janeiro — Outros descontos alterado de R$ 54,78 para R$ 0,00"},{"ts":"2026-09-09T23:09:08.084Z","desc":"Folha de Fevereiro — Outros descontos alterado de R$ 123,95 para R$ 0,00"},{"ts":"2026-09-09T23:09:06.684Z","desc":"Folha de Março — Outros descontos alterado de R$ 45,71 para R$ 0,00"},{"ts":"2026-09-09T23:09:05.397Z","desc":"Folha de Abril — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:09:04.139Z","desc":"Folha de Maio — Outros descontos alterado de -R$ 0,89 para R$ 0,00"},{"ts":"2026-09-09T23:09:02.612Z","desc":"Folha de Junho — Outros descontos alterado de -R$ 113,66 para R$ 0,00"},{"ts":"2026-09-09T23:09:01.240Z","desc":"Folha de Julho — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:59.939Z","desc":"Folha de Agosto — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:58.070Z","desc":"Folha de Setembro — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:56.685Z","desc":"Folha de Outubro — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:54.452Z","desc":"Folha de Novembro — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:52.755Z","desc":"Folha de Dezembro — Outros descontos alterado de R$ 0,11 para R$ 0,00"},{"ts":"2026-09-09T23:08:51.361Z","desc":"Folha de Dezembro — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:49.086Z","desc":"Folha de Novembro — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:47.430Z","desc":"Folha de Outubro — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:45.951Z","desc":"Folha de Setembro — Extras alterado de -R$ 36,39 para R$ 0,00"},{"ts":"2026-09-09T23:08:43.286Z","desc":"Folha de Setembro — Extras alterado de -R$ 36,38 para -R$ 36,39"},{"ts":"2026-09-09T23:08:42.859Z","desc":"Folha de Agosto — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:41.132Z","desc":"Folha de Julho — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:37.791Z","desc":"Folha de Junho — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:36.192Z","desc":"Folha de Maio — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:33.214Z","desc":"Folha de Abril — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:31.765Z","desc":"Folha de Março — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:30.308Z","desc":"Folha de Fevereiro — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:08:27.594Z","desc":"Folha de Janeiro — Extras alterado de -R$ 36,38 para R$ 0,00"},{"ts":"2026-09-09T23:06:32.621Z","desc":"Folha de Novembro — Desconto do 13º alterado de -R$ 38,03 para R$ 0,00"},{"ts":"2026-09-09T23:06:30.049Z","desc":"Folha de Novembro — Valor do 13º alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:06:21.920Z","desc":"Folha de Janeiro — Valor hora férias alterado de R$ 10,93 para R$ 0,00"},{"ts":"2026-09-09T23:06:18.318Z","desc":"Folha de Fevereiro — Valor hora férias alterado de R$ 18,45 para R$ 0,00"},{"ts":"2026-09-09T23:06:17.017Z","desc":"Folha de Março — Valor hora férias alterado de R$ 20,50 para R$ 0,00"},{"ts":"2026-09-09T23:06:15.510Z","desc":"Folha de Abril — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:14.089Z","desc":"Folha de Maio — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:11.837Z","desc":"Folha de Junho — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:10.593Z","desc":"Folha de Julho — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:09.208Z","desc":"Folha de Agosto — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:07.914Z","desc":"Folha de Setembro — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:06.400Z","desc":"Folha de Outubro — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:04.383Z","desc":"Folha de Novembro — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:06:02.813Z","desc":"Folha de Dezembro — Valor hora férias alterado de R$ 22,27 para R$ 0,00"},{"ts":"2026-09-09T23:05:50.797Z","desc":"Folha de Maio — Desconto de férias alterado de -R$ 123,73 para R$ 0,00"},{"ts":"2026-09-09T23:05:48.750Z","desc":"Folha de Dezembro — Horas de férias alterado de R$ 110,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:44.387Z","desc":"Folha de Maio — Horas de férias alterado de R$ 80,67 para R$ 0,00"},{"ts":"2026-09-09T23:05:40.316Z","desc":"Folha de Dezembro — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:30.489Z","desc":"Folha de Novembro — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:27.937Z","desc":"Folha de Outubro — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:25.954Z","desc":"Folha de Setembro — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:24.129Z","desc":"Folha de Agosto — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:20.796Z","desc":"Folha de Julho — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:19.233Z","desc":"Folha de Junho — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:17.919Z","desc":"Folha de Maio — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:16.525Z","desc":"Folha de Abril — Horas normais alterado de R$ 4.900,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:14.878Z","desc":"Folha de Março — Horas normais alterado de R$ 4.510,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:13.314Z","desc":"Folha de Fevereiro — Horas normais alterado de R$ 4.059,00 para R$ 0,00"},{"ts":"2026-09-09T23:05:10.749Z","desc":"Folha de Janeiro — Horas normais alterado de R$ 2.405,33 para R$ 0,00"},{"ts":"2026-09-09T23:04:34.399Z","desc":"Despesa recorrente \"Academia\" — Conta alterado de — para Crédito Nubank"},{"ts":"2026-09-09T23:04:26.632Z","desc":"Despesa recorrente \"Adobe\" — Conta alterado de — para Crédito Nubank"},{"ts":"2026-09-09T23:04:21.431Z","desc":"Despesa recorrente \"Meli+\" — Conta alterado de — para Crédito Nubank"},{"ts":"2026-09-09T23:04:15.930Z","desc":"Despesa recorrente \"Celular\" — Conta alterado de CC Caixa para —"},{"ts":"2026-09-09T23:04:11.231Z","desc":"Despesa recorrente \"Internet\" — Conta alterado de — para CC Caixa"},{"ts":"2026-09-09T23:04:00.151Z","desc":"Despesa recorrente \"Celular\" — Conta alterado de — para CC Caixa"},{"ts":"2026-09-09T23:03:55.316Z","desc":"Despesa recorrente \"Spotify\" — Valor alterado de R$ 0,90 para R$ 0,00"},{"ts":"2026-09-09T23:03:52.020Z","desc":"Despesa recorrente \"Spotify\" — Nome alterado de — para Spotify"},{"ts":"2026-09-09T23:03:30.604Z","desc":"Despesa recorrente \"Recorrente #7\" — Nome alterado de Spotify para —"},{"ts":"2026-09-09T23:03:28.508Z","desc":"Despesa recorrente \"Spotify\" — Valor alterado de R$ 23,90 para R$ 0,90"},{"ts":"2026-09-09T23:03:26.817Z","desc":"Despesa recorrente \"Prestação Apartamento\" — Valor alterado de R$ 850,94 para R$ 0,00"},{"ts":"2026-09-09T23:03:19.313Z","desc":"Conta \"Tesouro Direto C6\" — Saldo alterado de R$ 114,61 para R$ 0,00"},{"ts":"2026-09-09T23:03:13.784Z","desc":"Conta \"Inter CDB Digimais 26\" — Saldo alterado de R$ 603,16 para R$ 0,00"},{"ts":"2026-09-09T23:03:12.455Z","desc":"Conta \"RDB CX Manu\" — Saldo alterado de R$ 731,91 para R$ 0,00"},{"ts":"2026-09-09T23:03:10.999Z","desc":"Conta \"RDB CX Condomínio\" — Saldo alterado de R$ 3.550,64 para R$ 0,00"},{"ts":"2026-09-09T23:03:07.986Z","desc":"Conta \"RDB CX Reserva\" — Saldo alterado de R$ 18.332,42 para R$ 0,00"},{"ts":"2026-09-09T23:03:05.001Z","desc":"Conta \"Cotas Viacredi\" — Saldo alterado de R$ 876,56 para R$ 0,00"},{"ts":"2026-09-09T23:02:50.887Z","desc":"Conta \"Cofre\" — Saldo alterado de R$ 5,00 para R$ 0,00"},{"ts":"2026-09-09T23:02:46.723Z","desc":"Conta \"Wiipo\" — Saldo alterado de R$ 40,61 para R$ 0,00"},{"ts":"2026-09-09T23:02:43.824Z","desc":"Conta \"Inter\" — Saldo alterado de R$ 0,03 para R$ 0,00"},{"ts":"2026-09-09T23:02:41.500Z","desc":"Conta \"C6Bank\" — Saldo alterado de R$ 100,67 para R$ 0,00"},{"ts":"2026-09-09T23:02:38.580Z","desc":"Conta \"Nubank\" — Saldo alterado de R$ 500,72 para R$ 0,00"},{"ts":"2026-09-09T23:02:37.182Z","desc":"Conta \"CC Viacredi\" — Saldo alterado de R$ 0,17 para R$ 0,00"},{"ts":"2026-09-09T23:02:35.647Z","desc":"Conta \"CC Caixa\" — Saldo alterado de R$ 0,89 para R$ 0,00"},{"ts":"2026-09-09T23:02:30.511Z","desc":"Conta \"Carteira R$\" — Saldo alterado de R$ 30,00 para R$ 0,00"},{"ts":"2026-09-09T23:02:18.672Z","desc":"Subcategoria \"Condomínio\" excluída"},{"ts":"2026-09-09T23:02:16.638Z","desc":"Subcategoria \"Energia\" excluída"},{"ts":"2026-09-09T23:02:14.863Z","desc":"Subcategoria \"Água\" excluída"},{"ts":"2026-09-09T23:02:13.027Z","desc":"Subcategoria \"Internet\" excluída"},{"ts":"2026-09-09T23:02:10.091Z","desc":"Subcategoria \"Celular\" excluída"},{"ts":"2026-09-09T23:01:51.493Z","desc":"Receita recorrente \"Complemento Salário\" — Conta alterado de — para Wiipo"},{"ts":"2026-09-09T23:01:47.571Z","desc":"Receita recorrente \"Vale Alimentação\" — Valor alterado de R$ 500,00 para R$ 0,00"}],"historico":[],"metas":[{"nome":"Reserva de Emergência","meta":30000,"conta":"RDB CX Reserva"}]}</script>
 <script>
 const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const PALETTE=['#6366f1','#22c55e','#f59e0b','#ec4899','#0ea5e9','#ef4444','#a855f7'];
@@ -241,7 +191,7 @@ function logChange(desc){
 function fieldLabel(key){
   const map={nome:'Nome',tipo:'Tipo',saldo:'Saldo',desc:'Descrição',valor:'Valor',cat:'Categoria',sub:'Subcategoria',
     conta:'Conta',status:'Status',data:'Data',origem:'Conta de origem',destino:'Conta de destino',
-    hn:'Horas normais',extras:'Extras',descOc:'Outros descontos',fh:'Horas de férias',fr:'Valor hora férias',
+    hn:'Horas normais',extras:'Extras',descOc:'Outros descontos',descFerias:'Desconto de férias no salário',fdias:'Dias de férias',fvalorDia:'Valor do dia (férias)',
     fd:'Desconto de férias',dv:'Valor do 13º',dd:'Desconto do 13º',
     rConta:'Conta do salário',rStatus:'Status do salário',rData:'Data do salário',
     fConta:'Conta das férias',fStatus:'Status das férias',fData:'Data das férias',
@@ -269,9 +219,18 @@ function describeChange(path,oldVal,newVal){
     }
     if(root==='salario'&&parts[1]==='meses'){
       const m=parseInt(parts[2]),field=parts[3];
-      const monetary=['hn','extras','descOc','fh','fr','fd','dv','dd'];
+      const monetary=['hn','extras','descOc','descFerias','fvalorDia','fd','dv','dd'];
       const val=monetary.includes(field)?(v)=>fmt(Number(v)||0):plainVal;
       return `Folha de ${MESES[m]} — ${fieldLabel(field)} alterado de ${val(oldVal)} para ${val(newVal)}`;
+    }
+    if(root==='salario'&&parts[1]==='descontoSimplificado'){
+      return `Desconto simplificado do IR alterado de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;
+    }
+    if(root==='salario'&&parts[1]==='reducaoIR'){
+      const field=parts[2];
+      const labels={limite1:'Limite da isenção total',teto1:'Teto de redução (1ª faixa)',limite2:'Limite da redução parcial',constante:'Constante da fórmula',coef:'Coeficiente da fórmula'};
+      const val=field==='coef'?(v)=>Number(v||0).toFixed(6):(v)=>fmt(Number(v)||0);
+      return `Redução mensal do IR — ${labels[field]||field} alterado de ${val(oldVal)} para ${val(newVal)}`;
     }
     if(root==='metas'){
       const i=parseInt(parts[1]),field=parts[2];
@@ -344,32 +303,69 @@ function calcIRRF(base,faixas){
   if(last&&base>last.ate){return round2(Math.max(0,base*(Number(last.pct)||0)/100-(Number(last.ded)||0)));}
   return 0;
 }
+// A partir de 2026 (Lei 15.191/2025), a base do IR usa o MAIOR valor entre o
+// desconto do INSS e um "desconto simplificado" fixo — o que for melhor pro
+// contribuinte. O INSS de verdade continua sendo sempre descontado do salário;
+// o desconto simplificado só entra na conta da base do Imposto de Renda.
+function calcDeducaoIR(inss,descontoSimplificado){
+  return Math.max(Number(inss)||0,Number(descontoSimplificado)||0);
+}
+// Lei 15.270/2025: redutor mensal do IR que usa o SALÁRIO BRUTO (não a base
+// já descontada) para decidir a faixa. Zera o imposto até R$5.000 e reduz
+// parcialmente até R$7.350 — nunca deixa o IR final negativo.
+function calcReducaoIR(bruto,irTabela,red){
+  if(!red||!irTabela)return 0;
+  const b=Number(bruto)||0;
+  if(b<=Number(red.limite1))return round2(Math.min(Number(red.teto1)||0,irTabela));
+  if(b<=Number(red.limite2)){
+    const val=Math.max(0,(Number(red.constante)||0)-(Number(red.coef)||0)*b);
+    return round2(Math.min(val,irTabela));
+  }
+  return 0;
+}
 function salMes(m){
   const md=state.salario.meses[m];
-  const bruto=round2((Number(md.hn)||0)+(Number(md.extras)||0));
+  // "Desconto de Férias no Salário" reduz o bruto ANTES do INSS/IRRF (o mês
+  // em que você não trabalhou por estar de férias já foi remunerado à parte
+  // pelo pagamento de férias). Não mexe em "Horas Normais", então não afeta
+  // o cálculo de férias/13º, que usam o valor cheio.
+  const bruto=round2(Math.max(0,(Number(md.hn)||0)+(Number(md.extras)||0)-(Number(md.descFerias)||0)));
   const inss=calcINSS(bruto,state.salario.inss);
-  const baseIrrf=round2(bruto-inss);
-  const irrf=calcIRRF(baseIrrf,state.salario.irrf);
+  const deducaoIR=calcDeducaoIR(inss,state.salario.descontoSimplificado);
+  const baseIrrf=round2(Math.max(0,bruto-deducaoIR));
+  const irTabela=calcIRRF(baseIrrf,state.salario.irrf);
+  const reducao=calcReducaoIR(bruto,irTabela,state.salario.reducaoIR);
+  const irrf=round2(Math.max(0,irTabela-reducao));
   const liq=round2(bruto-inss-irrf-(Number(md.descOc)||0));
-  return {bruto,inss,baseIrrf,irrf,liq};
+  return {bruto,inss,baseIrrf,irrf,liq,irTabela,reducao};
 }
 function ferMes(m){
   const md=state.salario.meses[m];
-  const baseHR=round2((Number(md.fh)||0)*(Number(md.fr)||0));
+  // Férias planejadas em DIAS: valor do dia sugerido = Horas Normais (R$) do
+  // próprio mês ÷ 30, mas pode ser sobrescrito manualmente por mês.
+  const valorDia=(Number(md.fvalorDia)||0)>0?Number(md.fvalorDia):round2((Number(md.hn)||0)/30);
+  const dias=Number(md.fdias)||0;
+  const baseHR=round2(dias*valorDia);
   const um3=round2(baseHR/3);
   const bruto=round2(baseHR+um3);
   const inss=calcINSS(bruto,state.salario.inss);
-  const baseIrrf=round2(bruto-inss);
-  const irrf=calcIRRF(baseIrrf,state.salario.irrf);
+  const deducaoIR=calcDeducaoIR(inss,state.salario.descontoSimplificado);
+  const baseIrrf=round2(Math.max(0,bruto-deducaoIR));
+  const irTabela=calcIRRF(baseIrrf,state.salario.irrf);
+  const reducao=calcReducaoIR(bruto,irTabela,state.salario.reducaoIR);
+  const irrf=round2(Math.max(0,irTabela-reducao));
   const liq=round2(bruto-inss-irrf-(Number(md.fd)||0));
-  return {bruto,inss,irrf,liq};
+  return {bruto,inss,irrf,liq,valorDia,dias,um3};
 }
 function decMes(m){
   const md=state.salario.meses[m];
   const bruto=round2(Number(md.dv)||0);
   const inss=calcINSS(bruto,state.salario.inss);
-  const baseIrrf=round2(bruto-inss);
-  const irrf=calcIRRF(baseIrrf,state.salario.irrf);
+  const deducaoIR=calcDeducaoIR(inss,state.salario.descontoSimplificado);
+  const baseIrrf=round2(Math.max(0,bruto-deducaoIR));
+  const irTabela=calcIRRF(baseIrrf,state.salario.irrf);
+  const reducao=calcReducaoIR(bruto,irTabela,state.salario.reducaoIR);
+  const irrf=round2(Math.max(0,irTabela-reducao));
   const liq=round2(bruto-inss-irrf-(Number(md.dd)||0));
   return {bruto,inss,irrf,liq};
 }
@@ -378,8 +374,7 @@ function decMes(m){
 function computeAll(){
   const n=12;const sal=[],fer=[],dec=[];
   for(let m=0;m<n;m++){sal.push(salMes(m));fer.push(ferMes(m));dec.push(decMes(m));}
-  const investTotal=round2(state.contas.filter(c=>c.tipo==='Investimento').reduce((s,c)=>s+(Number(c.saldo)||0),0));
-  const autoRec=[];const totalReceitas=[],totalDespesas=[],saldoGeral=[],cxFinal=[];
+  const autoRec=[];const totalReceitas=[],totalDespesas=[],saldoGeral=[];
   const saldoInicialCalculado=round2(state.contas.reduce((s,c)=>s+(Number(c.saldo)||0),0));
   state.meta.saldoInicial=saldoInicialCalculado;
   let saldoAnt=saldoInicialCalculado;
@@ -394,8 +389,8 @@ function computeAll(){
     const mr=state.meses[m].rec||[],md2=state.meses[m].desp||[];
     const tr=round2(a.reduce((s,x)=>s+(Number(x.valor)||0),0)+mr.reduce((s,x)=>s+(Number(x.valor)||0),0));
     const td=round2(md2.reduce((s,x)=>s+(Number(x.valor)||0),0));
-    const sg=round2(saldoAnt+tr-td);const cx=round2(sg-investTotal);
-    totalReceitas.push(tr);totalDespesas.push(td);saldoGeral.push(sg);cxFinal.push(cx);
+    const sg=round2(saldoAnt+tr-td);
+    totalReceitas.push(tr);totalDespesas.push(td);saldoGeral.push(sg);
     saldoAnt=sg;
   }
   // Saldos por conta representam o valor REAL atual: somente receitas Recebidas
@@ -417,12 +412,25 @@ function computeAll(){
     });
     snaps.push(bal.slice());
   }
+  // Caixa Final = soma das contas tipo "Pagamento" no snapshot de cada mês.
+  // Saldo Investido = soma das contas tipo "Investimento" no mesmo snapshot.
+  // Calculado a partir do saldo real por conta (snaps), não de um total fixo.
+  const cxFinal=[],investSaldo=[];
+  for(let m=0;m<n;m++){
+    let cx=0,inv=0;
+    state.contas.forEach((cn,i)=>{
+      if(cn.tipo==='Pagamento')cx=round2(cx+(Number(snaps[m][i])||0));
+      else if(cn.tipo==='Investimento')inv=round2(inv+(Number(snaps[m][i])||0));
+    });
+    cxFinal.push(cx);investSaldo.push(inv);
+  }
+  const investTotal=investSaldo[n-1];
   const subMap={};state.subD.forEach(s=>subMap[s.nome]=s.cat);
   const catReal=state.catD.map(()=>Array(n).fill(0));
   for(let m=0;m<n;m++){(state.meses[m].desp||[]).forEach(x=>{const cat=subMap[x.sub];const ci=state.catD.indexOf(cat);if(ci>=0)catReal[ci][m]=round2(catReal[ci][m]+(Number(x.valor)||0));});}
   const catMeta=state.catD.map(()=>Array(n).fill(0));
   state.subD.forEach((s,i)=>{const ci=state.catD.indexOf(s.cat);if(ci>=0){const arr=state.planner.despD[i]||Array(n).fill(0);for(let m=0;m<n;m++)catMeta[ci][m]=round2(catMeta[ci][m]+(Number(arr[m])||0));}});
-  return {sal,fer,dec,autoRec,totalReceitas,totalDespesas,saldoGeral,cxFinal,investTotal,snaps,catReal,catMeta};
+  return {sal,fer,dec,autoRec,totalReceitas,totalDespesas,saldoGeral,cxFinal,investSaldo,investTotal,snaps,catReal,catMeta};
 }
 
 /* ---- Recorrentes (receitas/despesas fixas) ---- */
@@ -505,7 +513,7 @@ function buildDefault(){
     {nome:'Internet',cat:'Moradia'},{nome:'Celular',cat:'Moradia'}
   ];
   const inss=[{de:0,ate:1621,pct:7.5,ded:0},{de:1621.01,ate:2902.84,pct:9,ded:24.32},{de:2902.85,ate:4354.27,pct:12,ded:111.4},{de:4354.28,ate:8475.55,pct:14,ded:198.49}];
-  const irrf=[{de:0,ate:5000,pct:0,ded:0},{de:5000,ate:7350,pct:27.5,ded:978.62},{de:7350.01,ate:10000,pct:27.5,ded:0}];
+  const irrf=[{de:0,ate:2428.80,pct:0,ded:0},{de:2428.81,ate:2826.65,pct:7.5,ded:182.16},{de:2826.66,ate:3751.05,pct:15.0,ded:394.16},{de:3751.06,ate:4664.68,pct:22.5,ded:675.49},{de:4664.69,ate:99999999,pct:27.5,ded:908.73}];
 
   const hnSeed=[2405.3333,4059,4509.999,4899.999,4899.999,4899.999,4899.999,4899.999,4899.999,4899.999,4899.999,4899.999];
   const descOcSeed=[54.78,123.95,45.71,0.11,-0.89,-113.66,0.11,0.11,0.11,0.11,0.11,0.11];
@@ -518,7 +526,7 @@ function buildDefault(){
   for(let m=0;m<12;m++){
     meses.push({
       hn:hnSeed[m],extras:-36.38,descOc:descOcSeed[m],
-      fh: m===4?80.6667:(m===11?110:0), fr:frSeed[m], fd: m===4?-123.73:0,
+      fdias: m===4?10:0, fvalorDia:'', fd: m===4?-123.73:0,
       dv: m===10?4899.999:0, dd: m===10?-38.03:0,
       rConta:rConta[m], rStatus:rStatus[m], rData:rData[m],
       fConta: m===4?'CC Viacredi':'', fStatus: m===4?'Recebido':'A Receber', fData: m===4?'2026-05-14':'',
@@ -555,7 +563,7 @@ function buildDefault(){
   return {
     meta:{saldoInicial:24875.39,ano:2026},
     contas, catR, catD, subD,
-    salario:{inss,irrf,meses},
+    salario:{inss,irrf,descontoSimplificado:607.20,reducaoIR:{limite1:5000,teto1:312.89,limite2:7350,constante:978.62,coef:0.133145},meses},
     planner:{despD,despI,vale:Array(12).fill(1620),extras:[1400,0,0,0,1400,0,0,0,1400,0,0,0]},
     meses:mesesData,
     metas:[{nome:'Viagem Europa',meta:25000,conta:'RDB CX Reserva'},{nome:'Reserva de Emergência',meta:30000,conta:'RDB CX Reserva'},{nome:'Manutenção',meta:5000,conta:'RDB CX Manu'}],
@@ -578,7 +586,8 @@ function buildDefault(){
       ]
     },
     log:[],
-    historico:[]
+    historico:[],
+    parcelasPendentes:[]
   };
 }
 
@@ -595,16 +604,26 @@ function advanceYear(){
   state.contas.forEach((conta,i)=>{conta.saldo=round2(finalSnap[i]);});
   state.salario.meses=state.salario.meses.map(md=>({
     hn:md.hn,extras:md.extras,fr:md.fr,
-    descOc:0,fh:0,fd:0,dv:0,dd:0,
+    descOc:0,descFerias:0,fh:0,fd:0,dv:0,dd:0,
     rConta:'',rStatus:'A Receber',rData:'',fConta:'',fStatus:'A Receber',fData:'',dConta:'',dStatus:'A Receber',dData:''
   }));
   state.meses=Array.from({length:12},()=>({rec:[],desp:[]}));
+  let parcelasInjetadas=0;
+  if(Array.isArray(state.parcelasPendentes)&&state.parcelasPendentes.length){
+    state.parcelasPendentes.forEach(p=>{
+      const alvo=Math.max(0,Math.min(11,p.mesAlvo));
+      const {mesAlvo,...entrada}=p;
+      state.meses[alvo].desp.push(entrada);
+      parcelasInjetadas++;
+    });
+    state.parcelasPendentes=[];
+  }
   state.meta.ano=anoProximo;
   state.meta.saldoInicial=round2(finalSnap.reduce((a,b)=>a+(Number(b)||0),0));
-  logChange(`Ano encerrado: ${anoAtual} → ${anoProximo}. Saldos finais de dezembro copiados como saldo inicial do novo ano.`);
+  logChange(`Ano encerrado: ${anoAtual} → ${anoProximo}. Saldos finais de dezembro copiados como saldo inicial do novo ano.${parcelasInjetadas?` ${parcelasInjetadas} parcela(s) programada(s) foram lançadas automaticamente em ${anoProximo}.`:''}`);
   currentTab='config';
   renderCurrent();
-  alert(`Ano ${anoProximo} iniciado! Os dados de ${anoAtual} foram arquivados dentro deste mesmo arquivo (campo "historico") e o saldo inicial de ${anoProximo} já reflete o saldo final de dezembro de ${anoAtual}.`);
+  alert(`Ano ${anoProximo} iniciado! Os dados de ${anoAtual} foram arquivados dentro deste mesmo arquivo (campo "historico") e o saldo inicial de ${anoProximo} já reflete o saldo final de dezembro de ${anoAtual}.${parcelasInjetadas?` Também lancei ${parcelasInjetadas} parcela(s) que estavam programadas para este ano.`:''}`);
 }
 
 /* ---- Render: Dashboard ---- */
@@ -672,10 +691,18 @@ function renderDashboardCharts(){
 /* ---- Render: Metas Financeiras ---- */
 function renderMetas(){
  const cards=state.metas||[];
- const accountValue=(nome)=>{const c=state.contas.find(x=>x.nome===nome);return Number(c?.saldo)||0;};
+ const c=computeAll();
+ const ano=state.meta.ano||new Date().getFullYear();
+ const now=new Date();
+ // Mesma regra usada no Dashboard: mês atual se o ano em edição é o corrente;
+ // dezembro se o ano já passou; janeiro se o ano ainda não começou.
+ const refMonth=now.getFullYear()===ano?now.getMonth():(now.getFullYear()>ano?11:0);
+ const m=Math.max(0,Math.min(11,refMonth));
+ const idxByNome={};state.contas.forEach((cn,i)=>idxByNome[cn.nome]=i);
+ const accountValue=(nome)=>{const i=idxByNome[nome];return i!==undefined?(Number(c.snaps[m][i])||0):0;};
  const contaNames=state.contas.map(c=>c.nome);
- return `<div class="card dashboard-hero"><h2>🎯 Metas Financeiras</h2><p>Acompanhe objetivos usando o saldo das suas contas e investimentos.</p><div class="quick-actions"><button class="btn" data-action="addMeta">+ Nova meta</button></div></div>
- <div class="card"><div class="cardhead"><h3>Seus objetivos</h3><span class="hint">O progresso é calculado automaticamente a partir da conta selecionada.</span></div>
+ return `<div class="card dashboard-hero"><h2>🎯 Metas Financeiras</h2><p>Acompanhe objetivos usando o saldo das suas contas e investimentos em ${MESES[m]} de ${ano}.</p><div class="quick-actions"><button class="btn" data-action="addMeta">+ Nova meta</button></div></div>
+ <div class="card"><div class="cardhead"><h3>Seus objetivos</h3><span class="hint">O progresso é calculado a partir do saldo da conta em ${MESES[m]}/${ano}.</span></div>
  ${cards.length?cards.map((g,i)=>{const atual=accountValue(g.conta);const meta=Math.max(0,Number(g.meta)||0);const pct=meta?Math.min(100,round2(atual/meta*100)):0;const falta=Math.max(0,round2(meta-atual));return `<div class="goal-card">
    <div class="goal-edit-grid">
      <label class="hint">Nome da meta<br>${textInput(`metas.${i}.nome`,g.nome)}</label>
@@ -684,7 +711,7 @@ function renderMetas(){
    </div>
    <div class="goal-top" style="margin-top:10px"><span class="badge ${pct>=100?'ok':'warn'}">${pct}%</span><button class="btn danger small" data-action="removeMeta" data-i="${i}">✕ Remover</button></div>
    <div class="progress"><span style="width:${pct}%"></span></div>
-   <div class="goal-summary">Atual: <b>${fmt(atual)}</b> de ${fmt(meta)}${falta>0?` • faltam ${fmt(falta)}`:' • meta atingida 🎉'}</div>
+   <div class="goal-summary">Atual (${MESES[m]}/${ano}): <b>${fmt(atual)}</b> de ${fmt(meta)}${falta>0?` • faltam ${fmt(falta)}`:' • meta atingida 🎉'}</div>
  </div>`}).join(''):'<div class="muted">Nenhuma meta cadastrada.</div>'}
  </div>`;
 }
@@ -730,6 +757,7 @@ function renderConfig(){
     </div>
     <p class="hint">Alterar o campo "Ano em edição" só atualiza o rótulo exibido e os limites de data dos lançamentos. Para efetivamente encerrar ${ano} — copiando os saldos finais de dezembro como saldo inicial do próximo ano e arquivando os lançamentos atuais — use o botão "Avançar para ${ano+1}".</p>
     ${historico.length?`<p class="hint"><b>Anos já arquivados:</b> ${historico.map(h=>`${h.ano} (encerrado em ${new Date(h.arquivadoEm).toLocaleDateString('pt-BR')})`).join(', ')}</p>`:''}
+    ${(state.parcelasPendentes||[]).length?`<p class="hint">🔢 <b>${state.parcelasPendentes.length} parcela(s)</b> programada(s) de compras parceladas serão lançadas automaticamente quando você avançar para ${ano+1}.</p>`:''}
   </div>
   <div class="card"><h3>Saldo Inicial do Ano</h3><div class="kpi" style="text-align:left;padding:14px"><span>Calculado automaticamente pela soma dos saldos das contas, carteiras e investimentos cadastrados abaixo.</span><b class="pos" style="font-size:22px">${fmt(saldoInicialCalculado)}</b></div><p class="hint">Este valor não é editável diretamente. Para alterá-lo, atualize os saldos das Contas / Carteiras.</p></div>
   <div class="card">
@@ -811,48 +839,103 @@ function faixasTable(title,path,faixas){
 }
 function renderSalario(){
   const c=computeAll();
+  const ano=state.meta.ano||new Date().getFullYear();
+  const now=new Date();
+  const refMonth=now.getFullYear()===ano?now.getMonth():(now.getFullYear()>ano?11:0);
+  const rm=Math.max(0,Math.min(11,refMonth));
   const head=`<tr><th>Campo</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}</tr>`;
   const editRow=(label,field)=>`<tr><td>${label}</td>${state.salario.meses.map((_,m)=>`<td>${numInput(`salario.meses.${m}.${field}`,state.salario.meses[m][field])}</td>`).join('')}</tr>`;
   const calcRow=(label,arr)=>`<tr class="calc"><td>${label}</td>${arr.map(v=>`<td>${fmt(v)}</td>`).join('')}</tr>`;
+  const rSal=c.sal[rm],rFer=c.fer[rm],rDec=c.dec[rm];
+  const fdiasRow=`<tr><td>Dias de Férias</td>${state.salario.meses.map((md,m)=>`<td>${numInput(`salario.meses.${m}.fdias`,md.fdias)}</td>`).join('')}</tr>`;
+  const fvalorDiaRow=`<tr><td>Valor do Dia (R$)<br><span class="hint" style="font-weight:400">vazio = usa Horas Normais ÷ 30</span></td>${state.salario.meses.map((md,m)=>`<td>${numInput(`salario.meses.${m}.fvalorDia`,md.fvalorDia)}</td>`).join('')}</tr>`;
 
   return `
-  <div class="card"><h3>Salário Mensal</h3><div class="scrollx"><table class="tbl">
-  <thead>${head}</thead><tbody>
-  ${editRow('Horas Normais (R$)','hn')}
-  ${editRow('Extras (R$)','extras')}
-  ${editRow('Outros Descontos','descOc')}
-  ${calcRow('Salário Bruto',c.sal.map(x=>x.bruto))}
-  ${calcRow('INSS',c.sal.map(x=>x.inss))}
-  ${calcRow('Base IRRF',c.sal.map(x=>x.baseIrrf))}
-  ${calcRow('IRRF',c.sal.map(x=>x.irrf))}
-  ${calcRow('Salário Líquido',c.sal.map(x=>x.liq))}
-  </tbody></table></div>
-  <p class="hint">"Horas Normais" já em R$ (equivalente ao bruto de horas trabalhadas). INSS/IRRF calculados de forma progressiva sobre as faixas abaixo.</p>
+  <div class="card dashboard-hero">
+    <h2>💼 Planejamento de Folha — ${MESES[rm]}/${ano}</h2>
+    <p>Simule livremente: mude o salário bruto, dias de férias ou o 13º em qualquer mês do ano e veja o efeito imediato no INSS, no IR e no líquido — inclusive em meses futuros.</p>
+    <div class="kpis" style="margin:14px 0 0">
+      <div class="kpi"><span>Salário Bruto</span><b>${fmt(rSal.bruto)}</b></div>
+      <div class="kpi"><span>INSS</span><b class="neg">${fmt(rSal.inss)}</b></div>
+      <div class="kpi"><span>Base do IR</span><b>${fmt(rSal.baseIrrf)}</b></div>
+      <div class="kpi"><span>IRRF</span><b class="neg">${fmt(rSal.irrf)}</b></div>
+      <div class="kpi"><span>Salário Líquido</span><b class="pos">${fmt(rSal.liq)}</b></div>
+    </div>
   </div>
 
-  <div class="card"><h3>Férias</h3><div class="scrollx"><table class="tbl">
-  <thead>${head}</thead><tbody>
-  ${editRow('Horas','fh')}
-  ${editRow('R$/Hora','fr')}
-  ${editRow('Descontos','fd')}
-  ${calcRow('Valor Bruto',c.fer.map(x=>x.bruto))}
-  ${calcRow('INSS',c.fer.map(x=>x.inss))}
-  ${calcRow('IRRF',c.fer.map(x=>x.irrf))}
-  ${calcRow('Férias Líquido',c.fer.map(x=>x.liq))}
-  </tbody></table></div></div>
+  <div class="card">
+    <h3>💰 Salário Mensal</h3>
+    <div class="scrollx"><table class="tbl">
+    <thead>${head}</thead><tbody>
+    ${editRow('Horas Normais (R$)','hn')}
+    ${editRow('Extras (R$)','extras')}
+    ${editRow('Desconto de Férias no Salário (R$)','descFerias')}
+    ${editRow('Outros Descontos','descOc')}
+    ${calcRow('Salário Bruto',c.sal.map(x=>x.bruto))}
+    ${calcRow('INSS',c.sal.map(x=>x.inss))}
+    ${calcRow('Desconto usado na base do IR',c.sal.map(()=>state.salario.descontoSimplificado))}
+    ${calcRow('Base do IRRF',c.sal.map(x=>x.baseIrrf))}
+    ${calcRow('IR pela tabela',c.sal.map(x=>x.irTabela))}
+    ${calcRow('Redução (Lei 15.270/2025)',c.sal.map(x=>-x.reducao))}
+    ${calcRow('IRRF Final',c.sal.map(x=>x.irrf))}
+    ${calcRow('Salário Líquido',c.sal.map(x=>x.liq))}
+    </tbody></table></div>
+    <p class="hint">"Horas Normais" já em R$ (o próprio salário base, sempre no valor cheio — é a partir dele que férias e 13º são calculados). O "Desconto de Férias no Salário" é para lançar manualmente, no(s) mês(es) certo(s) da sua folha, os dias de férias que você já recebeu antecipado e que por isso não entram no salário normal daquele mês (reduz o Salário Bruto, então INSS e IRRF já recalculam sobre o valor menor) — se as férias caírem entre dois meses, é só dividir o valor entre eles. A base do IR usa o <b>maior valor</b> entre o INSS e o "Desconto usado na base do IR" (desconto simplificado, editável na tabela mais abaixo) — assim como manda a Lei 15.191/2025. A "Redução" aplica a Lei 15.270/2025, calculada sobre o salário bruto, e nunca deixa o IRRF final negativo.</p>
+  </div>
 
-  <div class="card"><h3>13º Salário</h3><div class="scrollx"><table class="tbl">
+  <div class="card">
+    <h3>🌴 Férias</h3>
+    <div class="scrollx"><table class="tbl">
+    <thead>${head}</thead><tbody>
+    ${fdiasRow}
+    ${fvalorDiaRow}
+    ${editRow('Outros Descontos','fd')}
+    ${calcRow('Valor dos Dias',c.fer.map(x=>round2(x.dias*x.valorDia)))}
+    ${calcRow('1/3 Constitucional',c.fer.map(x=>x.um3))}
+    ${calcRow('Valor Bruto',c.fer.map(x=>x.bruto))}
+    ${calcRow('INSS',c.fer.map(x=>x.inss))}
+    ${calcRow('IRRF',c.fer.map(x=>x.irrf))}
+    ${calcRow('Férias Líquido',c.fer.map(x=>x.liq))}
+    </tbody></table></div>
+    <p class="hint">Informe quantos dias de férias você vai tirar em cada mês — o valor do dia já é sugerido automaticamente a partir das "Horas Normais" daquele mês (÷30), mas pode ser sobrescrito. O bônus de 1/3 constitucional é somado automaticamente.</p>
+    ${state.salario.meses.map((md,mm)=>{const dias=Number(md.fdias)||0;
+      if(dias<=0)return '';
+      const valorDia=(Number(md.fvalorDia)||0)>0?Number(md.fvalorDia):round2((Number(md.hn)||0)/30);
+      const impacto=round2(dias*valorDia);
+      return `<div class="drive-setup-box" style="margin-top:8px">📌 Em ${MESES[mm]}, ${dias} dia(s) de férias representam <b>${fmt(impacto)}</b> que normalmente sairiam do seu salário normal (você recebe via férias em vez de salário por esses dias). Lembre de lançar esse valor manualmente no campo "Desconto de Férias no Salário", no(s) mês(es) em que sua folha realmente desconta esses dias (pode não ser o mesmo mês do gozo, e pode ficar dividido entre dois meses).</div>`;
+    }).join('')}
+  </div>
+
+  <div class="card"><h3>🎁 13º Salário</h3><div class="scrollx"><table class="tbl">
   <thead>${head}</thead><tbody>
   ${editRow('Valor Bruto','dv')}
   ${editRow('Descontos','dd')}
   ${calcRow('INSS',c.dec.map(x=>x.inss))}
   ${calcRow('IRRF',c.dec.map(x=>x.irrf))}
   ${calcRow('13º Líquido',c.dec.map(x=>x.liq))}
-  </tbody></table></div></div>
+  </tbody></table></div>
+  <p class="hint">Dica: a 1ª parcela do 13º (normalmente paga em novembro) costuma vir sem descontos de INSS/IR — lance só o valor da 2ª parcela em dezembro com o total que sofre desconto, e a 1ª parcela como um valor à parte em novembro.</p>
+  </div>
+
+  <div class="card">
+    <h3>⚙️ Desconto Simplificado e Redução do IR (Lei 15.191/2025 e Lei 15.270/2025)</h3>
+    <p class="hint">Esses valores mudam todo ano — confira a tabela atualizada em <a href="https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas" target="_blank" rel="noopener">gov.br/receitafederal</a> antes de virar o ano.</p>
+    <div class="kpis" style="grid-template-columns:repeat(2,1fr);margin:0 0 12px">
+      <div class="kpi" style="text-align:left;padding:14px"><span>Desconto Simplificado Mensal (R$)</span>${numInput('salario.descontoSimplificado',state.salario.descontoSimplificado)}</div>
+      <div class="kpi" style="text-align:left;padding:14px"><span>Isenção total até (R$ de bruto)</span>${numInput('salario.reducaoIR.limite1',state.salario.reducaoIR.limite1)}</div>
+    </div>
+    <div class="kpis" style="grid-template-columns:repeat(4,1fr);margin:0">
+      <div class="kpi" style="text-align:left;padding:14px"><span>Teto de redução (1ª faixa)</span>${numInput('salario.reducaoIR.teto1',state.salario.reducaoIR.teto1)}</div>
+      <div class="kpi" style="text-align:left;padding:14px"><span>Redução parcial até (R$ de bruto)</span>${numInput('salario.reducaoIR.limite2',state.salario.reducaoIR.limite2)}</div>
+      <div class="kpi" style="text-align:left;padding:14px"><span>Constante da fórmula</span>${numInput('salario.reducaoIR.constante',state.salario.reducaoIR.constante)}</div>
+      <div class="kpi" style="text-align:left;padding:14px"><span>Coeficiente da fórmula</span><input type="number" step="0.000001" class="inp" data-path="salario.reducaoIR.coef" value="${state.salario.reducaoIR.coef}"></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Como funciona: 1) calcula-se o IR pela tabela progressiva normal; 2) se o salário bruto do mês for até o "limite da isenção total", reduz-se o IR até zerar (limitado ao teto); 3) entre esse limite e o "limite da redução parcial", reduz-se pelo valor de <code>constante − coeficiente × salário bruto</code>; 4) acima disso, não há redução. O IRRF final nunca fica negativo.</p>
+  </div>
 
   <div class="grid2">
-  ${faixasTable('Tabela INSS','salario.inss',state.salario.inss)}
-  ${faixasTable('Tabela IRRF','salario.irrf',state.salario.irrf)}
+  ${faixasTable('Tabela INSS (editável)','salario.inss',state.salario.inss)}
+  ${faixasTable('Tabela IRRF (editável)','salario.irrf',state.salario.irrf)}
   </div>`;
 }
 
@@ -933,7 +1016,7 @@ function renderMonth(m){
   </tr>`).join('');
 
   const manDRows=manD.map((r,i)=>`<tr>
-    <td>${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${textInput(`meses.${m}.desp.${i}.desc`,r.desc)}</td>
+    <td>${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${r.parcela?`<span title="Parcela ${r.parcela.atual} de ${r.parcela.total}" style="margin-right:4px">🔢</span>`:''}${textInput(`meses.${m}.desp.${i}.desc`,r.desc)}</td>
     <td>${numInput(`meses.${m}.desp.${i}.valor`,r.valor)}</td>
     <td>${selectInput(`meses.${m}.desp.${i}.sub`,r.sub,['',...subNames])}</td>
     <td>${selectInput(`meses.${m}.desp.${i}.conta`,r.conta,['',...contaNames])}</td>
@@ -977,6 +1060,7 @@ function renderMonth(m){
     <div class="kpi"><span>Total Despesas</span><b class="neg">${fmt(c.totalDespesas[m])}</b></div>
     <div class="kpi"><span>Saldo Geral</span><b>${fmt(c.saldoGeral[m])}</b></div>
     <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinal[m])}</b></div>
+    <div class="kpi"><span>Saldo Investido</span><b>${fmt(c.investSaldo[m])}</b></div>
   </div>
 
   <div class="card"><h3>Receitas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl">
@@ -992,7 +1076,7 @@ function renderMonth(m){
 
   <div class="card">
     <div class="cardhead"><h3>Despesas</h3><button class="btn small" data-action="addDesp" data-m="${m}">+ Despesa</button></div>
-    <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma despesa recorrente (configure em ⚙️ Configuração).</div>
+    <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma despesa recorrente (configure em ⚙️ Configuração). 🔢 marca uma parcela de uma compra parcelada.</div>
     <div class="scrollx"><table class="tbl"><thead><tr><th>Descrição</th><th>Valor</th><th>Subcategoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
     <tbody>${manDRows || '<tr><td colspan="7" class="muted">Nenhuma despesa lançada.</td></tr>'}</tbody></table></div>
   </div>
@@ -1018,7 +1102,6 @@ function renderResumo(){
   const totDesp=round2(c.totalDespesas.reduce((a,b)=>a+b,0));
   const lucro=round2(totRec-totDesp);
   const saldoFinal=c.saldoGeral[11];
-  const cxFinalAno=c.cxFinal[11];
 
   const catRows=state.catD.map((cat,ci)=>{
     const tot=round2(c.catReal[ci].reduce((a,b)=>a+b,0));
@@ -1034,7 +1117,8 @@ function renderResumo(){
     <div class="kpi"><span>Despesas do Ano</span><b class="neg">${fmt(totDesp)}</b></div>
     <div class="kpi"><span>Resultado (Lucro)</span><b class="${lucro>=0?'pos':'neg'}">${fmt(lucro)}</b></div>
     <div class="kpi"><span>Saldo Geral Final</span><b>${fmt(saldoFinal)}</b></div>
-    <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(cxFinalAno)}</b></div>
+    <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinal[11])}</b></div>
+    <div class="kpi"><span>Saldo Investido</span><b>${fmt(c.investSaldo[11])}</b></div>
   </div>
 
   <div class="grid2">
@@ -1138,7 +1222,7 @@ function defaultQaMonth(){
   return now.getFullYear()===ano?now.getMonth():0;
 }
 function openQuickAdd(){
-  qa={tipo:'Despesa',mes:defaultQaMonth(),desc:'',valor:0,sub:state.subD[0]?.nome||'',cat:state.catR[0]||'',conta:state.contas[0]?.nome||'',destino:state.contas[1]?.nome||'',status:'A Pagar',data:''};
+  qa={tipo:'Despesa',mes:defaultQaMonth(),desc:'',valor:0,sub:state.subD[0]?.nome||'',cat:state.catR[0]||'',conta:state.contas[0]?.nome||'',destino:state.contas[1]?.nome||'',status:'A Pagar',data:'',parcelado:false,parcelas:2};
   renderQuickAddModal();
 }
 function closeQuickAdd(){qa=null;renderQuickAddModal();}
@@ -1158,7 +1242,10 @@ function renderQuickAddModal(){
   if(qa.tipo==='Despesa'){
     fields=`<div class="qa-field"><label>Subcategoria</label><select class="inp" data-qa="sub">${state.subD.map(s=>`<option value="${escAttr(s.nome)}" ${s.nome===qa.sub?'selected':''}>${escHtml(s.nome)}</option>`).join('')}</select></div>
       <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...contaNames].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
-      <div class="qa-field"><label>Status</label><select class="inp" data-qa="status">${['Pago','A Pagar'].map(s=>`<option value="${s}" ${s===qa.status?'selected':''}>${s}</option>`).join('')}</select></div>`;
+      <div class="qa-field"><label>Status</label><select class="inp" data-qa="status">${['Pago','A Pagar'].map(s=>`<option value="${s}" ${s===qa.status?'selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="qa-field"><label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" data-qa="parcelado" ${qa.parcelado?'checked':''} style="width:15px;height:15px"> 🔢 Compra parcelada</label></div>
+      ${qa.parcelado?`<div class="qa-field"><label>Número de parcelas</label><input type="number" min="2" max="48" step="1" class="inp" data-qa="parcelas" data-num="1" value="${qa.parcelas||2}"></div>
+      <p class="hint" style="margin:-4px 0 4px">O valor acima é o valor de <b>cada parcela</b>. Vou criar uma despesa em ${qa.parcelas||2} meses seguidos a partir do mês escolhido, com "(1/${qa.parcelas||2})", "(2/${qa.parcelas||2})" etc. na descrição.</p>`:''}`;
   }else if(qa.tipo==='Receita'){
     fields=`<div class="qa-field"><label>Categoria</label><select class="inp" data-qa="cat">${state.catR.map(c=>`<option value="${escAttr(c)}" ${c===qa.cat?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>
       <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...contaNames].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
@@ -1194,8 +1281,21 @@ function submitQuickAdd(){
   if(!desc){alert('Informe uma descrição para o lançamento.');return;}
   if(valor<=0){alert('Informe um valor maior que zero.');return;}
   if(qa.tipo==='Despesa'){
-    state.meses[m].desp.push({desc,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:qa.data||''});
-    logChange(`Despesa "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
+    const parcelas=qa.parcelado?Math.max(2,Math.min(48,parseInt(qa.parcelas)||2)):1;
+    if(parcelas>1){
+      const grupo='pc'+Date.now()+Math.floor(Math.random()*1000);
+      let criadas=0,pendentes=0;
+      for(let i=0;i<parcelas;i++){
+        const alvo=m+i;
+        const entrada={desc:`${desc} (${i+1}/${parcelas})`,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:'',parcela:{grupo,atual:i+1,total:parcelas}};
+        if(alvo<=11){state.meses[alvo].desp.push(entrada);criadas++;}
+        else{if(!Array.isArray(state.parcelasPendentes))state.parcelasPendentes=[];state.parcelasPendentes.push({...entrada,mesAlvo:alvo-12});pendentes++;}
+      }
+      logChange(`Despesa parcelada "${desc}" criada em ${parcelas}x de ${fmt(valor)} (${criadas} parcela(s) em ${state.meta.ano}${pendentes?`, ${pendentes} programada(s) para ${state.meta.ano+1} quando o ano virar`:''})`);
+    }else{
+      state.meses[m].desp.push({desc,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:qa.data||''});
+      logChange(`Despesa "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
+    }
   }else if(qa.tipo==='Receita'){
     state.meses[m].rec.push({desc,valor,cat:qa.cat||state.catR[0]||'',conta:qa.conta||'',status:qa.status||'A Receber',data:qa.data||''});
     logChange(`Receita "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
@@ -1215,7 +1315,8 @@ function confirmDelete(msg){return confirm(msg||'Tem certeza que deseja excluir 
 document.addEventListener('change',e=>{
   const t=e.target;
   if(t.dataset.qa){
-    let v=t.value;if(t.dataset.num)v=parseFloat(v)||0;
+    let v = t.type==='checkbox' ? t.checked : t.value;
+    if(t.dataset.num)v=parseFloat(v)||0;
     qa[t.dataset.qa]=v;
     if(t.dataset.qa==='tipo')applyQaTipoDefaults();
     renderQuickAddModal();
@@ -1319,6 +1420,10 @@ function migrateState(s){
   if(!s.recorrentes||typeof s.recorrentes!=='object')s.recorrentes={rec:[],desp:[]};
   if(!Array.isArray(s.recorrentes.rec))s.recorrentes.rec=[];
   if(!Array.isArray(s.recorrentes.desp))s.recorrentes.desp=[];
+  if(!Array.isArray(s.parcelasPendentes))s.parcelasPendentes=[];
+  if(!s.salario)s.salario={};
+  if(typeof s.salario.descontoSimplificado!=='number')s.salario.descontoSimplificado=607.20;
+  if(!s.salario.reducaoIR||typeof s.salario.reducaoIR!=='object')s.salario.reducaoIR={limite1:5000,teto1:312.89,limite2:7350,constante:978.62,coef:0.133145};
   return s;
 }
 function loadState(){
