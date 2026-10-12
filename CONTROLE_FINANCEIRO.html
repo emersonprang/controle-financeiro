@@ -55,7 +55,7 @@ canvas{max-width:100%;}
 .dashboard-hero .kpi span{color:var(--muted);}
 .dashboard-hero .kpi b:not(.pos):not(.neg){color:var(--text);}
 .dashboard-hero h2{margin:0 0 6px;font-size:24px}.dashboard-hero p{margin:0;opacity:.85;font-size:13px}
-.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.metric{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}.metric .label{font-size:12px;color:var(--muted)}.metric .value{font-size:22px;font-weight:700;margin-top:7px}.metric .subvalue{font-size:11px;color:var(--muted);margin-top:5px}
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}.metric{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}.metric .label{font-size:12px;color:var(--muted)}.metric .value{font-size:22px;font-weight:700;margin-top:7px}.metric .subvalue{font-size:11px;color:var(--muted);margin-top:5px}
 @media(max-width:900px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.metric-grid{grid-template-columns:1fr}}
 .status-list{display:flex;flex-direction:column;gap:9px}.status-item{display:flex;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:12.5px}.badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}.badge.ok{background:#dcfce7;color:#166534}.badge.warn{background:#fef3c7;color:#92400e}.badge.danger{background:#fee2e2;color:#991b1b}.quick-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.quick-actions .btn{background:#fff;color:var(--primary-dark)}
@@ -137,7 +137,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
     <button class="btn" data-action="save">💾 Salvar</button>
   </div>
 </header>
-<nav id="nav"><div class="nav-brand"><span class="nav-brand-text">💼 Controle Financeiro</span><button class="nav-toggle" data-action="toggleSidebar" title="Recolher/expandir">☰</button></div><div class="nav-section">GESTÃO FINANCEIRA</div><button class="tabbtn active" data-tab="home" title="Visão Geral"><span class="nav-icon">🏠</span> <span class="nav-label">Visão Geral</span></button><button class="tabbtn" data-tab="salario" title="Salário"><span class="nav-icon">💰</span> <span class="nav-label">Salário</span></button><button class="tabbtn" data-tab="planner" title="Planejamento"><span class="nav-icon">📋</span> <span class="nav-label">Planejamento</span></button><button class="tabbtn" data-tab="metas" title="Metas Financeiras"><span class="nav-icon">🎯</span> <span class="nav-label">Metas Financeiras</span></button><button class="tabbtn" data-tab="resumo" title="Resumo Anual"><span class="nav-icon">📊</span> <span class="nav-label">Resumo Anual</span></button><div class="nav-section">LANÇAMENTOS</div><div class="month-picker"><span class="nav-icon">📅</span><select id="monthSelect" aria-label="Selecionar mês"><option value="m0">Janeiro</option><option value="m1">Fevereiro</option><option value="m2">Março</option><option value="m3">Abril</option><option value="m4">Maio</option><option value="m5">Junho</option><option value="m6">Julho</option><option value="m7">Agosto</option><option value="m8" selected="">Setembro</option><option value="m9">Outubro</option><option value="m10">Novembro</option><option value="m11">Dezembro</option></select></div><div class="nav-section">SISTEMA</div><button class="tabbtn" data-tab="config" title="Configurações"><span class="nav-icon">⚙️</span> <span class="nav-label">Configurações</span></button></nav>
+<nav id="nav"><div class="nav-brand"><span class="nav-brand-text">💼 Controle Financeiro</span><button class="nav-toggle" data-action="toggleSidebar" title="Recolher/expandir">☰</button></div><div class="nav-section">GESTÃO FINANCEIRA</div><button class="tabbtn active" data-tab="home" title="Visão Geral"><span class="nav-icon">🏠</span> <span class="nav-label">Visão Geral</span></button><button class="tabbtn" data-tab="salario" title="Salário"><span class="nav-icon">💰</span> <span class="nav-label">Salário</span></button><button class="tabbtn" data-tab="planner" title="Planejamento"><span class="nav-icon">📋</span> <span class="nav-label">Planejamento</span></button><button class="tabbtn" data-tab="metas" title="Metas Financeiras"><span class="nav-icon">🎯</span> <span class="nav-label">Metas Financeiras</span></button><button class="tabbtn" data-tab="investimentos" title="Investimentos"><span class="nav-icon">📈</span> <span class="nav-label">Investimentos</span></button><button class="tabbtn" data-tab="resumo" title="Resumo Anual"><span class="nav-icon">📊</span> <span class="nav-label">Resumo Anual</span></button><div class="nav-section">LANÇAMENTOS</div><div class="month-picker"><span class="nav-icon">📅</span><select id="monthSelect" aria-label="Selecionar mês"><option value="m0">Janeiro</option><option value="m1">Fevereiro</option><option value="m2">Março</option><option value="m3">Abril</option><option value="m4">Maio</option><option value="m5">Junho</option><option value="m6">Julho</option><option value="m7">Agosto</option><option value="m8" selected="">Setembro</option><option value="m9">Outubro</option><option value="m10">Novembro</option><option value="m11">Dezembro</option></select></div><div class="nav-section">SISTEMA</div><button class="tabbtn" data-tab="config" title="Configurações"><span class="nav-icon">⚙️</span> <span class="nav-label">Configurações</span></button></nav>
 <main id="app">
   <div class="card dashboard-hero"><h2>Olá! Aqui está sua visão financeira.</h2><p>Setembro de 2026 • acompanhe patrimônio, orçamento e pendências em um só lugar.</p>
   <div class="quick-actions"><button class="btn" data-tab-go="m8">📅 Abrir Setembro</button><button class="btn" data-tab-go="planner">📋 Planejamento</button><button class="btn" data-tab-go="metas">🎯 Metas</button><button class="btn" data-tab-go="resumo">📊 Resumo anual</button></div></div>
@@ -425,12 +425,25 @@ function computeAll(){
     cxFinal.push(cx);investSaldo.push(inv);
   }
   const investTotal=investSaldo[n-1];
+  // Saldo Geral (real) = contas Pagamento + Investimento (snapshot real do mês).
+  // Caixa Final (previsão) = caixa atual (efetivado) − despesas "A Pagar" + receitas "A Receber" do mês.
+  // Lançamentos em contas de Investimento ficam de fora (o indicador é "sem invest.").
+  const invNomes=new Set(state.contas.filter(x=>x.tipo==='Investimento').map(x=>x.nome));
+  const stIs=(x,st)=>String(x?.status||'').trim().toLowerCase()===st;
+  const somaPend=(arr,st)=>round2((arr||[]).filter(x=>stIs(x,st)&&!invNomes.has(x.conta)).reduce((a,x)=>a+(Number(x.valor)||0),0));
+  const saldoGeralReal=[],aPagarMes=[],aReceberMes=[],cxFinalProj=[];
+  for(let m=0;m<n;m++){
+    saldoGeralReal.push(round2(cxFinal[m]+investSaldo[m]));
+    const ap=somaPend(state.meses[m].desp,'a pagar');
+    const ar=round2(somaPend(state.meses[m].rec,'a receber')+somaPend(autoRec[m],'a receber'));
+    aPagarMes.push(ap);aReceberMes.push(ar);cxFinalProj.push(round2(cxFinal[m]-ap+ar));
+  }
   const subMap={};state.subD.forEach(s=>subMap[s.nome]=s.cat);
   const catReal=state.catD.map(()=>Array(n).fill(0));
   for(let m=0;m<n;m++){(state.meses[m].desp||[]).forEach(x=>{const cat=subMap[x.sub];const ci=state.catD.indexOf(cat);if(ci>=0)catReal[ci][m]=round2(catReal[ci][m]+(Number(x.valor)||0));});}
   const catMeta=state.catD.map(()=>Array(n).fill(0));
   state.subD.forEach((s,i)=>{const ci=state.catD.indexOf(s.cat);if(ci>=0){const arr=state.planner.despD[i]||Array(n).fill(0);for(let m=0;m<n;m++)catMeta[ci][m]=round2(catMeta[ci][m]+(Number(arr[m])||0));}});
-  return {sal,fer,dec,autoRec,totalReceitas,totalDespesas,saldoGeral,cxFinal,investSaldo,investTotal,snaps,catReal,catMeta};
+  return {sal,fer,dec,autoRec,totalReceitas,totalDespesas,saldoGeral,saldoGeralReal,aPagarMes,aReceberMes,cxFinalProj,cxFinal,investSaldo,investTotal,snaps,catReal,catMeta};
 }
 
 /* ---- Recorrentes (receitas/despesas fixas) ---- */
@@ -656,20 +669,21 @@ function renderDashboard(){
   const pending=[...pendingReceber,...pendingPagar];
   const totalReceber=round2(pendingReceber.reduce((a,x)=>a+(Number(x.valor)||0),0));
   const totalPagar=round2(pendingPagar.reduce((a,x)=>a+(Number(x.valor)||0),0));
-  const statuses=state.catD.map((cat,ci)=>{const real=c.catReal[ci][m],meta=c.catMeta[ci][m]; if(!meta&&!real)return null; const pct=meta?real/meta*100:100; return {cat,real,meta,pct};}).filter(Boolean).sort((a,b)=>b.pct-a.pct).slice(0,5);
+  const statuses=state.catD.map((cat,ci)=>{const real=c.catReal[ci][m],meta=c.catMeta[ci][m]; const pct=meta?real/meta*100:(real?100:0); return {cat,real,meta,pct};}).sort((a,b)=>b.pct-a.pct);
   return `
   <div class="card dashboard-hero"><h2>Olá! Aqui está sua visão financeira.</h2><p>${MESES[m]} de ${anoControle} • acompanhe patrimônio, orçamento e pendências em um só lugar.</p>
   <div class="quick-actions"><button class="btn" data-tab-go="m${m}">📅 Abrir ${MESES[m]}</button><button class="btn" data-tab-go="planner">📋 Planejamento</button><button class="btn" data-tab-go="metas">🎯 Metas</button><button class="btn" data-tab-go="resumo">📊 Resumo anual</button></div></div>
   <div class="metric-grid">
     <div class="metric"><div class="label">Patrimônio líquido estimado</div><div class="value">${fmt(patrimonio)}</div><div class="subvalue">Disponível + investimentos − cartões</div></div>
-    <div class="metric"><div class="label">Caixa disponível</div><div class="value">${fmt(payment)}</div><div class="subvalue">Contas e carteiras • somente movimentações recebidas/pagas</div></div>
+    <div class="metric"><div class="label">Caixa Atual (sem invest.)</div><div class="value">${fmt(payment)}</div><div class="subvalue">Contas de pagamento • somente o que já foi pago/recebido</div></div>
+    <div class="metric"><div class="label">Caixa Final (sem invest.)</div><div class="value">${fmt(c.cxFinalProj[m])}</div><div class="subvalue">Previsão até o fim de ${MESES[m]}: caixa atual − a pagar + a receber</div></div>
     <div class="metric"><div class="label">Investimentos</div><div class="value">${fmt(investments)}</div><div class="subvalue">Valor projetado até ${MESES[m]}</div></div>
     <div class="metric"><div class="label">Resultado do mês</div><div class="value ${saldoMes>=0?'pos':'neg'}">${fmt(saldoMes)}</div><div class="subvalue">Somente receitas recebidas − despesas pagas</div></div>
   </div>
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de ${MESES[m]}</h3><span class="badge ${remaining>=0?'ok':'danger'}">${remaining>=0?'Dentro do planejado':'Acima do planejado'}</span></div>
     <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>${fmt(metaMes)}</b></div><div class="kpi"><span>Realizado</span><b>${fmt(realMes)}</b></div><div class="kpi"><span>Restante</span><b class="${remaining>=0?'pos':'neg'}">${fmt(remaining)}</b></div></div>
-    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const cls=x.pct>100?'danger':x.pct>=80?'warn':'ok';return `<div class="status-item"><span>${escHtml(x.cat)}</span><span><b>${fmt(x.real)}</b> / ${fmt(x.meta)} <span class="badge ${cls}">${round2(x.pct)}%</span></span></div>`}).join(''):'<div class="muted">Ainda não há despesas realizadas neste mês.</div>'}</div></div>
+    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const cls=x.pct>100?'danger':x.pct>=80?'warn':'ok';return `<div class="status-item"><span>${escHtml(x.cat)}</span><span><b>${fmt(x.real)}</b> / ${fmt(x.meta)} <span class="badge ${cls}">${round2(x.pct)}%</span></span></div>`}).join(''):'<div class="muted">Nenhuma categoria de despesa cadastrada.</div>'}</div></div>
     <div class="card"><div class="cardhead"><h3>🔔 Pendências do mês</h3><span class="badge ${pending.length?'warn':'ok'}">${pending.length} pendência(s)</span></div>
     <div class="kpis pending-totals" style="grid-template-columns:repeat(2,1fr);margin:0 0 14px">
       <div class="kpi"><span>💚 Total a receber</span><b class="pos">${fmt(totalReceber)}</b></div>
@@ -684,7 +698,7 @@ function renderDashboard(){
 }
 function renderDashboardCharts(){
  const c=computeAll(); ['chDashSaldo','chDashPie'].forEach(id=>{if(charts[id]){charts[id].destroy();delete charts[id];}});
- const a=document.getElementById('chDashSaldo'); if(a) charts.chDashSaldo=new Chart(a,{type:'line',data:{labels:MESES.map(x=>x.slice(0,3)),datasets:[{label:'Saldo Geral',data:c.saldoGeral,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,.12)',fill:true,tension:.3}]},options:{responsive:true,maintainAspectRatio:false}});
+ const a=document.getElementById('chDashSaldo'); if(a) charts.chDashSaldo=new Chart(a,{type:'line',data:{labels:MESES.map(x=>x.slice(0,3)),datasets:[{label:'Saldo Geral (real)',data:c.saldoGeralReal,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,.12)',fill:true,tension:.3}]},options:{responsive:true,maintainAspectRatio:false}});
  const b=document.getElementById('chDashPie'); const totals=state.catD.map((cat,ci)=>round2(c.catReal[ci].reduce((x,y)=>x+y,0))); if(b) charts.chDashPie=new Chart(b,{type:'doughnut',data:{labels:state.catD,datasets:[{data:totals,backgroundColor:PALETTE}]},options:{responsive:true,maintainAspectRatio:false}});
 }
 
@@ -990,7 +1004,7 @@ function renderPlanner(){
 /* ---- Render: Mês ---- */
 function renderMonth(m){
   const c=computeAll();
-  const saldoIni = m===0? round2(state.contas.reduce((s,x)=>s+(Number(x.saldo)||0),0)) : c.saldoGeral[m-1];
+  const saldoIni = m===0? round2(state.contas.filter(x=>x.tipo==='Pagamento'||x.tipo==='Investimento').reduce((s,x)=>s+(Number(x.saldo)||0),0)) : c.saldoGeralReal[m-1];
   const auto=c.autoRec[m];
   const manR=state.meses[m].rec||[], manD=state.meses[m].desp||[];
   const statusOptR=['Recebido','A Receber']; const statusOptD=['Pago','A Pagar'];
@@ -1052,15 +1066,29 @@ function renderMonth(m){
     <button class="month-nav-btn" data-action="nextMonth" ${m===11?'disabled':''}>${m<11?`${MESES[m+1]} →`:''}</button>
   </div>`;
 
+  const cartoes=state.contas.filter(x=>x.tipo==='Cartão');
+  const cartaoLinhas=cartoes.map(cn=>{
+    const desp=round2(manD.filter(x=>x.conta===cn.nome).reduce((a,x)=>a+(Number(x.valor)||0),0));
+    const rec=round2([...manR,...auto].filter(x=>x.conta===cn.nome).reduce((a,x)=>a+(Number(x.valor)||0),0));
+    return {nome:cn.nome,desp,rec,fatura:round2(desp-rec)};
+  });
+  const totFatura=round2(cartaoLinhas.reduce((a,x)=>a+x.fatura,0));
+  const cartaoCard=cartoes.length?`<div class="card"><h3>💳 Cartões de Crédito — fatura do mês</h3>
+    <div class="hint" style="margin-bottom:6px">Soma das despesas menos as receitas/estornos lançados em cada cartão neste mês, inclusive os ainda "A Pagar" — é a estimativa do total da fatura.</div>
+    <div class="scrollx"><table class="tbl"><thead><tr><th>Cartão</th><th>Despesas</th><th>Receitas/Estornos</th><th>Total da fatura</th></tr></thead>
+    <tbody>${cartaoLinhas.map(x=>`<tr><td>${escHtml(x.nome)}</td><td>${fmt(x.desp)}</td><td>${fmt(x.rec)}</td><td><b>${fmt(x.fatura)}</b></td></tr>`).join('')}
+    <tr><td><b>Total</b></td><td></td><td></td><td><b>${fmt(totFatura)}</b></td></tr></tbody></table></div></div>`:'';
+
   return `
   ${monthNav}
   <div class="kpis">
     <div class="kpi"><span>Saldo Inicial</span><b>${fmt(saldoIni)}</b></div>
-    <div class="kpi"><span>Total Receitas</span><b class="pos">${fmt(c.totalReceitas[m])}</b></div>
-    <div class="kpi"><span>Total Despesas</span><b class="neg">${fmt(c.totalDespesas[m])}</b></div>
-    <div class="kpi"><span>Saldo Geral</span><b>${fmt(c.saldoGeral[m])}</b></div>
-    <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinal[m])}</b></div>
-    <div class="kpi"><span>Saldo Investido</span><b>${fmt(c.investSaldo[m])}</b></div>
+    <div class="kpi"><span>Total de Receitas (projeção)</span><b class="pos">${fmt(c.totalReceitas[m])}</b></div>
+    <div class="kpi"><span>Total de Despesas (projeção)</span><b class="neg">${fmt(c.totalDespesas[m])}</b></div>
+    <div class="kpi"><span>Saldo Geral (real)</span><b>${fmt(c.saldoGeralReal[m])}</b></div>
+    <div class="kpi"><span>Caixa Atual (sem invest.)</span><b>${fmt(c.cxFinal[m])}</b></div>
+    <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinalProj[m])}</b></div>
+    <div class="kpi"><span>Saldo Investido (real)</span><b>${fmt(c.investSaldo[m])}</b></div>
   </div>
 
   <div class="card"><h3>Receitas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl">
@@ -1087,6 +1115,8 @@ function renderMonth(m){
     <tbody>${transRows || '<tr><td colspan="6" class="muted">Nenhuma transferência lançada.</td></tr>'}</tbody></table></div>
   </div>
 
+  ${cartaoCard}
+
   <div class="grid2">
     <div class="card"><h3>Meta x Real por Categoria</h3><div class="scrollx"><table class="tbl">
     <thead><tr><th>Categoria</th><th>Real</th><th>Meta</th><th>% Consumido</th></tr></thead><tbody>${metaCat}</tbody></table></div></div>
@@ -1096,12 +1126,64 @@ function renderMonth(m){
 }
 
 /* ---- Render: Resumo ---- */
+/* ---- Investimentos: rendimento por conta ---- */
+function investRendimentos(){
+  const c=computeAll();
+  const isRecebido=x=>String(x?.status||'').trim().toLowerCase()==='recebido';
+  return state.contas.map((cn,i)=>({cn,i})).filter(x=>x.cn.tipo==='Investimento').map(({cn,i})=>{
+    const rendMes=Array(12).fill(0);
+    for(let m=0;m<12;m++){
+      (state.meses[m].rec||[]).forEach(x=>{
+        if(x.cat==='Juros'&&x.conta===cn.nome&&isRecebido(x)) rendMes[m]=round2(rendMes[m]+(Number(x.valor)||0));
+      });
+    }
+    const saldoIni=(m)=>m===0?(Number(cn.saldo)||0):(Number(c.snaps[m-1][i])||0);
+    const pctMes=rendMes.map((v,m)=>{const base=saldoIni(m);return base>0?round2((v/base)*10000)/100:0;});
+    const rendAno=round2(rendMes.reduce((a,b)=>a+b,0));
+    const saldoInicioAno=Number(cn.saldo)||0;
+    const saldoAtual=Number(c.snaps[11][i])||0;
+    // % do ano = rendimentos mensais encadeados (juros compostos) sobre o saldo de início de cada mês.
+    // Meses com saldo inicial zero ficam de fora, então conta aberta no meio do ano também funciona.
+    let acum=1;pctMes.forEach((v,m)=>{if(saldoIni(m)>0)acum*=1+v/100;});
+    const pctAno=round2((acum-1)*100);
+    const jurosPend=round2([...Array(12).keys()].reduce((a,m)=>a+(state.meses[m].rec||[]).filter(x=>x.cat==='Juros'&&x.conta===cn.nome&&String(x?.status||'').trim().toLowerCase()==='a receber').reduce((b,x)=>b+(Number(x.valor)||0),0),0));
+    const aportes=round2(saldoAtual-saldoInicioAno-rendAno);
+    const validPct=pctMes.filter((v,m)=>saldoIni(m)>0);
+    const mediaMensal=validPct.length?round2(validPct.reduce((a,b)=>a+b,0)/validPct.length*100)/100:0;
+    return {nome:cn.nome,rendMes,pctMes,rendAno,pctAno,mediaMensal,saldoInicioAno,saldoAtual,jurosPend,aportes};
+  });
+}
+function renderInvestimentos(){
+  const rows=investRendimentos();
+  const head=`<tr><th>Conta</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}<th>Total Ano</th><th>% Ano</th><th>Média Mensal</th></tr>`;
+  if(rows.length===0){
+    return `<div class="card"><h3>📈 Investimentos</h3><p class="hint">Nenhuma conta do tipo "Investimento" cadastrada ainda. Crie uma em Configurações → Contas, marcando o tipo como "Investimento", para acompanhar o rendimento aqui.</p></div>`;
+  }
+  const bodyRend=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.rendMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td><b>${fmt(r.rendAno)}</b></td><td><b>${r.pctAno.toFixed(2)}%</b></td><td>${r.mediaMensal.toFixed(2)}%</td></tr>`).join('');
+  const ranking=[...rows].sort((a,b)=>b.pctAno-a.pctAno);
+  const medalhas=['🥇','🥈','🥉'];
+  const rankingHtml=ranking.map((r,idx)=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${medalhas[idx]||'▪️'} ${escHtml(r.nome)}</span><span><b>${r.pctAno.toFixed(2)}% ao ano</b> (${r.mediaMensal.toFixed(2)}% médio/mês)</span></div>`).join('');
+  return `
+  <div class="card"><h3>🏆 Ranking de Rendimento (${state.meta.ano})</h3>
+  ${rankingHtml}
+  <p class="hint">Ranking pelo % acumulado no ano (rendimentos de cada mês encadeados, cada um sobre o saldo que a conta tinha no início do mês). A "Média Mensal" ajuda a comparar contas que começaram o ano com saldo baixo ou receberam aportes ao longo do ano.</p>
+  </div>
+  <div class="card"><h3>💼 Saldo e movimentação no ano</h3><div class="scrollx"><table class="tbl">
+  <thead><tr><th>Conta</th><th>Saldo inicial</th><th>Aportes/resgates líquidos</th><th>Rendimento (Juros recebido)</th><th>Juros ainda a receber</th><th>Saldo atual (fim do ano)</th></tr></thead>
+  <tbody>${rows.map(r=>`<tr><td>${escHtml(r.nome)}</td><td>${fmt(r.saldoInicioAno)}</td><td>${fmt(r.aportes)}</td><td>${fmt(r.rendAno)}</td><td>${fmt(r.jurosPend)}</td><td><b>${fmt(r.saldoAtual)}</b></td></tr>`).join('')}</tbody></table></div>
+  <p class="hint">Saldo atual = saldo inicial + aportes/resgates (transferências e outros lançamentos nessa conta) + rendimento. Só entra no rendimento o que está como <b>Recebido</b> — receitas "Juros" ainda marcadas "A Receber" aparecem na coluna ao lado, mas não contam no ranking nem no saldo.</p></div>
+  <div class="card"><h3>📈 Rendimento Mensal por Conta</h3><div class="scrollx"><table class="tbl">
+  <thead>${head}</thead><tbody>${bodyRend}</tbody>
+  </table></div>
+  <p class="hint">O rendimento de cada mês é a soma das Receitas lançadas com categoria <b>"Juros"</b> creditadas naquela conta (só as marcadas como "Recebido"). O % de cada mês usa como base o saldo da conta no início daquele mês (mês com saldo inicial zero não gera %); aportes e resgates não entram nessa conta, então o % reflete só o rendimento — não a variação por você ter colocado ou tirado dinheiro. Se uma conta não aparecer aqui, confira se ela está marcada como tipo "Investimento" em Configurações.</p>
+  </div>`;
+}
 function renderResumo(){
   const c=computeAll();
   const totRec=round2(c.totalReceitas.reduce((a,b)=>a+b,0));
   const totDesp=round2(c.totalDespesas.reduce((a,b)=>a+b,0));
   const lucro=round2(totRec-totDesp);
-  const saldoFinal=c.saldoGeral[11];
+  const saldoFinal=c.saldoGeralReal[11];
 
   const catRows=state.catD.map((cat,ci)=>{
     const tot=round2(c.catReal[ci].reduce((a,b)=>a+b,0));
@@ -1116,9 +1198,9 @@ function renderResumo(){
     <div class="kpi"><span>Receitas do Ano</span><b class="pos">${fmt(totRec)}</b></div>
     <div class="kpi"><span>Despesas do Ano</span><b class="neg">${fmt(totDesp)}</b></div>
     <div class="kpi"><span>Resultado (Lucro)</span><b class="${lucro>=0?'pos':'neg'}">${fmt(lucro)}</b></div>
-    <div class="kpi"><span>Saldo Geral Final</span><b>${fmt(saldoFinal)}</b></div>
-    <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinal[11])}</b></div>
-    <div class="kpi"><span>Saldo Investido</span><b>${fmt(c.investSaldo[11])}</b></div>
+    <div class="kpi"><span>Saldo Geral Final (real)</span><b>${fmt(saldoFinal)}</b></div>
+    <div class="kpi"><span>Caixa (sem invest.) no fim do ano (real)</span><b>${fmt(c.cxFinal[11])}</b></div>
+    <div class="kpi"><span>Saldo Investido (real)</span><b>${fmt(c.investSaldo[11])}</b></div>
   </div>
 
   <div class="grid2">
@@ -1146,8 +1228,8 @@ function renderCharts(){
   ]},options:{responsive:true,maintainAspectRatio:false}});
   const ctx2=document.getElementById('chSaldo');
   if(ctx2) charts.chSaldo=new Chart(ctx2,{type:'line',data:{labels:MESES.map(m=>m.slice(0,3)),datasets:[
-    {label:'Saldo Geral',data:c.saldoGeral,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,.15)',fill:true,tension:.3},
-    {label:'Caixa Final',data:c.cxFinal,borderColor:'#0ea5e9',backgroundColor:'rgba(14,165,233,.1)',fill:true,tension:.3}
+    {label:'Saldo Geral (real)',data:c.saldoGeralReal,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,.15)',fill:true,tension:.3},
+    {label:'Caixa (sem invest.)',data:c.cxFinal,borderColor:'#0ea5e9',backgroundColor:'rgba(14,165,233,.1)',fill:true,tension:.3}
   ]},options:{responsive:true,maintainAspectRatio:false}});
   const ctx3=document.getElementById('chPie');
   const totals=state.catD.map((cat,ci)=>round2(c.catReal[ci].reduce((a,b)=>a+b,0)));
@@ -1157,7 +1239,7 @@ function renderCharts(){
 /* ---- Dispatcher / Nav ---- */
 function buildNav(){
   const nav=document.getElementById('nav');
-  const main=[['home','🏠','Visão Geral'],['salario','💰','Salário'],['planner','📋','Planejamento'],['metas','🎯','Metas Financeiras'],['resumo','📊','Resumo Anual']];
+  const main=[['home','🏠','Visão Geral'],['salario','💰','Salário'],['planner','📋','Planejamento'],['metas','🎯','Metas Financeiras'],['investimentos','📈','Investimentos'],['resumo','📊','Resumo Anual']];
   const btn=([id,icon,label])=>`<button class="tabbtn" data-tab="${id}" title="${label}"><span class="nav-icon">${icon}</span> <span class="nav-label">${label}</span></button>`;
   const now=new Date().getMonth();
   const monthOptions=MESES.map((m,i)=>`<option value="m${i}" ${i===now?'selected':''}>${m}</option>`).join('');
@@ -1165,7 +1247,7 @@ function buildNav(){
   const sel=document.getElementById('monthSelect');
   if(sel) sel.addEventListener('change',()=>{currentTab=sel.value; if(window.innerWidth<=760)document.body.classList.remove('mobile-sidebar-open'); renderCurrent();});
 } 
-function tabLabel(id){if(id==='home')return 'Visão Geral';if(id==='salario')return 'Salário';if(id==='planner')return 'Planejamento';if(id==='metas')return 'Metas Financeiras';if(id==='resumo')return 'Resumo Anual';if(id==='config')return 'Configurações';if(id&&id.startsWith('m'))return MESES[parseInt(id.slice(1))]||'Lançamentos';return '';}
+function tabLabel(id){if(id==='home')return 'Visão Geral';if(id==='salario')return 'Salário';if(id==='planner')return 'Planejamento';if(id==='metas')return 'Metas Financeiras';if(id==='investimentos')return 'Investimentos';if(id==='resumo')return 'Resumo Anual';if(id==='config')return 'Configurações';if(id&&id.startsWith('m'))return MESES[parseInt(id.slice(1))]||'Lançamentos';return '';}
 function updateActiveTab(){document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===currentTab));const cp=document.getElementById('currentPage');if(cp)cp.textContent=tabLabel(currentTab);const sel=document.getElementById('monthSelect');if(sel&&currentTab&&currentTab.startsWith('m'))sel.value=currentTab;}
 
 function renderCurrent(){
@@ -1176,6 +1258,7 @@ function renderCurrent(){
   else if(currentTab==='salario') app.innerHTML=renderSalario();
   else if(currentTab==='planner') app.innerHTML=renderPlanner();
   else if(currentTab==='metas') app.innerHTML=renderMetas();
+  else if(currentTab==='investimentos') app.innerHTML=renderInvestimentos();
   else if(currentTab==='resumo'){app.innerHTML=renderResumo();renderCharts();}
   else if(currentTab.startsWith('m')){const m=parseInt(currentTab.slice(1));app.innerHTML=renderMonth(m);}
   updateActiveTab();
