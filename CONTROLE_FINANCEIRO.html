@@ -731,6 +731,88 @@ function renderMetas(){
 }
 
 /* ---- Render: Config ---- */
+/* ---- Importação de lançamentos (JSON gerado a partir de planilha) ---- */
+let importPending=null;
+const impNorm=t=>String(t==null?'':t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+function impKey(mi,side,x){return [mi,side,impNorm(x.desc),(Number(x.valor)||0).toFixed(2),impNorm(x.conta),x.data||'',x.linha||''].join('|');}
+function buildImportPlan(data,opts){
+  const plan={meses:[],avisos:[],bloqueio:''};
+  if(Number(data.ano)!==Number(state.meta.ano))plan.bloqueio=`O arquivo é de ${data.ano}, mas o app está no ano ${state.meta.ano}. Ajuste o ano em "Ano do Controle" ou use outro arquivo.`;
+  const contas=new Set(state.contas.map(c=>c.nome)),subs=new Set(state.subD.map(x=>x.nome)),cats=new Set(state.catR);
+  const falt={contas:new Set(),subs:new Set(),cats:new Set()};let semConta=0,datasFora=0;
+  (data.meses||[]).forEach(M=>{
+    const mi=Number(M.mes),mm=state.meses[mi];if(!mm)return;
+    const row={mi,aba:M.aba||MESES[mi],novos:0,recorr:0,dup:0,auto:0,nRec:0,nDesp:0,totRec:0,totDesp:0,ops:[],
+      existentes:(mm.rec||[]).filter(x=>!x.recId).length+(mm.desp||[]).filter(x=>!x.recId).length};
+    ['rec','desp'].forEach(side=>{
+      const arr=mm[side]||[],taken=new Set();
+      (M[side]||[]).forEach(x=>{
+        if(x.auto&&!opts.incluirAuto){row.auto++;return;}
+        const key=impKey(mi,side,x),nd=impNorm(x.desc),nc=impNorm(x.conta),v=(Number(x.valor)||0).toFixed(2);
+        if(arr.some(y=>y.impKey===key)||arr.some(y=>!y.recId&&impNorm(y.desc)===nd&&impNorm(y.conta)===nc&&(Number(y.valor)||0).toFixed(2)===v)){row.dup++;return;}
+        if(x.conta&&!contas.has(x.conta))falt.contas.add(x.conta);
+        if(!x.conta)semConta++;
+        if(side==='desp'&&x.sub&&!subs.has(x.sub))falt.subs.add(x.sub);
+        if(side==='rec'&&x.cat&&!cats.has(x.cat))falt.cats.add(x.cat);
+        if(x.data&&!String(x.data).startsWith(String(state.meta.ano)))datasFora++;
+        const ri=x.auto?-1:arr.findIndex((y,i)=>y.recId&&!y.customizado&&!y.impKey&&!taken.has(i)&&impNorm(y.desc)===nd);
+        if(ri>=0){taken.add(ri);row.recorr++;row.ops.push({side,fill:ri,x,key});}
+        else{row.novos++;row.ops.push({side,x,key});}
+        if(side==='rec'){row.nRec++;row.totRec=round2(row.totRec+(Number(x.valor)||0));}else{row.nDesp++;row.totDesp=round2(row.totDesp+(Number(x.valor)||0));}
+      });
+    });
+    plan.meses.push(row);
+  });
+  if(falt.contas.size)plan.avisos.push(`Contas que não existem no app (ficarão sem efeito no saldo até você cadastrá-las): ${[...falt.contas].join(', ')}.`);
+  if(falt.subs.size)plan.avisos.push(`Subcategorias de despesa que não existem no app: ${[...falt.subs].join(', ')}.`);
+  if(falt.cats.size)plan.avisos.push(`Categorias de receita que não existem no app: ${[...falt.cats].join(', ')}.`);
+  if(semConta)plan.avisos.push(`${semConta} lançamento(s) sem conta definida — entram, mas não afetam nenhum saldo até você escolher a conta no mês.`);
+  if(datasFora)plan.avisos.push(`${datasFora} lançamento(s) com data fora de ${state.meta.ano} (ex.: compras de cartão de dezembro). A data é só informativa; o mês vale pela aba.`);
+  return plan;
+}
+function applyImportPlan(){
+  if(!importPending||importPending.plan.bloqueio)return;
+  let add=0,fill=0;
+  importPending.plan.meses.forEach(row=>{
+    const mm=state.meses[row.mi];
+    row.ops.forEach(op=>{
+      const x=op.x;
+      if(op.fill!==undefined){
+        const y=mm[op.side][op.fill];
+        Object.assign(y,{valor:round2(x.valor),conta:x.conta||y.conta||'',status:x.status,data:x.data||'',customizado:true,impKey:op.key});
+        if(op.side==='rec'&&x.cat)y.cat=x.cat;
+        if(op.side==='desp'&&x.sub)y.sub=x.sub;
+        fill++;
+      }else{
+        const it={desc:x.desc,valor:round2(x.valor),conta:x.conta||'',status:x.status,data:x.data||'',impKey:op.key};
+        if(op.side==='rec')it.cat=x.cat||state.catR[0]||'';else it.sub=x.sub||'';
+        mm[op.side].push(it);add++;
+      }
+    });
+  });
+  if(!Array.isArray(state.importacoes))state.importacoes=[];
+  state.importacoes.unshift({ts:new Date().toISOString(),arquivo:importPending.nome,novos:add,recorrentes:fill});
+  logChange(`Importação de lançamentos (${importPending.nome}): ${add} novo(s) e ${fill} preenchendo itens recorrentes`);
+  importPending=null;persist();renderCurrent();
+  alert(`Importação concluída: ${add} lançamentos novos e ${fill} itens recorrentes preenchidos.`);
+}
+function renderImportCard(){
+  const p=importPending;
+  let body=`<p class="hint">Importa lançamentos (receitas e despesas por mês) a partir de um arquivo <b>.json</b> gerado da sua planilha. Nada é gravado até você confirmar na prévia. Importar o mesmo arquivo duas vezes não duplica nada.</p>
+    <input type="file" accept=".json,application/json" data-import="file" class="inp">`;
+  if(p){
+    const pl=p.plan,tot=pl.meses.reduce((a,r)=>({n:a.n+r.novos,f:a.f+r.recorr,d:a.d+r.dup,a:a.a+r.auto}),{n:0,f:0,d:0,a:0});
+    body+=`<div style="margin-top:10px"><b>Prévia — ${escHtml(p.nome)}</b></div>
+    ${pl.bloqueio?`<div class="drive-setup-box" style="margin-top:8px">⛔ ${escHtml(pl.bloqueio)}</div>`:''}
+    <label style="display:block;margin:8px 0"><input type="checkbox" data-import="opt" data-opt="incluirAuto" ${p.opts.incluirAuto?'checked':''}> Incluir também as linhas <b>Salário / Férias / Décimo Terceiro</b> como receitas manuais (marque só se a aba Salário estiver vazia nesses meses — senão o valor conta duas vezes)</label>
+    <div class="scrollx"><table class="tbl"><thead><tr><th>Mês</th><th>Receitas</th><th>Despesas</th><th>Novos</th><th>Preenchem recorrentes</th><th>Duplicatas ignoradas</th><th>Salário/Férias/13º ignorados</th><th>Manuais que já existem</th></tr></thead><tbody>
+    ${pl.meses.map(r=>`<tr><td>${escHtml(r.aba)}</td><td>${r.nRec} • ${fmt(r.totRec)}</td><td>${r.nDesp} • ${fmt(r.totDesp)}</td><td>${r.novos}</td><td>${r.recorr}</td><td>${r.dup}</td><td>${r.auto}</td><td>${r.existentes}</td></tr>`).join('')}
+    <tr><td><b>Total</b></td><td></td><td></td><td><b>${tot.n}</b></td><td><b>${tot.f}</b></td><td><b>${tot.d}</b></td><td><b>${tot.a}</b></td><td></td></tr></tbody></table></div>
+    ${pl.avisos.map(a=>`<p class="hint" style="margin-top:6px">⚠️ ${escHtml(a)}</p>`).join('')}
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-action="importApply" ${pl.bloqueio?'disabled':''}>✅ Confirmar importação</button><button class="btn" data-action="importCancel">Cancelar</button></div>`;
+  }
+  return `<div class="card"><h3>📥 Importar lançamentos de planilha</h3>${body}</div>`;
+}
 function renderConfig(){
   const saldoInicialCalculado=round2(state.contas.reduce((total,conta)=>total+(Number(conta.saldo)||0),0));
   state.meta.saldoInicial=saldoInicialCalculado;
@@ -763,6 +845,7 @@ function renderConfig(){
       <p class="hint" style="margin-top:6px">O arquivo se chama <code>${DRIVE_FILE_NAME}</code> e fica na raiz do seu Google Drive (pasta "Meu Drive"). Se não achar procurando manualmente, use o botão "Abrir arquivo no Google Drive" acima, ou busque exatamente por esse nome na barra de busca do Drive.</p>
       <p class="hint" style="margin-top:8px">As alterações são salvas automaticamente no Google Drive alguns segundos depois de você editar qualquer campo. Ao abrir este mesmo link em outro aparelho e entrar com a mesma conta, os dados mais recentes do Drive substituem os locais.</p>`}
   </div>
+  ${renderImportCard()}
   <div class="card">
     <h3>📅 Ano do Controle</h3>
     <div class="kpis" style="grid-template-columns:repeat(2,1fr);margin:0 0 10px">
@@ -1397,6 +1480,19 @@ function submitQuickAdd(){
 function confirmDelete(msg){return confirm(msg||'Tem certeza que deseja excluir este item? Essa ação não pode ser desfeita.');}
 document.addEventListener('change',e=>{
   const t=e.target;
+  if(t.dataset.import==='file'){
+    const f=t.files&&t.files[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{try{
+      const data=JSON.parse(rd.result);
+      if(!data||!Array.isArray(data.meses))throw new Error('formato');
+      const opts={incluirAuto:false};
+      importPending={nome:f.name,data,opts,plan:buildImportPlan(data,opts)};
+    }catch(err){importPending=null;alert('Arquivo inválido: não consegui ler como lançamentos importáveis.');}
+    renderCurrent();};
+    rd.readAsText(f);return;
+  }
+  if(t.dataset.import==='opt'&&importPending){importPending.opts[t.dataset.opt]=t.checked;importPending.plan=buildImportPlan(importPending.data,importPending.opts);renderCurrent();return;}
   if(t.dataset.qa){
     let v = t.type==='checkbox' ? t.checked : t.value;
     if(t.dataset.num)v=parseFloat(v)||0;
@@ -1461,6 +1557,8 @@ document.addEventListener('click',e=>{
       state.meses[m].trans.push({desc:'Transferência',valor:0,origem:state.contas[0]?.nome||'',destino:state.contas[1]?.nome||'',data:''}); break;
     case 'removeTrans': { const tr=state.meses[m].trans[i]; if(!confirmDelete(`Excluir a transferência "${tr?.desc}" (${fmt(tr?.valor)})?`))return; state.meses[m].trans.splice(i,1); logChange(`Transferência "${tr?.desc}" (${fmt(tr?.valor)}, ${MESES[m]}) excluída`); break; }
     case 'advanceYear': advanceYear(); return;
+    case 'importApply': applyImportPlan(); return;
+    case 'importCancel': importPending=null; renderCurrent(); return;
     case 'googleSignIn': signInGoogle(); return;
     case 'googleSignOut': if(confirmDelete('Desconectar do Google Drive? Você pode conectar novamente quando quiser — os dados salvos no Drive não são apagados.'))signOutGoogle(); return;
     case 'driveSyncNow': saveToDrive(); return;
