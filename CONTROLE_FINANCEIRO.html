@@ -46,8 +46,8 @@ select.inp{min-width:100px;}
 .hint{font-size:11.5px;color:var(--muted);margin-top:6px;}
 .muted{color:var(--muted);text-align:center;padding:12px;}
 .bar{background:#e2e8f0;border-radius:6px;height:9px;width:110px;overflow:hidden;display:inline-block;vertical-align:middle;}
-.barfill{height:100%;background:var(--green);}
-.barfill.over{background:var(--red);}
+.barfill{display:block;height:100%;max-width:100%;background:var(--green);transition:width .25s;}
+.barfill.over{background:#f97316;}
 canvas{max-width:100%;}
 .chartbox{height:280px;}
 .dashboard-hero{background:linear-gradient(135deg,#312e81,#7c3aed);color:#fff;border:none;}
@@ -1134,10 +1134,12 @@ function renderMonth(m){
 
   const metaCat = state.catD.map((cat,ci)=>{
     const real=c.catReal[ci][m], meta=c.catMeta[ci][m];
-    const pct = meta>0? Math.min(100,round2(real/meta*100)) : (real>0?100:0);
-    const over = real>meta && meta>0;
+    const pctReal = meta>0? round2(real/meta*100) : (real>0?100:0);
+    const pctBar = Math.min(100,pctReal);
+    const over = real>meta;
+    const label = meta>0? `${pctReal}%` : (real>0?'sem meta':'0%');
     return `<tr><td>${escHtml(cat)}</td><td>${fmt(real)}</td><td>${fmt(meta)}</td>
-      <td><span class="bar"><span class="barfill ${over?'over':''}" style="width:${pct}%"></span></span> ${pct}%</td></tr>`;
+      <td><span class="bar"><span class="barfill ${over?'over':''}" style="width:${pctBar}%"></span></span> ${label}</td></tr>`;
   }).join('');
 
   const contaRows=state.contas.map((cn,i)=>`<tr><td>${escHtml(cn.nome)}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
