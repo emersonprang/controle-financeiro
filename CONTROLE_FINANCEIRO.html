@@ -39,6 +39,11 @@ main#app{padding:18px;max-width:1400px;margin:0 auto;}
 table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
 table.tbl th,table.tbl td{padding:5px 7px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
 table.tbl th{background:#f8fafc;}
+.grid2.top{align-items:start;}.grid2.top>.card{margin-bottom:0;}.grid2.top{margin-bottom:18px;}
+table.tbl.lanc th{border-bottom:1px solid var(--border);}
+table.tbl.lanc td{border-bottom:none;padding:1px 4px;}
+table.tbl.lanc tbody tr:hover td{background:#f8fafc;}
+table.tbl.lanc tr.calc td{border-top:1px solid var(--border);padding:5px 7px;}
 table.tbl tr.calc td{font-weight:700;background:#f8fafc;}
 .scrollx{overflow-x:auto;}
 .inp{width:100%;min-width:64px;border:1px solid var(--border);border-radius:6px;padding:4px 5px;font-size:12px;background:#fff;}
@@ -145,7 +150,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
     <div class="metric"><div class="label">Patrimônio líquido estimado</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Disponível + investimentos − cartões</div></div>
     <div class="metric"><div class="label">Caixa disponível</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Contas e carteiras • somente movimentações recebidas/pagas</div></div>
     <div class="metric"><div class="label">Investimentos</div><div class="value">R$&nbsp;0,00</div><div class="subvalue">Valor projetado até Setembro</div></div>
-    <div class="metric"><div class="label">Resultado do mês</div><div class="value pos">R$&nbsp;0,00</div><div class="subvalue">Somente receitas recebidas − despesas pagas</div></div>
+    <div class="metric"><div class="label">Resultado do mês</div><div class="value pos">R$&nbsp;0,00</div><div class="subvalue">Recebidas − pagas, sem a categoria Ajustes</div></div>
   </div>
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de Setembro</h3><span class="badge ok">Dentro do planejado</span></div>
@@ -371,6 +376,11 @@ function decMes(m){
 }
 
 /* ---- Motor Geral ---- */
+const _lc=v=>String(v==null?'':v).trim().toLowerCase();
+// Lançamentos da categoria "Ajustes" (empréstimos, reembolsos, Pix entre contas etc.)
+// movimentam o caixa/saldos, mas ficam fora dos totais de receitas/despesas e do resultado.
+function ehAjusteRec(x){return _lc(x&&x.cat)==='ajustes';}
+function ehAjusteDesp(x){const sd=(state.subD||[]).find(q=>q.nome===(x&&x.sub));return _lc(x&&x.sub)==='ajustes'||!!(sd&&_lc(sd.cat)==='ajustes');}
 function computeAll(){
   const n=12;const sal=[],fer=[],dec=[];
   for(let m=0;m<n;m++){sal.push(salMes(m));fer.push(ferMes(m));dec.push(decMes(m));}
@@ -387,9 +397,11 @@ function computeAll(){
     ];
     autoRec.push(a);
     const mr=state.meses[m].rec||[],md2=state.meses[m].desp||[];
-    const tr=round2(a.reduce((s,x)=>s+(Number(x.valor)||0),0)+mr.reduce((s,x)=>s+(Number(x.valor)||0),0));
-    const td=round2(md2.reduce((s,x)=>s+(Number(x.valor)||0),0));
-    const sg=round2(saldoAnt+tr-td);
+    const trAll=round2(a.reduce((s,x)=>s+(Number(x.valor)||0),0)+mr.reduce((s,x)=>s+(Number(x.valor)||0),0));
+    const tdAll=round2(md2.reduce((s,x)=>s+(Number(x.valor)||0),0));
+    const tr=round2(a.reduce((s,x)=>s+(Number(x.valor)||0),0)+mr.filter(x=>!ehAjusteRec(x)).reduce((s,x)=>s+(Number(x.valor)||0),0));
+    const td=round2(md2.filter(x=>!ehAjusteDesp(x)).reduce((s,x)=>s+(Number(x.valor)||0),0));
+    const sg=round2(saldoAnt+trAll-tdAll);
     totalReceitas.push(tr);totalDespesas.push(td);saldoGeral.push(sg);
     saldoAnt=sg;
   }
@@ -654,8 +666,8 @@ function renderDashboard(){
   const patrimonio=round2(payment+investments-cards);
   const saldoMes=round2(
     c.autoRec[m].filter(x=>String(x.status||'').toLowerCase()==='recebido').reduce((a,x)=>a+(Number(x.valor)||0),0)+
-    (state.meses[m].rec||[]).filter(x=>String(x.status||'').toLowerCase()==='recebido').reduce((a,x)=>a+(Number(x.valor)||0),0)-
-    (state.meses[m].desp||[]).filter(x=>String(x.status||'').toLowerCase()==='pago').reduce((a,x)=>a+(Number(x.valor)||0),0)
+    (state.meses[m].rec||[]).filter(x=>String(x.status||'').toLowerCase()==='recebido'&&!ehAjusteRec(x)).reduce((a,x)=>a+(Number(x.valor)||0),0)-
+    (state.meses[m].desp||[]).filter(x=>String(x.status||'').toLowerCase()==='pago'&&!ehAjusteDesp(x)).reduce((a,x)=>a+(Number(x.valor)||0),0)
   );
   const metaMes=round2(c.catMeta.reduce((a,row)=>a+(Number(row[m])||0),0));
   const realMes=round2(c.catReal.reduce((a,row)=>a+(Number(row[m])||0),0));
@@ -678,7 +690,7 @@ function renderDashboard(){
     <div class="metric"><div class="label">Caixa Atual (sem invest.)</div><div class="value">${fmt(payment)}</div><div class="subvalue">Contas de pagamento • somente o que já foi pago/recebido</div></div>
     <div class="metric"><div class="label">Caixa Final (sem invest.)</div><div class="value">${fmt(c.cxFinalProj[m])}</div><div class="subvalue">Previsão até o fim de ${MESES[m]}: caixa atual − a pagar + a receber</div></div>
     <div class="metric"><div class="label">Investimentos</div><div class="value">${fmt(investments)}</div><div class="subvalue">Valor projetado até ${MESES[m]}</div></div>
-    <div class="metric"><div class="label">Resultado do mês</div><div class="value ${saldoMes>=0?'pos':'neg'}">${fmt(saldoMes)}</div><div class="subvalue">Somente receitas recebidas − despesas pagas</div></div>
+    <div class="metric"><div class="label">Resultado do mês</div><div class="value ${saldoMes>=0?'pos':'neg'}">${fmt(saldoMes)}</div><div class="subvalue">Recebidas − pagas, sem a categoria Ajustes</div></div>
   </div>
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de ${MESES[m]}</h3><span class="badge ${remaining>=0?'ok':'danger'}">${remaining>=0?'Dentro do planejado':'Acima do planejado'}</span></div>
@@ -819,6 +831,7 @@ function renderConfig(){
   const ano=state.meta.ano||new Date().getFullYear();
   const historico=Array.isArray(state.historico)?state.historico:[];
   return `
+  <div class="grid2 top">
   <div class="card">
     <h3>☁️ Sincronização com Google Drive</h3>
     ${!GOOGLE_CONFIGURED?`
@@ -846,6 +859,8 @@ function renderConfig(){
       <p class="hint" style="margin-top:8px">As alterações são salvas automaticamente no Google Drive alguns segundos depois de você editar qualquer campo. Ao abrir este mesmo link em outro aparelho e entrar com a mesma conta, os dados mais recentes do Drive substituem os locais.</p>`}
   </div>
   ${renderImportCard()}
+  </div>
+  <div class="grid2 top">
   <div class="card">
     <h3>📅 Ano do Controle</h3>
     <div class="kpis" style="grid-template-columns:repeat(2,1fr);margin:0 0 10px">
@@ -857,10 +872,11 @@ function renderConfig(){
     ${(state.parcelasPendentes||[]).length?`<p class="hint">🔢 <b>${state.parcelasPendentes.length} parcela(s)</b> programada(s) de compras parceladas serão lançadas automaticamente quando você avançar para ${ano+1}.</p>`:''}
   </div>
   <div class="card"><h3>Saldo Inicial do Ano</h3><div class="kpi" style="text-align:left;padding:14px"><span>Calculado automaticamente pela soma dos saldos das contas, carteiras e investimentos cadastrados abaixo.</span><b class="pos" style="font-size:22px">${fmt(saldoInicialCalculado)}</b></div><p class="hint">Este valor não é editável diretamente. Para alterá-lo, atualize os saldos das Contas / Carteiras.</p></div>
+  </div>
   <div class="card">
     <div class="cardhead"><h3>🔁 Receitas Recorrentes</h3><button class="btn small" data-action="addRecorrenteR">+ Receita Recorrente</button></div>
     <p class="hint">Itens marcados como "Ativo" são lançados automaticamente em todos os meses do ano. Alterar o valor (ou conta/categoria) padrão aqui atualiza todos os meses que você ainda não editou manualmente — assim que você ajusta um mês específico na aba dele, aquele mês passa a ser independente e não muda mais com o padrão. Desmarcar "Ativo" não apaga o que já foi gerado, só evita novas gerações (por exemplo, ao criar o item ou ao avançar de ano).</p>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Categoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Categoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
     ${state.recorrentes.rec.length?state.recorrentes.rec.map((t,i)=>`<tr>
       <td>${checkInput(`recorrentes.rec.${i}.ativo`,t.ativo)}</td>
       <td>${textInput(`recorrentes.rec.${i}.nome`,t.nome)}</td>
@@ -874,7 +890,7 @@ function renderConfig(){
   <div class="card">
     <div class="cardhead"><h3>🔁 Despesas Recorrentes</h3><button class="btn small" data-action="addRecorrenteD">+ Despesa Recorrente</button></div>
     <p class="hint">Aluguel, condomínio, contas de casa, assinaturas etc. Mesma lógica das receitas recorrentes acima.</p>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Subcategoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Subcategoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
     ${state.recorrentes.desp.length?state.recorrentes.desp.map((t,i)=>`<tr>
       <td>${checkInput(`recorrentes.desp.${i}.ativo`,t.ativo)}</td>
       <td>${textInput(`recorrentes.desp.${i}.nome`,t.nome)}</td>
@@ -887,7 +903,7 @@ function renderConfig(){
   </div>
   <div class="card">
     <div class="cardhead"><h3>Contas / Carteiras</h3><button class="btn small" data-action="addConta">+ Conta</button></div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead><tbody>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead><tbody>
     ${state.contas.map((c,i)=>`<tr>
       <td>${textInput(`contas.${i}.nome`,c.nome)}</td>
       <td>${selectInput(`contas.${i}.tipo`,c.tipo,['Pagamento','Cartão','Investimento'])}</td>
@@ -899,16 +915,16 @@ function renderConfig(){
   <div class="grid2">
     <div class="card">
       <div class="cardhead"><h3>Categorias de Receita</h3><button class="btn small" data-action="addCatR">+</button></div>
-      <table class="tbl"><tbody>${state.catR.map((c,i)=>`<tr><td>${textInput(`catR.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatR" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
+      <table class="tbl lanc"><tbody>${state.catR.map((c,i)=>`<tr><td>${textInput(`catR.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatR" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
     </div>
     <div class="card">
       <div class="cardhead"><h3>Categorias de Despesa</h3><button class="btn small" data-action="addCatD">+</button></div>
-      <table class="tbl"><tbody>${state.catD.map((c,i)=>`<tr><td>${textInput(`catD.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatD" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
+      <table class="tbl lanc"><tbody>${state.catD.map((c,i)=>`<tr><td>${textInput(`catD.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatD" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
     </div>
   </div>
   <div class="card">
     <div class="cardhead"><h3>Subcategorias de Despesa</h3><button class="btn small" data-action="addSub">+ Subcategoria</button></div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Subcategoria</th><th>Categoria</th><th></th></tr></thead><tbody>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Subcategoria</th><th>Categoria</th><th></th></tr></thead><tbody>
     ${state.subD.map((s,i)=>`<tr><td>${textInput(`subD.${i}.nome`,s.nome)}</td><td>${selectInput(`subD.${i}.cat`,s.cat,state.catD)}</td><td><button class="btn danger small" data-action="removeSub" data-i="${i}">✕</button></td></tr>`).join('')}
     </tbody></table></div>
   </div>
@@ -1176,27 +1192,27 @@ function renderMonth(m){
     <div class="kpi"><span>Saldo Investido (real)</span><b>${fmt(c.investSaldo[m])}</b></div>
   </div>
 
-  <div class="card"><h3>Receitas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl">
+  <div class="card"><h3>Receitas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl lanc">
   <thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th></tr></thead>
   <tbody>${autoRows}</tbody></table></div></div>
 
   <div class="card">
     <div class="cardhead"><h3>Receitas Manuais</h3><button class="btn small" data-action="addRec" data-m="${m}">+ Receita</button></div>
     <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma receita recorrente (configure em ⚙️ Configuração).</div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
     <tbody>${manRRows || '<tr><td colspan="7" class="muted">Nenhuma receita manual lançada.</td></tr>'}</tbody></table></div>
   </div>
 
   <div class="card">
     <div class="cardhead"><h3>Despesas</h3><button class="btn small" data-action="addDesp" data-m="${m}">+ Despesa</button></div>
     <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma despesa recorrente (configure em ⚙️ Configuração). 🔢 marca uma parcela de uma compra parcelada.</div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Descrição</th><th>Valor</th><th>Subcategoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Subcategoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
     <tbody>${manDRows || '<tr><td colspan="7" class="muted">Nenhuma despesa lançada.</td></tr>'}</tbody></table></div>
   </div>
 
   <div class="card">
     <div class="cardhead"><div><h3>🔄 Transferências entre contas</h3><div class="hint">Transferências não contam como receita ou despesa: apenas movimentam seu dinheiro entre contas.</div></div><button class="btn small" data-action="addTrans" data-m="${m}">+ Transferência</button></div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Descrição</th><th>Valor</th><th>Conta de origem</th><th>Conta de destino</th><th>Data</th><th></th></tr></thead>
+    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Conta de origem</th><th>Conta de destino</th><th>Data</th><th></th></tr></thead>
     <tbody>${transRows || '<tr><td colspan="6" class="muted">Nenhuma transferência lançada.</td></tr>'}</tbody></table></div>
   </div>
 
@@ -1222,7 +1238,11 @@ function investRendimentos(){
         if(x.cat==='Juros'&&x.conta===cn.nome&&isRecebido(x)) rendMes[m]=round2(rendMes[m]+(Number(x.valor)||0));
       });
     }
-    const saldoIni=(m)=>m===0?(Number(cn.saldo)||0):(Number(c.snaps[m-1][i])||0);
+    // Mês de referência (mesma regra das outras abas): meses depois dele ainda não aconteceram,
+    // então ficam fora do % do mês, da média e do % do ano.
+    const _now=new Date(),_ano=state.meta.ano||_now.getFullYear();
+    const refM=Math.max(0,Math.min(11,_now.getFullYear()===_ano?_now.getMonth():(_now.getFullYear()>_ano?11:0)));
+    const saldoIni=(m)=>m>refM?0:(m===0?(Number(cn.saldo)||0):(Number(c.snaps[m-1][i])||0));
     const pctMes=rendMes.map((v,m)=>{const base=saldoIni(m);return base>0?round2((v/base)*10000)/100:0;});
     const rendAno=round2(rendMes.reduce((a,b)=>a+b,0));
     const saldoInicioAno=Number(cn.saldo)||0;
@@ -1235,19 +1255,27 @@ function investRendimentos(){
     const aportes=round2(saldoAtual-saldoInicioAno-rendAno);
     const validPct=pctMes.filter((v,m)=>saldoIni(m)>0);
     const mediaMensal=validPct.length?round2(validPct.reduce((a,b)=>a+b,0)/validPct.length*100)/100:0;
-    return {nome:cn.nome,rendMes,pctMes,rendAno,pctAno,mediaMensal,saldoInicioAno,saldoAtual,jurosPend,aportes};
+    const baseMes=[...Array(12).keys()].map(saldoIni);
+    return {nome:cn.nome,rendMes,pctMes,baseMes,rendAno,pctAno,mediaMensal,saldoInicioAno,saldoAtual,jurosPend,aportes};
   });
 }
+const fmtPct=v=>(Number(v)||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'%';
 function renderInvestimentos(){
   const rows=investRendimentos();
   const head=`<tr><th>Conta</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}<th>Total Ano</th><th>% Ano</th><th>Média Mensal</th></tr>`;
   if(rows.length===0){
     return `<div class="card"><h3>📈 Investimentos</h3><p class="hint">Nenhuma conta do tipo "Investimento" cadastrada ainda. Crie uma em Configurações → Contas, marcando o tipo como "Investimento", para acompanhar o rendimento aqui.</p></div>`;
   }
-  const bodyRend=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.rendMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td><b>${fmt(r.rendAno)}</b></td><td><b>${r.pctAno.toFixed(2)}%</b></td><td>${r.mediaMensal.toFixed(2)}%</td></tr>`).join('');
+  const headPct=`<tr><th>Conta</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}<th>% Ano</th><th>Média Mensal</th></tr>`;
+  const bodyPct=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.pctMes.map((v,m)=>`<td>${r.baseMes[m]>0?fmtPct(v):'—'}</td>`).join('')}<td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
+  const totPctMes=[...Array(12).keys()].map(m=>{const base=rows.reduce((a,r)=>a+(r.baseMes[m]||0),0),rend=rows.reduce((a,r)=>a+(r.baseMes[m]>0?r.rendMes[m]:0),0);return base>0?{v:round2(rend/base*100),ok:true}:{v:0,ok:false};});
+  let acumTot=1;totPctMes.forEach(x=>{if(x.ok)acumTot*=1+x.v/100;});
+  const okTot=totPctMes.filter(x=>x.ok);
+  const totalPctRow=`<tr class="calc"><td>Todas as contas</td>${totPctMes.map(x=>`<td>${x.ok?fmtPct(x.v):'—'}</td>`).join('')}<td>${fmtPct(round2((acumTot-1)*100))}</td><td>${fmtPct(okTot.length?round2(okTot.reduce((a,x)=>a+x.v,0)/okTot.length):0)}</td></tr>`;
+  const bodyRend=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.rendMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td><b>${fmt(r.rendAno)}</b></td><td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
   const ranking=[...rows].sort((a,b)=>b.pctAno-a.pctAno);
   const medalhas=['🥇','🥈','🥉'];
-  const rankingHtml=ranking.map((r,idx)=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${medalhas[idx]||'▪️'} ${escHtml(r.nome)}</span><span><b>${r.pctAno.toFixed(2)}% ao ano</b> (${r.mediaMensal.toFixed(2)}% médio/mês)</span></div>`).join('');
+  const rankingHtml=ranking.map((r,idx)=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${medalhas[idx]||'▪️'} ${escHtml(r.nome)}</span><span><b>${fmtPct(r.pctAno)} ao ano</b> (${fmtPct(r.mediaMensal)} médio/mês)</span></div>`).join('');
   return `
   <div class="card"><h3>🏆 Ranking de Rendimento (${state.meta.ano})</h3>
   ${rankingHtml}
@@ -1257,10 +1285,15 @@ function renderInvestimentos(){
   <thead><tr><th>Conta</th><th>Saldo inicial</th><th>Aportes/resgates líquidos</th><th>Rendimento (Juros recebido)</th><th>Juros ainda a receber</th><th>Saldo atual (fim do ano)</th></tr></thead>
   <tbody>${rows.map(r=>`<tr><td>${escHtml(r.nome)}</td><td>${fmt(r.saldoInicioAno)}</td><td>${fmt(r.aportes)}</td><td>${fmt(r.rendAno)}</td><td>${fmt(r.jurosPend)}</td><td><b>${fmt(r.saldoAtual)}</b></td></tr>`).join('')}</tbody></table></div>
   <p class="hint">Saldo atual = saldo inicial + aportes/resgates (transferências e outros lançamentos nessa conta) + rendimento. Só entra no rendimento o que está como <b>Recebido</b> — receitas "Juros" ainda marcadas "A Receber" aparecem na coluna ao lado, mas não contam no ranking nem no saldo.</p></div>
-  <div class="card"><h3>📈 Rendimento Mensal por Conta</h3><div class="scrollx"><table class="tbl">
+  <div class="card"><h3>📈 Rendimento Mensal por Conta (R$)</h3><div class="scrollx"><table class="tbl">
   <thead>${head}</thead><tbody>${bodyRend}</tbody>
   </table></div>
-  <p class="hint">O rendimento de cada mês é a soma das Receitas lançadas com categoria <b>"Juros"</b> creditadas naquela conta (só as marcadas como "Recebido"). O % de cada mês usa como base o saldo da conta no início daquele mês (mês com saldo inicial zero não gera %); aportes e resgates não entram nessa conta, então o % reflete só o rendimento — não a variação por você ter colocado ou tirado dinheiro. Se uma conta não aparecer aqui, confira se ela está marcada como tipo "Investimento" em Configurações.</p>
+  <p class="hint">O rendimento de cada mês é a soma das Receitas lançadas com categoria <b>"Juros"</b> creditadas naquela conta (só as marcadas como "Recebido"). O % de cada mês usa como base o saldo da conta no início daquele mês (mês com saldo inicial zero não gera %, e meses ainda por vir ficam de fora da média e do % do ano); aportes e resgates não entram nessa conta, então o % reflete só o rendimento — não a variação por você ter colocado ou tirado dinheiro. Se uma conta não aparecer aqui, confira se ela está marcada como tipo "Investimento" em Configurações.</p>
+  </div>
+  <div class="card"><h3>📊 Rendimento Mensal por Conta (%)</h3><div class="scrollx"><table class="tbl">
+  <thead>${headPct}</thead><tbody>${bodyPct}${totalPctRow}</tbody>
+  </table></div>
+  <p class="hint">% do mês = rendimento (Juros recebido) ÷ saldo da conta no início do mês. "—" indica mês sem base para calcular (a conta começou com saldo zero ou o mês ainda não chegou), e esses meses não entram na média nem no % do ano. A linha "Todas as contas" é o rendimento total ÷ saldo total de início de mês, ou seja, a média ponderada da carteira.</p>
   </div>`;
 }
 function renderResumo(){
