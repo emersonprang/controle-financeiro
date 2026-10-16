@@ -178,6 +178,19 @@ const PALETTE=['#6366f1','#22c55e','#f59e0b','#ec4899','#0ea5e9','#ef4444','#a85
 let state=null, currentTab='home', fileHandle=null, charts={};
 
 function round2(n){n=Number(n)||0;return Math.round((n+Number.EPSILON)*100)/100;}
+/* ---- Contas ativas / inativas ---- */
+// Conta inativa continua nos cálculos (histórico preservado); só some das listas de escolha
+// e das telas de saldo nos períodos em que está zerada.
+const contaAtiva=cn=>!cn||cn.ativa!==false;
+function opcoesConta(valorAtual){
+  const nomes=state.contas.filter(contaAtiva).map(c=>c.nome);
+  if(valorAtual&&!nomes.includes(valorAtual))nomes.push(valorAtual);
+  return nomes;
+}
+function contaEmUso(nome){
+  const q=JSON.stringify(nome);
+  return [state.meses,state.recorrentes,state.salario,state.historico,state.metas,state.parcelasPendentes].some(part=>part!==undefined&&JSON.stringify(part).includes(q));
+}
 function fmt(n){n=Number(n)||0;return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
 function escAttr(s){return String(s==null?'':s).replace(/&/g,'&').replace(/"/g,'&quot;').replace(/</g,'<').replace(/>/g,'>');}
 function escHtml(s){return String(s==null?'':s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>');}
@@ -195,7 +208,7 @@ function logChange(desc){
 }
 function fieldLabel(key){
   const map={nome:'Nome',tipo:'Tipo',saldo:'Saldo',desc:'Descrição',valor:'Valor',cat:'Categoria',sub:'Subcategoria',
-    conta:'Conta',status:'Status',data:'Data',origem:'Conta de origem',destino:'Conta de destino',
+    conta:'Conta',ativa:'Conta ativa',status:'Status',data:'Data',origem:'Conta de origem',destino:'Conta de destino',
     hn:'Horas normais',extras:'Extras',descOc:'Outros descontos',descFerias:'Desconto de férias no salário',fdias:'Dias de férias',fvalorDia:'Valor do dia (férias)',
     fd:'Desconto de férias',dv:'Valor do 13º',dd:'Desconto do 13º',
     rConta:'Conta do salário',rStatus:'Status do salário',rData:'Data do salário',
@@ -211,7 +224,7 @@ function describeChange(path,oldVal,newVal){
     if(root==='contas'){
       const i=parseInt(parts[1]),field=parts[2];
       const nome=state.contas[i]?.nome||`Conta #${i+1}`;
-      const val=field==='saldo'?(v)=>fmt(Number(v)||0):plainVal;
+      const val=field==='saldo'?(v)=>fmt(Number(v)||0):(field==='ativa'?(v)=>((v===true||v==='true')?'Ativa':'Inativa'):plainVal);
       return `Conta "${nome}" — ${fieldLabel(field)} alterado de ${val(oldVal)} para ${val(newVal)}`;
     }
     if(root==='meses'&&(parts[2]==='rec'||parts[2]==='desp'||parts[2]==='trans')){
@@ -733,7 +746,7 @@ function renderMetas(){
    <div class="goal-edit-grid">
      <label class="hint">Nome da meta<br>${textInput(`metas.${i}.nome`,g.nome)}</label>
      <label class="hint">Valor da meta (R$)<br>${numInput(`metas.${i}.meta`,g.meta)}</label>
-     <label class="hint">Conta vinculada<br>${selectInput(`metas.${i}.conta`,g.conta,contaNames)}</label>
+     <label class="hint">Conta vinculada<br>${selectInput(`metas.${i}.conta`,g.conta,opcoesConta(g.conta))}</label>
    </div>
    <div class="goal-top" style="margin-top:10px"><span class="badge ${pct>=100?'ok':'warn'}">${pct}%</span><button class="btn danger small" data-action="removeMeta" data-i="${i}">✕ Remover</button></div>
    <div class="progress"><span style="width:${pct}%"></span></div>
@@ -882,7 +895,7 @@ function renderConfig(){
       <td>${textInput(`recorrentes.rec.${i}.nome`,t.nome)}</td>
       <td>${numInput(`recorrentes.rec.${i}.valor`,t.valor)}</td>
       <td>${selectInput(`recorrentes.rec.${i}.cat`,t.cat,state.catR)}</td>
-      <td>${selectInput(`recorrentes.rec.${i}.conta`,t.conta,['',...state.contas.map(c=>c.nome)])}</td>
+      <td>${selectInput(`recorrentes.rec.${i}.conta`,t.conta,['',...opcoesConta(t.conta)])}</td>
       <td><button class="btn danger small" data-action="removeRecorrenteR" data-i="${i}">✕</button></td>
     </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma receita recorrente cadastrada.</td></tr>'}
     </tbody></table></div>
@@ -896,21 +909,29 @@ function renderConfig(){
       <td>${textInput(`recorrentes.desp.${i}.nome`,t.nome)}</td>
       <td>${numInput(`recorrentes.desp.${i}.valor`,t.valor)}</td>
       <td>${selectInput(`recorrentes.desp.${i}.sub`,t.sub,state.subD.map(s=>s.nome))}</td>
-      <td>${selectInput(`recorrentes.desp.${i}.conta`,t.conta,['',...state.contas.map(c=>c.nome)])}</td>
+      <td>${selectInput(`recorrentes.desp.${i}.conta`,t.conta,['',...opcoesConta(t.conta)])}</td>
       <td><button class="btn danger small" data-action="removeRecorrenteD" data-i="${i}">✕</button></td>
     </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma despesa recorrente cadastrada.</td></tr>'}
     </tbody></table></div>
   </div>
   <div class="card">
     <div class="cardhead"><h3>Contas / Carteiras</h3><button class="btn small" data-action="addConta">+ Conta</button></div>
-    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead><tbody>
-    ${state.contas.map((c,i)=>`<tr>
+    <p class="hint">Desmarque "Ativa" quando encerrar uma conta: o histórico dela continua nos cálculos, mas ela deixa de aparecer nas listas de escolha e nas telas de saldo quando estiver zerada. O ✕ só exclui contas que nunca tiveram lançamentos.</p>
+    ${(()=>{
+      const linha=(c,i)=>`<tr${contaAtiva(c)?'':' style="opacity:.75"'}>
+      <td>${checkInput(`contas.${i}.ativa`,contaAtiva(c))}</td>
       <td>${textInput(`contas.${i}.nome`,c.nome)}</td>
       <td>${selectInput(`contas.${i}.tipo`,c.tipo,['Pagamento','Cartão','Investimento'])}</td>
       <td>${numInput(`contas.${i}.saldo`,c.saldo)}</td>
       <td><button class="btn danger small" data-action="removeConta" data-i="${i}">✕</button></td>
-    </tr>`).join('')}
-    </tbody></table></div>
+    </tr>`;
+      const cab='<thead><tr><th>Ativa</th><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead>';
+      const at=state.contas.map((c,i)=>contaAtiva(c)?linha(c,i):'').join('');
+      const ina=state.contas.map((c,i)=>contaAtiva(c)?'':linha(c,i)).join('');
+      const nIna=state.contas.filter(c=>!contaAtiva(c)).length;
+      return `<div class="scrollx"><table class="tbl lanc">${cab}<tbody>${at}</tbody></table></div>`+
+        (nIna?`<details style="margin-top:10px"><summary><b>Contas inativas (${nIna})</b></summary><div class="scrollx"><table class="tbl lanc">${cab}<tbody>${ina}</tbody></table></div></details>`:'');
+    })()}
   </div>
   <div class="grid2">
     <div class="card">
@@ -1066,6 +1087,7 @@ function renderPlanner(){
 
   const rowsI=state.contas.map((cn,i)=>{
     const arr=state.planner.despI[i]||Array(12).fill(0);
+    if(!contaAtiva(cn)&&arr.every(v=>!(Number(v)||0)))return '';
     const tot=round2(arr.reduce((a,b)=>a+(Number(b)||0),0));
     return `<tr><td>${escHtml(cn.nome)}</td>${arr.map((v,m)=>`<td>${numInput(`planner.despI.${i}.${m}`,v)}</td>`).join('')}<td>${fmt(tot)}</td></tr>`;
   });
@@ -1113,7 +1135,7 @@ function renderMonth(m){
   const autoRows=auto.map((a,i)=>{
     const fields=['rConta','fConta','dConta'][i], stF=['rStatus','fStatus','dStatus'][i], dtF=['rData','fData','dData'][i];
     return `<tr><td>${a.desc}</td><td>${fmt(a.valor)}</td><td>${a.cat}</td>
-      <td>${selectInput(`salario.meses.${m}.${fields}`,a.conta,['',...contaNames])}</td>
+      <td>${selectInput(`salario.meses.${m}.${fields}`,a.conta,['',...opcoesConta(a.conta)])}</td>
       <td>${selectInput(`salario.meses.${m}.${stF}`,a.status,statusOptR)}</td>
       <td>${dateInput(`salario.meses.${m}.${dtF}`,a.data,m)}</td></tr>`;
   }).join('');
@@ -1122,7 +1144,7 @@ function renderMonth(m){
     <td>${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${textInput(`meses.${m}.rec.${i}.desc`,r.desc)}</td>
     <td>${numInput(`meses.${m}.rec.${i}.valor`,r.valor)}</td>
     <td>${selectInput(`meses.${m}.rec.${i}.cat`,r.cat,state.catR)}</td>
-    <td>${selectInput(`meses.${m}.rec.${i}.conta`,r.conta,['',...contaNames])}</td>
+    <td>${selectInput(`meses.${m}.rec.${i}.conta`,r.conta,['',...opcoesConta(r.conta)])}</td>
     <td>${selectInput(`meses.${m}.rec.${i}.status`,r.status,statusOptR)}</td>
     <td>${dateInput(`meses.${m}.rec.${i}.data`,r.data,m)}</td>
     <td><button class="btn danger small" data-action="removeRec" data-m="${m}" data-i="${i}">✕</button></td>
@@ -1132,7 +1154,7 @@ function renderMonth(m){
     <td>${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${r.parcela?`<span title="Parcela ${r.parcela.atual} de ${r.parcela.total}" style="margin-right:4px">🔢</span>`:''}${textInput(`meses.${m}.desp.${i}.desc`,r.desc)}</td>
     <td>${numInput(`meses.${m}.desp.${i}.valor`,r.valor)}</td>
     <td>${selectInput(`meses.${m}.desp.${i}.sub`,r.sub,['',...subNames])}</td>
-    <td>${selectInput(`meses.${m}.desp.${i}.conta`,r.conta,['',...contaNames])}</td>
+    <td>${selectInput(`meses.${m}.desp.${i}.conta`,r.conta,['',...opcoesConta(r.conta)])}</td>
     <td>${selectInput(`meses.${m}.desp.${i}.status`,r.status,statusOptD)}</td>
     <td>${dateInput(`meses.${m}.desp.${i}.data`,r.data,m)}</td>
     <td><button class="btn danger small" data-action="removeDesp" data-m="${m}" data-i="${i}">✕</button></td>
@@ -1142,8 +1164,8 @@ function renderMonth(m){
   const transRows=trans.map((t,i)=>`<tr>
     <td>${textInput(`meses.${m}.trans.${i}.desc`,t.desc||'Transferência')}</td>
     <td>${numInput(`meses.${m}.trans.${i}.valor`,t.valor)}</td>
-    <td>${selectInput(`meses.${m}.trans.${i}.origem`,t.origem||'',contaNames)}</td>
-    <td>${selectInput(`meses.${m}.trans.${i}.destino`,t.destino||'',contaNames)}</td>
+    <td>${selectInput(`meses.${m}.trans.${i}.origem`,t.origem||'',opcoesConta(t.origem))}</td>
+    <td>${selectInput(`meses.${m}.trans.${i}.destino`,t.destino||'',opcoesConta(t.destino))}</td>
     <td>${textInput(`meses.${m}.trans.${i}.data`,t.data||'')}</td>
     <td><button class="btn danger small" data-action="removeTrans" data-m="${m}" data-i="${i}">✕</button></td>
   </tr>`).join('');
@@ -1158,7 +1180,7 @@ function renderMonth(m){
       <td><span class="bar"><span class="barfill ${over?'over':''}" style="width:${pctBar}%"></span></span> ${label}</td></tr>`;
   }).join('');
 
-  const contaRows=state.contas.map((cn,i)=>`<tr><td>${escHtml(cn.nome)}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&!(Number(c.snaps[m][i])||0))?'':`<tr><td>${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
 
   const ano=state.meta.ano||new Date().getFullYear();
   const monthNav=`<div class="month-nav">
@@ -1167,7 +1189,7 @@ function renderMonth(m){
     <button class="month-nav-btn" data-action="nextMonth" ${m===11?'disabled':''}>${m<11?`${MESES[m+1]} →`:''}</button>
   </div>`;
 
-  const cartoes=state.contas.filter(x=>x.tipo==='Cartão');
+  const cartoes=state.contas.filter(x=>x.tipo==='Cartão'&&(contaAtiva(x)||manD.some(y=>y.conta===x.nome)||[...manR,...auto].some(y=>y.conta===x.nome)));
   const cartaoLinhas=cartoes.map(cn=>{
     const desp=round2(manD.filter(x=>x.conta===cn.nome).reduce((a,x)=>a+(Number(x.valor)||0),0));
     const rec=round2([...manR,...auto].filter(x=>x.conta===cn.nome).reduce((a,x)=>a+(Number(x.valor)||0),0));
@@ -1231,7 +1253,7 @@ function renderMonth(m){
 function investRendimentos(){
   const c=computeAll();
   const isRecebido=x=>String(x?.status||'').trim().toLowerCase()==='recebido';
-  return state.contas.map((cn,i)=>({cn,i})).filter(x=>x.cn.tipo==='Investimento').map(({cn,i})=>{
+  return state.contas.map((cn,i)=>({cn,i})).filter(x=>x.cn.tipo==='Investimento'&&(contaAtiva(x.cn)||c.snaps.some(sn=>(Number(sn[x.i])||0)!==0)||state.meses.some(mm=>(mm.rec||[]).some(r=>r.cat==='Juros'&&r.conta===x.cn.nome)))).map(({cn,i})=>{
     const rendMes=Array(12).fill(0);
     for(let m=0;m<12;m++){
       (state.meses[m].rec||[]).forEach(x=>{
@@ -1309,7 +1331,7 @@ function renderResumo(){
   }).join('');
   const totalPorMes=Array(12).fill(0);state.catD.forEach((cat,ci)=>c.catReal[ci].forEach((v,m)=>totalPorMes[m]=round2(totalPorMes[m]+v)));
 
-  const contaRows=state.contas.map((cn,i)=>`<tr><td>${escHtml(cn.nome)}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[11][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&c.snaps.every(sn=>!(Number(sn[i])||0)))?'':`<tr><td>${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[11][i])}</td></tr>`).join('');
 
   return `
   <div class="kpis">
@@ -1442,18 +1464,18 @@ function renderQuickAddModal(){
   let fields='';
   if(qa.tipo==='Despesa'){
     fields=`<div class="qa-field"><label>Subcategoria</label><select class="inp" data-qa="sub">${state.subD.map(s=>`<option value="${escAttr(s.nome)}" ${s.nome===qa.sub?'selected':''}>${escHtml(s.nome)}</option>`).join('')}</select></div>
-      <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...contaNames].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
+      <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...opcoesConta(qa.conta)].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
       <div class="qa-field"><label>Status</label><select class="inp" data-qa="status">${['Pago','A Pagar'].map(s=>`<option value="${s}" ${s===qa.status?'selected':''}>${s}</option>`).join('')}</select></div>
       <div class="qa-field"><label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" data-qa="parcelado" ${qa.parcelado?'checked':''} style="width:15px;height:15px"> 🔢 Compra parcelada</label></div>
       ${qa.parcelado?`<div class="qa-field"><label>Número de parcelas</label><input type="number" min="2" max="48" step="1" class="inp" data-qa="parcelas" data-num="1" value="${qa.parcelas||2}"></div>
       <p class="hint" style="margin:-4px 0 4px">O valor acima é o valor de <b>cada parcela</b>. Vou criar uma despesa em ${qa.parcelas||2} meses seguidos a partir do mês escolhido, com "(1/${qa.parcelas||2})", "(2/${qa.parcelas||2})" etc. na descrição.</p>`:''}`;
   }else if(qa.tipo==='Receita'){
     fields=`<div class="qa-field"><label>Categoria</label><select class="inp" data-qa="cat">${state.catR.map(c=>`<option value="${escAttr(c)}" ${c===qa.cat?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>
-      <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...contaNames].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
+      <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...opcoesConta(qa.conta)].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
       <div class="qa-field"><label>Status</label><select class="inp" data-qa="status">${['Recebido','A Receber'].map(s=>`<option value="${s}" ${s===qa.status?'selected':''}>${s}</option>`).join('')}</select></div>`;
   }else{
-    fields=`<div class="qa-field"><label>Conta de origem</label><select class="inp" data-qa="conta">${contaNames.map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>
-      <div class="qa-field"><label>Conta de destino</label><select class="inp" data-qa="destino">${contaNames.map(c=>`<option value="${escAttr(c)}" ${c===qa.destino?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>`;
+    fields=`<div class="qa-field"><label>Conta de origem</label><select class="inp" data-qa="conta">${opcoesConta(qa.conta).map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>
+      <div class="qa-field"><label>Conta de destino</label><select class="inp" data-qa="destino">${opcoesConta(qa.destino).map(c=>`<option value="${escAttr(c)}" ${c===qa.destino?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>`;
   }
   root.innerHTML=`<div class="qa-modal">
     <h3>⚡ Lançamento Rápido</h3>
@@ -1540,6 +1562,14 @@ document.addEventListener('change',e=>{
   let val = t.type==='checkbox' ? t.checked : t.value;
   if(t.dataset.num)val=parseFloat(val)||0;
   const oldVal=getPath(state,path);
+  const mAtv=path.match(/^contas\.(\d+)\.ativa$/);
+  if(mAtv&&val===false){
+    const ci=parseInt(mAtv[1]),cc=state.contas[ci],snap=computeAll().snaps;
+    const _n=new Date(),_a=state.meta.ano||_n.getFullYear();
+    const rm=Math.max(0,Math.min(11,_n.getFullYear()===_a?_n.getMonth():(_n.getFullYear()>_a?11:0)));
+    const sal=Number(snap[rm]?.[ci])||0;
+    if(Math.abs(sal)>=0.005&&!confirm(`A conta "${cc?.nome||''}" ainda tem saldo de ${fmt(sal)} em ${MESES[rm]}. Ela continua contando no seu patrimônio mesmo inativa. Desativar assim mesmo?`)){renderCurrent();return;}
+  }
   setPath(state,path,val);
   if(String(oldVal)!==String(val))logChange(describeChange(path,oldVal,val));
 
@@ -1574,7 +1604,7 @@ document.addEventListener('click',e=>{
     case 'addMeta': state.metas.push({nome:'Nova meta',meta:10000,conta:state.contas.find(c=>c.tipo==='Investimento')?.nome||state.contas[0]?.nome||''}); logChange('Nova meta financeira criada'); break;
     case 'removeMeta': { const g=state.metas[i]; if(!confirmDelete(`Excluir a meta "${g?.nome||''}"?`))return; state.metas.splice(i,1); logChange(`Meta "${g?.nome||''}" excluída`); break; }
     case 'addConta': state.contas.push({nome:'Nova Conta',tipo:'Pagamento',saldo:0}); state.planner.despI.push(Array(12).fill(0)); logChange('Nova conta criada'); break;
-    case 'removeConta': { const c=state.contas[i]; if(!confirmDelete(`Excluir a conta "${c?.nome||''}"? Lançamentos que referenciam essa conta ficarão sem conta vinculada.`))return; state.contas.splice(i,1); state.planner.despI.splice(i,1); logChange(`Conta "${c?.nome||''}" (saldo ${fmt(c?.saldo)}) excluída`); break; }
+    case 'removeConta': { const c=state.contas[i]; if(c&&contaEmUso(c.nome)){alert(`A conta "${c.nome}" tem lançamentos, metas ou histórico vinculados e não pode ser excluída sem alterar seus saldos passados.\n\nDesmarque "Ativa" para tirá-la das listas e telas, mantendo o histórico.`);return;} if(!confirmDelete(`Excluir a conta "${c?.nome||''}"? Ela não tem nenhum lançamento vinculado.`))return; state.contas.splice(i,1); state.planner.despI.splice(i,1); logChange(`Conta "${c?.nome||''}" (saldo ${fmt(c?.saldo)}) excluída`); break; }
     case 'addCatR': state.catR.push('Nova Categoria'); break;
     case 'removeCatR': { const c=state.catR[i]; if(!confirmDelete(`Excluir a categoria de receita "${c}"?`))return; state.catR.splice(i,1); logChange(`Categoria de receita "${c}" excluída`); break; }
     case 'addCatD': state.catD.push('Nova Categoria'); break;
