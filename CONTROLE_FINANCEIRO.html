@@ -53,8 +53,46 @@ table.tbl.lanc td{border-bottom:none;padding:1px 4px;}
 table.tbl.lanc tbody tr:hover td{background:var(--soft);}
 table.tbl.lanc tr.calc td{border-top:1px solid var(--border);padding:5px 7px;}
 .grid2>*,main>*{min-width:0;}
+.tico{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:13px;font-weight:700;line-height:1;margin-right:5px;flex:0 0 auto;vertical-align:middle;}
+.tico.in{background:var(--ok-bg);color:var(--ok-fg);}.tico.out{background:var(--danger-bg);color:var(--danger-fg);}.tico.tr{background:var(--warn-bg);color:var(--warn-fg);}
+.cico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;vertical-align:-5px;margin-right:5px;flex:0 0 auto;}
+:root[data-theme="dark"] .cico{filter:brightness(1.45);}
+.cwrap{display:flex;align-items:center;min-width:0;}.cwrap select{flex:1;min-width:0;}
+input[type=color].cor-in{width:34px;height:28px;padding:0;border:1px solid var(--border);border-radius:6px;background:transparent;cursor:pointer;}
+/* ---- Lista única de lançamentos ---- */
+.lgrid{min-width:900px;}
+.lhead,.ldet{display:grid;grid-template-columns:minmax(190px,2.4fr) 96px minmax(130px,1.3fr) minmax(160px,1.6fr) 108px 128px 40px;gap:6px;align-items:center;}
+.lhead{font-weight:700;font-size:13px;padding:6px 4px;background:var(--soft);border-bottom:1px solid var(--border);}
+.lrow{padding:1px 4px;}.lrow:hover{background:var(--soft);}
+.lsum{display:none;}
+.lcell{min-width:0;display:flex;align-items:center;}
+.lcell .inp{width:100%;min-width:0;}.lcell .cwrap{width:100%;}.lcell.c1 .inp{flex:1;}
+.lchips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 6px;}
+.ltot{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:13px;margin:0 0 8px;color:var(--text);}.ltot span{white-space:nowrap;}
+.lchip{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;}
+.lchip.on{background:var(--primary);color:#fff;border-color:var(--primary);}
+.lseta{font-weight:700;margin:0 4px;color:var(--muted);}
+.lval.in{color:var(--green-text);}.lval.out{color:var(--red);}
+.lstat{font-weight:700;width:18px;text-align:center;}.lstat.ok{color:var(--green-text);}.lstat.pend{color:var(--over-text);}
 .msticky{display:none;}
 @media(max-width:760px){
+  .lhead{display:none;}.lgrid{min-width:0;}
+  .lrow{border:1px solid var(--border);border-radius:12px;margin:0 0 6px;padding:0;background:var(--card);overflow:hidden;}
+  .lrow:hover{background:var(--card);}
+  .lanc-card{padding:12px 10px;}
+  .lsum{display:flex;align-items:center;gap:5px;padding:8px;cursor:pointer;min-height:44px;}
+  .lsum .tico{margin-right:0;}
+  .lchip{padding:5px 9px;font-size:12px;}
+  .ltot{font-size:12px;}
+  .ldesc{flex:1;min-width:56px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-size:13px;}
+  .lval{white-space:nowrap;font-weight:700;font-size:13px;}
+  .lcontas{display:flex;align-items:center;white-space:nowrap;}.lcontas .cico{margin-right:0;}
+  .lchev{transition:transform .15s;color:var(--muted);}.lrow.open .lchev{transform:rotate(180deg);}
+  .ldet{display:none;grid-template-columns:1fr 1fr;gap:8px;padding:10px;border-top:1px dashed var(--border);}
+  .lrow.open .ldet{display:grid;}
+  .lcell{display:block;}.lcell::before{content:attr(data-label);display:block;font-size:10.5px;color:var(--muted);margin-bottom:2px;}
+  .lcell.c1{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;}.lcell.c1::before{flex:0 0 100%;}.lcell.c1 .tico{display:none;}
+  .lcell.c7{grid-column:1/-1;display:flex;justify-content:flex-end;}.lcell.c7::before{display:none;}
   .msticky{display:flex;position:sticky;top:0;z-index:40;gap:8px;justify-content:space-around;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 10px;margin:0 0 10px;box-shadow:0 2px 8px rgba(15,23,42,.08);}
   .msticky div{text-align:center;font-size:11px;color:var(--muted);white-space:nowrap;}.msticky b{display:block;font-size:14px;color:var(--text);}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}.kpi{min-width:0;}.kpi b,.kpi span{overflow-wrap:anywhere;}
@@ -139,6 +177,15 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
 @keyframes syncpulse{0%,100%{opacity:1}50%{opacity:.3}}
 .drive-setup-box{background:var(--soft);border:1px dashed var(--border);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--muted);line-height:1.6}
 .drive-setup-box code{background:var(--track);padding:1px 5px;border-radius:5px;font-size:11.5px}
+@media(max-width:760px){
+  /* No celular o cabeçalho rola junto com a página (antes ficava grudado e ocupava a tela toda);
+     só a barra de Caixa Atual/Final fica fixa no topo. */
+  header.top{position:static;padding:10px 12px;gap:6px;}
+  .month-nav-btn{min-width:0;padding:6px 8px;font-size:12px;}
+  header.top h1{font-size:16px;}
+  .actions{flex-wrap:wrap;width:100%;gap:6px;}
+  .actions .btn,.actions .sync-badge{white-space:nowrap;padding:6px 10px;font-size:12px;}
+}
 </style>
 <style id="googleidentityservice_button_styles">.qJTHM{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;color:#202124;direction:ltr;-webkit-touch-callout:none;font-family:Roboto-Regular,arial,sans-serif;-webkit-font-smoothing:antialiased;font-weight:400;margin:0;overflow:hidden;-webkit-text-size-adjust:100%}.ynRLnc{left:-9999px;position:absolute;top:-9999px}.L6cTce{display:none}.bltWBb{overflow-wrap:break-word;word-break:break-word}.hSRGPd{color:#1a73e8;cursor:pointer;font-weight:500;text-decoration:none}.Bz112c-W3lGp{height:16px;width:16px}.Bz112c-E3DyYd{height:20px;width:20px}.Bz112c-r9oPif{height:24px;width:24px}.Bz112c-u2z5K{height:36px;width:36px}.Bz112c-uaxL4e{border-radius:10px}.LgbsSe-Bz112c{display:block}.S9gUrf-YoZ4jf{border:none;margin:0;padding:0}.S9gUrf-YoZ4jf *{border:none;margin:0;padding:0}.fFW7wc-ibnC6b>.aZ2wEe>div{border-color:#4285f4}.P1ekSe-ZMv3u{-webkit-transition:height .2s linear;transition:height .2s linear}.P1ekSe-ZMv3u>div:first-child{background-color:#1a73e8!important;-webkit-transition:width .3s linear;transition:width .3s linear}.P1ekSe-ZMv3u>div:nth-child(2){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.P1ekSe-ZMv3u>div:nth-child(3){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.haAclf{display:inline-block}.nsm7Bb-HzV7m-LgbsSe{border-radius:4px;box-sizing:border-box;-webkit-transition:background-color .218s,border-color .218s;transition:background-color .218s,border-color .218s;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#fff;background-image:none;border:1px solid #dadce0;color:#3c4043;cursor:pointer;font-family:Google Sans,arial,sans-serif;font-size:.875rem;height:40px;letter-spacing:.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;vertical-align:middle;white-space:nowrap;width:auto}.nsm7Bb-HzV7m-LgbsSe.TzA9Ye-LgbsSe{font-size:14px}@media screen and (-ms-high-contrast:active){.nsm7Bb-HzV7m-LgbsSe{border:2px solid windowText;color:windowText}}@media screen and (preferes-contrast:more){.nsm7Bb-HzV7m-LgbsSe{color:#000}}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe{font-size:.875rem;height:32px;letter-spacing:.25px;padding:0 10px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.TzA9Ye-LgbsSe{font-size:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe{font-size:.6875rem;height:20px;letter-spacing:.3px;padding:0 8px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.TzA9Ye-LgbsSe{font-size:11px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe{padding:0;width:40px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe{width:32px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe{width:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK{border-radius:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe{border-radius:16px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe{border-radius:10px}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc{border:1px solid #8e918f;background-color:#131314;color:#e3e3e3}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc{border:none;color:#fff}.nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc{background-color:#1a73e8}.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{background-color:#202124;color:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{color:#fff}}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:18px;margin-right:8px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:14px;min-width:14px;width:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:10px;min-width:10px;width:10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin-left:8px;margin-right:-4px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:10px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:8px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:4px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:3px;border-bottom-left-radius:3px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center;background-color:#fff;height:36px;margin-left:-10px;margin-right:12px;min-width:36px;width:36px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:28px;margin-left:-8px;margin-right:10px;min-width:28px;width:28px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:16px;margin-left:-6px;margin-right:8px;min-width:16px;width:16px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:3px;margin-left:2px;margin-right:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:8px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;position:relative;width:100%}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX{-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:1;-webkit-box-flex:1;flex-grow:1;font-family:Google Sans,arial,sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-weight:300}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:0;-webkit-box-flex:0;flex-grow:0}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe{-webkit-transition:background-color .218s;transition:background-color .218s;bottom:0;left:0;position:absolute;right:0;top:0}.nsm7Bb-HzV7m-LgbsSe:focus,.nsm7Bb-HzV7m-LgbsSe:hover{box-shadow:none;border-color:rgb(210,227,252);outline:none}.nsm7Bb-HzV7m-LgbsSe:focus-within{outline:2px solid #00639b;border-color:transparent}.nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.08)}.nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.1)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.08)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.12)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.24)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.32)}.nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY{border-radius:50%;display:-webkit-box;display:-webkit-flex;display:flex;height:20px;margin-left:-4px;margin-right:8px;min-width:20px;width:20px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-family:Roboto;font-size:12px;text-align:left}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS,.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf{overflow:hidden;text-overflow:ellipsis}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;color:#5f6368;fill:#5f6368;font-size:11px;font-weight:400}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.i5vt6e-to915-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#c4c7c5;fill:#c4c7c5}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#e8eaed;fill:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff,.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#000;fill:#000}}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c{height:18px;margin:-3px -3px -3px 2px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-bottom-right-radius:3px;margin-left:12px;margin-right:-10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.L5Fo6c-sM5MNb{border:0;display:block;left:0;position:relative;top:0}.L5Fo6c-bF1uUb{border-radius:4px;bottom:0;cursor:pointer;left:0;position:absolute;right:0;top:0}.L5Fo6c-bF1uUb:focus{border:none;outline:none}sentinel{}</style></head>
 <body>
@@ -182,7 +229,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   </div>
   <div class="grid2">
     <div class="card"><h3>📈 Evolução do saldo</h3><div class="chartbox"><canvas id="chDashSaldo" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
-    <div class="card"><h3>🍰 Despesas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
+    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
   </div></main>
 <button id="fabQuickAdd" class="fab" data-action="openQuickAdd" title="Novo lançamento rápido">+</button>
 <div id="quickAddOverlay" class="qa-overlay" style="display:none">
@@ -225,7 +272,7 @@ function logChange(desc){
 }
 function fieldLabel(key){
   const map={nome:'Nome',tipo:'Tipo',saldo:'Saldo',desc:'Descrição',valor:'Valor',cat:'Categoria',sub:'Subcategoria',
-    conta:'Conta',ativa:'Conta ativa',status:'Status',data:'Data',origem:'Conta de origem',destino:'Conta de destino',
+    conta:'Conta',ativa:'Conta ativa',cor:'Cor do ícone',status:'Status',data:'Data',origem:'Conta de origem',destino:'Conta de destino',
     hn:'Horas normais',extras:'Extras',descOc:'Outros descontos',descFerias:'Desconto de férias no salário',fdias:'Dias de férias',fvalorDia:'Valor do dia (férias)',
     fd:'Desconto de férias',dv:'Valor do 13º',dd:'Desconto do 13º',
     rConta:'Conta do salário',rStatus:'Status do salário',rData:'Data do salário',
@@ -245,7 +292,7 @@ function describeChange(path,oldVal,newVal){
       return `Conta "${nome}" — ${fieldLabel(field)} alterado de ${val(oldVal)} para ${val(newVal)}`;
     }
     if(root==='meses'&&(parts[2]==='rec'||parts[2]==='desp'||parts[2]==='trans')){
-      const m=parseInt(parts[1]);const tipo=parts[2]==='rec'?'Receita':(parts[2]==='desp'?'Despesa':'Transferência');
+      const m=parseInt(parts[1]);const tipo=parts[2]==='rec'?'Entrada':(parts[2]==='desp'?'Saída':'Transferência');
       const idx=parseInt(parts[3]),field=parts[4];
       const item=(state.meses[m]?.[parts[2]]||[])[idx];
       const desc=item?.desc||`${tipo} #${idx+1}`;
@@ -273,21 +320,21 @@ function describeChange(path,oldVal,newVal){
       const val=field==='meta'?(v)=>fmt(Number(v)||0):plainVal;
       return `Meta "${nome}" — ${fieldLabel(field)} alterado de ${val(oldVal)} para ${val(newVal)}`;
     }
-    if(root==='catR')return `Categoria de receita renomeada de "${plainVal(oldVal)}" para "${plainVal(newVal)}"`;
-    if(root==='catD')return `Categoria de despesa renomeada de "${plainVal(oldVal)}" para "${plainVal(newVal)}"`;
+    if(root==='catR')return `Categoria de entrada renomeada de "${plainVal(oldVal)}" para "${plainVal(newVal)}"`;
+    if(root==='catD')return `Categoria de saída renomeada de "${plainVal(oldVal)}" para "${plainVal(newVal)}"`;
     if(root==='subD')return `Subcategoria — ${fieldLabel(parts[2])} alterado de "${plainVal(oldVal)}" para "${plainVal(newVal)}"`;
     if(root==='meta'&&parts[1]==='ano')return `Ano do controle alterado de ${plainVal(oldVal)} para ${plainVal(newVal)}`;
     if(root==='recorrentes'){
       const tipoArr=parts[1],i=parseInt(parts[2]),field=parts[3];
       const t=(state.recorrentes[tipoArr]||[])[i];
       const nome=t?.nome||`Recorrente #${i+1}`;
-      const tipoLabel=tipoArr==='rec'?'Receita recorrente':'Despesa recorrente';
+      const tipoLabel=tipoArr==='rec'?'Entrada recorrente':'Saída recorrente';
       const val=field==='valor'?(v)=>fmt(Number(v)||0):(field==='ativo'?(v)=>((v===true||v==='true')?'Ativo':'Inativo'):plainVal);
       return `${tipoLabel} "${nome}" — ${fieldLabel(field)} alterado de ${val(oldVal)} para ${val(newVal)}`;
     }
     if(root==='planner'){
       const sub=parts[1];
-      if(sub==='despD'){const i=parseInt(parts[2]),mm=parseInt(parts[3]);const nome=state.subD[i]?.nome||`Subcategoria #${i+1}`;return `Meta de despesa "${nome}" (${MESES[mm]}) alterada de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;}
+      if(sub==='despD'){const i=parseInt(parts[2]),mm=parseInt(parts[3]);const nome=state.subD[i]?.nome||`Subcategoria #${i+1}`;return `Meta de saída "${nome}" (${MESES[mm]}) alterada de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;}
       if(sub==='despI'){const i=parseInt(parts[2]),mm=parseInt(parts[3]);const nome=state.contas[i]?.nome||`Conta #${i+1}`;return `Aporte planejado em "${nome}" (${MESES[mm]}) alterado de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;}
       if(sub==='vale'){const mm=parseInt(parts[2]);return `Vale-alimentação planejado (${MESES[mm]}) alterado de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;}
       if(sub==='extras'){const mm=parseInt(parts[2]);return `Extras planejados (${MESES[mm]}) alterado de ${fmt(Number(oldVal)||0)} para ${fmt(Number(newVal)||0)}`;}
@@ -408,7 +455,7 @@ function decMes(m){
 /* ---- Motor Geral ---- */
 const _lc=v=>String(v==null?'':v).trim().toLowerCase();
 // Lançamentos da categoria "Ajustes" (empréstimos, reembolsos, Pix entre contas etc.)
-// movimentam o caixa/saldos, mas ficam fora dos totais de receitas/despesas e do resultado.
+// movimentam o caixa/saldos, mas ficam fora dos totais de entradas/saídas e do resultado.
 function ehAjusteRec(x){return _lc(x&&x.cat)==='ajustes';}
 function ehAjusteDesp(x){const sd=(state.subD||[]).find(q=>q.nome===(x&&x.sub));return _lc(x&&x.sub)==='ajustes'||!!(sd&&_lc(sd.cat)==='ajustes');}
 function computeAll(){
@@ -435,8 +482,8 @@ function computeAll(){
     totalReceitas.push(tr);totalDespesas.push(td);saldoGeral.push(sg);
     saldoAnt=sg;
   }
-  // Saldos por conta representam o valor REAL atual: somente receitas Recebidas
-  // e despesas Pagas movimentam as contas. Itens A Receber/A Pagar ficam apenas
+  // Saldos por conta representam o valor REAL atual: somente entradas Recebidas
+  // e saídas Pagas movimentam as contas. Itens A Receber/A Pagar ficam apenas
   // como pendências e não alteram o saldo até que o status seja atualizado.
   const idx={};state.contas.forEach((c,i)=>idx[c.nome]=i);
   const bal=state.contas.map(c=>Number(c.saldo)||0);const snaps=[];
@@ -468,7 +515,7 @@ function computeAll(){
   }
   const investTotal=investSaldo[n-1];
   // Saldo Geral (real) = contas Pagamento + Investimento (snapshot real do mês).
-  // Caixa Final (previsão) = caixa atual (efetivado) − despesas "A Pagar" + receitas "A Receber" do mês.
+  // Caixa Final (previsão) = caixa atual (efetivado) − saídas "A Pagar" + entradas "A Receber" do mês.
   // Lançamentos em contas de Investimento ficam de fora (o indicador é "sem invest.").
   const invNomes=new Set(state.contas.filter(x=>x.tipo==='Investimento').map(x=>x.nome));
   const stIs=(x,st)=>String(x?.status||'').trim().toLowerCase()===st;
@@ -488,7 +535,7 @@ function computeAll(){
   return {sal,fer,dec,autoRec,totalReceitas,totalDespesas,saldoGeral,saldoGeralReal,aPagarMes,aReceberMes,cxFinalProj,cxFinal,investSaldo,investTotal,snaps,catReal,catMeta};
 }
 
-/* ---- Recorrentes (receitas/despesas fixas) ---- */
+/* ---- Recorrentes (entradas/saídas fixas) ---- */
 function syncRecorrentes(){
   if(!state.recorrentes)state.recorrentes={rec:[],desp:[]};
   const ano=state.meta.ano||new Date().getFullYear();
@@ -702,7 +749,7 @@ function renderDashboard(){
   const metaMes=round2(c.catMeta.reduce((a,row)=>a+(Number(row[m])||0),0));
   const realMes=round2(c.catReal.reduce((a,row)=>a+(Number(row[m])||0),0));
   const remaining=round2(metaMes-realMes);
-  // Pendências: receitas automáticas e manuais ainda não recebidas, e despesas ainda não pagas
+  // Pendências: entradas automáticas e manuais ainda não recebidas, e saídas ainda não pagas
   const pendingReceber=[
     ...c.autoRec[m].filter(x=>String(x.status||'').toLowerCase()==='a receber'),
     ...(state.meses[m].rec||[]).filter(x=>String(x.status||'').toLowerCase()==='a receber')
@@ -725,7 +772,7 @@ function renderDashboard(){
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de ${MESES[m]}</h3><span class="badge ${remaining>=0?'ok':'danger'}">${remaining>=0?'Dentro do planejado':'Acima do planejado'}</span></div>
     <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>${fmt(metaMes)}</b></div><div class="kpi"><span>Realizado</span><b>${fmt(realMes)}</b></div><div class="kpi"><span>Restante</span><b class="${remaining>=0?'pos':'neg'}">${fmt(remaining)}</b></div></div>
-    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const semMeta=!(x.meta>0)&&x.real>0;const cls=(x.pct>100||semMeta)?'danger':x.pct>=80?'warn':'ok';return `<div class="status-item"><span>${escHtml(x.cat)}</span><span><b>${fmt(x.real)}</b> / ${fmt(x.meta)} <span class="badge ${cls}">${cls==='danger'?'▲ ':cls==='warn'?'! ':'✓ '}${semMeta?'sem meta':round2(x.pct)+'%'}</span></span></div>`}).join(''):'<div class="muted">Nenhuma categoria de despesa cadastrada.</div>'}</div></div>
+    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const semMeta=!(x.meta>0)&&x.real>0;const cls=(x.pct>100||semMeta)?'danger':x.pct>=80?'warn':'ok';return `<div class="status-item"><span>${escHtml(x.cat)}</span><span><b>${fmt(x.real)}</b> / ${fmt(x.meta)} <span class="badge ${cls}">${cls==='danger'?'▲ ':cls==='warn'?'! ':'✓ '}${semMeta?'sem meta':round2(x.pct)+'%'}</span></span></div>`}).join(''):'<div class="muted">Nenhuma categoria de saída cadastrada.</div>'}</div></div>
     <div class="card"><div class="cardhead"><h3>🔔 Pendências do mês</h3><span class="badge ${pending.length?'warn':'ok'}">${pending.length} pendência(s)</span></div>
     <div class="kpis pending-totals" style="grid-template-columns:repeat(2,1fr);margin:0 0 14px">
       <div class="kpi"><span>💚 Total a receber</span><b class="pos">${fmt(totalReceber)}</b></div>
@@ -735,7 +782,7 @@ function renderDashboard(){
   </div>
   <div class="grid2">
     <div class="card"><h3>📈 Evolução do saldo</h3><div class="chartbox"><canvas id="chDashSaldo"></canvas></div></div>
-    <div class="card"><h3>🍰 Despesas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie"></canvas></div></div>
+    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie"></canvas></div></div>
   </div>`;
 }
 function renderDashboardCharts(){
@@ -806,8 +853,8 @@ function buildImportPlan(data,opts){
     plan.meses.push(row);
   });
   if(falt.contas.size)plan.avisos.push(`Contas que não existem no app (ficarão sem efeito no saldo até você cadastrá-las): ${[...falt.contas].join(', ')}.`);
-  if(falt.subs.size)plan.avisos.push(`Subcategorias de despesa que não existem no app: ${[...falt.subs].join(', ')}.`);
-  if(falt.cats.size)plan.avisos.push(`Categorias de receita que não existem no app: ${[...falt.cats].join(', ')}.`);
+  if(falt.subs.size)plan.avisos.push(`Subcategorias de saída que não existem no app: ${[...falt.subs].join(', ')}.`);
+  if(falt.cats.size)plan.avisos.push(`Categorias de entrada que não existem no app: ${[...falt.cats].join(', ')}.`);
   if(semConta)plan.avisos.push(`${semConta} lançamento(s) sem conta definida — entram, mas não afetam nenhum saldo até você escolher a conta no mês.`);
   if(datasFora)plan.avisos.push(`${datasFora} lançamento(s) com data fora de ${state.meta.ano} (ex.: compras de cartão de dezembro). A data é só informativa; o mês vale pela aba.`);
   return plan;
@@ -840,14 +887,14 @@ function applyImportPlan(){
 }
 function renderImportCard(){
   const p=importPending;
-  let body=`<p class="hint">Importa lançamentos (receitas e despesas por mês) a partir de um arquivo <b>.json</b> gerado da sua planilha. Nada é gravado até você confirmar na prévia. Importar o mesmo arquivo duas vezes não duplica nada.</p>
+  let body=`<p class="hint">Importa lançamentos (entradas e saídas por mês) a partir de um arquivo <b>.json</b> gerado da sua planilha. Nada é gravado até você confirmar na prévia. Importar o mesmo arquivo duas vezes não duplica nada.</p>
     <input type="file" accept=".json,application/json" data-import="file" class="inp">`;
   if(p){
     const pl=p.plan,tot=pl.meses.reduce((a,r)=>({n:a.n+r.novos,f:a.f+r.recorr,d:a.d+r.dup,a:a.a+r.auto}),{n:0,f:0,d:0,a:0});
     body+=`<div style="margin-top:10px"><b>Prévia — ${escHtml(p.nome)}</b></div>
     ${pl.bloqueio?`<div class="drive-setup-box" style="margin-top:8px">⛔ ${escHtml(pl.bloqueio)}</div>`:''}
-    <label style="display:block;margin:8px 0"><input type="checkbox" data-import="opt" data-opt="incluirAuto" ${p.opts.incluirAuto?'checked':''}> Incluir também as linhas <b>Salário / Férias / Décimo Terceiro</b> como receitas manuais (marque só se a aba Salário estiver vazia nesses meses — senão o valor conta duas vezes)</label>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Mês</th><th>Receitas</th><th>Despesas</th><th>Novos</th><th>Preenchem recorrentes</th><th>Duplicatas ignoradas</th><th>Salário/Férias/13º ignorados</th><th>Manuais que já existem</th></tr></thead><tbody>
+    <label style="display:block;margin:8px 0"><input type="checkbox" data-import="opt" data-opt="incluirAuto" ${p.opts.incluirAuto?'checked':''}> Incluir também as linhas <b>Salário / Férias / Décimo Terceiro</b> como entradas manuais (marque só se a aba Salário estiver vazia nesses meses — senão o valor conta duas vezes)</label>
+    <div class="scrollx"><table class="tbl"><thead><tr><th>Mês</th><th>Entradas</th><th>Saídas</th><th>Novos</th><th>Preenchem recorrentes</th><th>Duplicatas ignoradas</th><th>Salário/Férias/13º ignorados</th><th>Manuais que já existem</th></tr></thead><tbody>
     ${pl.meses.map(r=>`<tr><td>${escHtml(r.aba)}</td><td>${r.nRec} • ${fmt(r.totRec)}</td><td>${r.nDesp} • ${fmt(r.totDesp)}</td><td>${r.novos}</td><td>${r.recorr}</td><td>${r.dup}</td><td>${r.auto}</td><td>${r.existentes}</td></tr>`).join('')}
     <tr><td><b>Total</b></td><td></td><td></td><td><b>${tot.n}</b></td><td><b>${tot.f}</b></td><td><b>${tot.d}</b></td><td><b>${tot.a}</b></td><td></td></tr></tbody></table></div>
     ${pl.avisos.map(a=>`<p class="hint" style="margin-top:6px">⚠️ ${escHtml(a)}</p>`).join('')}
@@ -855,6 +902,22 @@ function renderImportCard(){
   }
   return `<div class="card"><h3>📥 Importar lançamentos de planilha</h3>${body}</div>`;
 }
+/* ---- Ícones de conta (tipo + cor escolhida) ---- */
+const CONTA_SVG={
+  'Pagamento':'<path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4H5.5A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20H19a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5.5A2.5 2.5 0 0 1 3 6.5"/><circle cx="16.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"/>',
+  'Cartão':'<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/>',
+  'Investimento':'<path d="M4 12.5C4 9.4 6.9 7 10.6 7h3c3.4 0 6.1 2.2 6.1 5.1 0 1.3-.5 2.4-1.4 3.2V18h-2.5v-1.2h-5.5V18H7.8v-2.1C5.6 15.3 4 14 4 12.5Z"/><path d="M15.2 7.2l.9-2.2 2 1.8M10 9.6h3.4M4 12.3l-1.5-.6"/><circle cx="16.4" cy="11.2" r=".9" fill="currentColor" stroke="none"/>'
+};
+const CONTA_COR_PADRAO={'Pagamento':'#2563eb','Cartão':'#ea580c','Investimento':'#16a34a'};
+const contaCor=cn=>(cn&&/^#[0-9a-fA-F]{6}$/.test(cn.cor||''))?cn.cor:(CONTA_COR_PADRAO[cn&&cn.tipo]||'#64748b');
+function contaIco(cn){if(!cn)return '';const svg=CONTA_SVG[cn.tipo]||CONTA_SVG['Pagamento'];return `<svg class="cico" viewBox="0 0 24 24" style="color:${contaCor(cn)}" role="img" aria-label="${escAttr(cn.tipo)}"><title>${escHtml(cn.tipo)}: ${escHtml(cn.nome)}</title>${svg}</svg>`;}
+function contaIcoNome(nome){const cn=(state.contas||[]).find(c=>c.nome===nome);return cn?contaIco(cn):'';}
+function contaSel(path,val,opts){return `<span class="cwrap">${contaIcoNome(val)}${selectInput(path,val,opts)}</span>`;}
+function colorInput(path,val){return `<input type="color" class="cor-in" data-path="${escAttr(path)}" value="${escAttr(val)}" title="Cor do ícone da conta">`;}
+let lancFiltro='todos',lancMes=-1,lancFocusKey=null;const lancOpen=new Set();
+const stampNow=()=>new Date().toISOString();
+const TICO={in:['↓','Entrada'],out:['↑','Saída'],tr:['⇄','Transferência entre contas']};
+const tipoIco=k=>`<span class="tico ${k}" title="${TICO[k][1]}" aria-label="${TICO[k][1]}">${TICO[k][0]}</span>`;
 function renderConfig(){
   const saldoInicialCalculado=round2(state.contas.reduce((total,conta)=>total+(Number(conta.saldo)||0),0));
   state.meta.saldoInicial=saldoInicialCalculado;
@@ -904,7 +967,7 @@ function renderConfig(){
   <div class="card"><h3>Saldo Inicial do Ano</h3><div class="kpi" style="text-align:left;padding:14px"><span>Calculado automaticamente pela soma dos saldos das contas, carteiras e investimentos cadastrados abaixo.</span><b class="pos" style="font-size:22px">${fmt(saldoInicialCalculado)}</b></div><p class="hint">Este valor não é editável diretamente. Para alterá-lo, atualize os saldos das Contas / Carteiras.</p></div>
   </div>
   <div class="card">
-    <div class="cardhead"><h3>🔁 Receitas Recorrentes</h3><button class="btn small" data-action="addRecorrenteR">+ Receita Recorrente</button></div>
+    <div class="cardhead"><h3>🔁 Entradas Recorrentes</h3><button class="btn small" data-action="addRecorrenteR">+ Entrada Recorrente</button></div>
     <p class="hint">Itens marcados como "Ativo" são lançados automaticamente em todos os meses do ano. Alterar o valor (ou conta/categoria) padrão aqui atualiza todos os meses que você ainda não editou manualmente — assim que você ajusta um mês específico na aba dele, aquele mês passa a ser independente e não muda mais com o padrão. Desmarcar "Ativo" não apaga o que já foi gerado, só evita novas gerações (por exemplo, ao criar o item ou ao avançar de ano).</p>
     <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Categoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
     ${state.recorrentes.rec.length?state.recorrentes.rec.map((t,i)=>`<tr>
@@ -914,12 +977,12 @@ function renderConfig(){
       <td>${selectInput(`recorrentes.rec.${i}.cat`,t.cat,state.catR)}</td>
       <td>${selectInput(`recorrentes.rec.${i}.conta`,t.conta,['',...opcoesConta(t.conta)])}</td>
       <td><button class="btn danger small" data-action="removeRecorrenteR" data-i="${i}">✕</button></td>
-    </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma receita recorrente cadastrada.</td></tr>'}
+    </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma entrada recorrente cadastrada.</td></tr>'}
     </tbody></table></div>
   </div>
   <div class="card">
-    <div class="cardhead"><h3>🔁 Despesas Recorrentes</h3><button class="btn small" data-action="addRecorrenteD">+ Despesa Recorrente</button></div>
-    <p class="hint">Aluguel, condomínio, contas de casa, assinaturas etc. Mesma lógica das receitas recorrentes acima.</p>
+    <div class="cardhead"><h3>🔁 Saídas Recorrentes</h3><button class="btn small" data-action="addRecorrenteD">+ Saída Recorrente</button></div>
+    <p class="hint">Aluguel, condomínio, contas de casa, assinaturas etc. Mesma lógica das entradas recorrentes acima.</p>
     <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Ativo</th><th>Nome</th><th>Valor padrão</th><th>Subcategoria</th><th>Conta padrão</th><th></th></tr></thead><tbody>
     ${state.recorrentes.desp.length?state.recorrentes.desp.map((t,i)=>`<tr>
       <td>${checkInput(`recorrentes.desp.${i}.ativo`,t.ativo)}</td>
@@ -928,7 +991,7 @@ function renderConfig(){
       <td>${selectInput(`recorrentes.desp.${i}.sub`,t.sub,state.subD.map(s=>s.nome))}</td>
       <td>${selectInput(`recorrentes.desp.${i}.conta`,t.conta,['',...opcoesConta(t.conta)])}</td>
       <td><button class="btn danger small" data-action="removeRecorrenteD" data-i="${i}">✕</button></td>
-    </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma despesa recorrente cadastrada.</td></tr>'}
+    </tr>`).join(''):'<tr><td colspan="6" class="muted">Nenhuma saída recorrente cadastrada.</td></tr>'}
     </tbody></table></div>
   </div>
   <div class="card">
@@ -937,12 +1000,13 @@ function renderConfig(){
     ${(()=>{
       const linha=(c,i)=>`<tr${contaAtiva(c)?'':' style="opacity:.75"'}>
       <td>${checkInput(`contas.${i}.ativa`,contaAtiva(c))}</td>
+      <td style="white-space:nowrap">${contaIco(c)}${colorInput(`contas.${i}.cor`,contaCor(c))}</td>
       <td>${textInput(`contas.${i}.nome`,c.nome)}</td>
       <td>${selectInput(`contas.${i}.tipo`,c.tipo,['Pagamento','Cartão','Investimento'])}</td>
       <td>${numInput(`contas.${i}.saldo`,c.saldo)}</td>
       <td><button class="btn danger small" data-action="removeConta" data-i="${i}">✕</button></td>
     </tr>`;
-      const cab='<thead><tr><th>Ativa</th><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead>';
+      const cab='<thead><tr><th>Ativa</th><th>Ícone / cor</th><th>Nome</th><th>Tipo</th><th>Saldo Atual</th><th></th></tr></thead>';
       const at=state.contas.map((c,i)=>contaAtiva(c)?linha(c,i):'').join('');
       const ina=state.contas.map((c,i)=>contaAtiva(c)?'':linha(c,i)).join('');
       const nIna=state.contas.filter(c=>!contaAtiva(c)).length;
@@ -952,16 +1016,16 @@ function renderConfig(){
   </div>
   <div class="grid2">
     <div class="card">
-      <div class="cardhead"><h3>Categorias de Receita</h3><button class="btn small" data-action="addCatR">+</button></div>
+      <div class="cardhead"><h3>Categorias de Entrada</h3><button class="btn small" data-action="addCatR">+</button></div>
       <table class="tbl lanc"><tbody>${state.catR.map((c,i)=>`<tr><td>${textInput(`catR.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatR" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
     </div>
     <div class="card">
-      <div class="cardhead"><h3>Categorias de Despesa</h3><button class="btn small" data-action="addCatD">+</button></div>
+      <div class="cardhead"><h3>Categorias de Saída</h3><button class="btn small" data-action="addCatD">+</button></div>
       <table class="tbl lanc"><tbody>${state.catD.map((c,i)=>`<tr><td>${textInput(`catD.${i}`,c)}</td><td><button class="btn danger small" data-action="removeCatD" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table>
     </div>
   </div>
   <div class="card">
-    <div class="cardhead"><h3>Subcategorias de Despesa</h3><button class="btn small" data-action="addSub">+ Subcategoria</button></div>
+    <div class="cardhead"><h3>Subcategorias de Saída</h3><button class="btn small" data-action="addSub">+ Subcategoria</button></div>
     <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Subcategoria</th><th>Categoria</th><th></th></tr></thead><tbody>
     ${state.subD.map((s,i)=>`<tr><td>${textInput(`subD.${i}.nome`,s.nome)}</td><td>${selectInput(`subD.${i}.cat`,s.cat,state.catD)}</td><td><button class="btn danger small" data-action="removeSub" data-i="${i}">✕</button></td></tr>`).join('')}
     </tbody></table></div>
@@ -1116,10 +1180,10 @@ function renderPlanner(){
   const totRec=proventos.map((v,m)=>round2(v+(Number(vale[m])||0)+(Number(extras[m])||0)));
 
   return `
-  <div class="card"><h3>Previsão de Despesas</h3><div class="scrollx"><table class="tbl">
+  <div class="card"><h3>Previsão de Saídas</h3><div class="scrollx"><table class="tbl">
   <thead>${head}</thead><tbody>
   ${rowsD.join('')}
-  <tr class="calc"><td>TOTAL Despesas</td>${totD.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(totDgeral)}</td></tr>
+  <tr class="calc"><td>TOTAL Saídas</td>${totD.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(totDgeral)}</td></tr>
   </tbody></table></div></div>
 
   <div class="card"><h3>Previsão de Investimentos</h3><div class="scrollx"><table class="tbl">
@@ -1128,12 +1192,12 @@ function renderPlanner(){
   <tr class="calc"><td>TOTAL Investido</td>${totI.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(totIgeral)}</td></tr>
   </tbody></table></div></div>
 
-  <div class="card"><h3>Previsão de Receitas</h3><div class="scrollx"><table class="tbl">
+  <div class="card"><h3>Previsão de Entradas</h3><div class="scrollx"><table class="tbl">
   <thead><tr><th>Item</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}</tr></thead><tbody>
   <tr class="calc"><td>Proventos (Salário+Férias+13º)</td>${proventos.map(v=>`<td>${fmt(v)}</td>`).join('')}</tr>
   <tr><td>Vale Alimentação</td>${vale.map((v,m)=>`<td>${numInput(`planner.vale.${m}`,v)}</td>`).join('')}</tr>
   <tr><td>Extras / Bônus</td>${extras.map((v,m)=>`<td>${numInput(`planner.extras.${m}`,v)}</td>`).join('')}</tr>
-  <tr class="calc"><td>TOTAL Receitas</td>${totRec.map(v=>`<td>${fmt(v)}</td>`).join('')}</tr>
+  <tr class="calc"><td>TOTAL Entradas</td>${totRec.map(v=>`<td>${fmt(v)}</td>`).join('')}</tr>
   </tbody></table></div>
   <p class="hint">Este quadro é apenas de planejamento/meta. Os valores realizados são lançados em cada aba mensal.</p>
   </div>`;
@@ -1151,41 +1215,87 @@ function renderMonth(m){
 
   const autoRows=auto.map((a,i)=>{
     const fields=['rConta','fConta','dConta'][i], stF=['rStatus','fStatus','dStatus'][i], dtF=['rData','fData','dData'][i];
-    return `<tr><td class="c-desc" data-label="Descrição">${a.desc}</td><td data-label="Valor">${fmt(a.valor)}</td><td data-label="Categoria">${a.cat}</td>
-      <td data-label="Conta">${selectInput(`salario.meses.${m}.${fields}`,a.conta,['',...opcoesConta(a.conta)])}</td>
+    return `<tr><td class="c-desc" data-label="Descrição">${tipoIco('in')}${a.desc}</td><td data-label="Valor">${fmt(a.valor)}</td><td data-label="Categoria">${a.cat}</td>
+      <td data-label="Conta">${contaSel(`salario.meses.${m}.${fields}`,a.conta,['',...opcoesConta(a.conta)])}</td>
       <td data-label="Status">${selectInput(`salario.meses.${m}.${stF}`,a.status,statusOptR)}</td>
       <td data-label="Data">${dateInput(`salario.meses.${m}.${dtF}`,a.data,m)}</td></tr>`;
   }).join('');
 
-  const manRRows=manR.map((r,i)=>`<tr>
-    <td class="c-desc" data-label="Descrição">${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${textInput(`meses.${m}.rec.${i}.desc`,r.desc)}</td>
-    <td data-label="Valor">${numInput(`meses.${m}.rec.${i}.valor`,r.valor)}</td>
-    <td data-label="Categoria">${selectInput(`meses.${m}.rec.${i}.cat`,r.cat,state.catR)}</td>
-    <td data-label="Conta">${selectInput(`meses.${m}.rec.${i}.conta`,r.conta,['',...opcoesConta(r.conta)])}</td>
-    <td data-label="Status">${selectInput(`meses.${m}.rec.${i}.status`,r.status,statusOptR)}</td>
-    <td data-label="Data">${dateInput(`meses.${m}.rec.${i}.data`,r.data,m)}</td>
-    <td class="c-del" data-label=""><button class="btn danger small" data-action="removeRec" data-m="${m}" data-i="${i}">✕</button></td>
-  </tr>`).join('');
-
-  const manDRows=manD.map((r,i)=>`<tr>
-    <td class="c-desc" data-label="Descrição">${r.recId?'<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>':''}${r.parcela?`<span title="Parcela ${r.parcela.atual} de ${r.parcela.total}" style="margin-right:4px">🔢</span>`:''}${textInput(`meses.${m}.desp.${i}.desc`,r.desc)}</td>
-    <td data-label="Valor">${numInput(`meses.${m}.desp.${i}.valor`,r.valor)}</td>
-    <td data-label="Subcategoria">${selectInput(`meses.${m}.desp.${i}.sub`,r.sub,['',...subNames])}</td>
-    <td data-label="Conta">${selectInput(`meses.${m}.desp.${i}.conta`,r.conta,['',...opcoesConta(r.conta)])}</td>
-    <td data-label="Status">${selectInput(`meses.${m}.desp.${i}.status`,r.status,statusOptD)}</td>
-    <td data-label="Data">${dateInput(`meses.${m}.desp.${i}.data`,r.data,m)}</td>
-    <td class="c-del" data-label=""><button class="btn danger small" data-action="removeDesp" data-m="${m}" data-i="${i}">✕</button></td>
-  </tr>`).join('');
-
   const trans=state.meses[m].trans||[];
-  const transRows=trans.map((t,i)=>`<tr>
-    <td class="c-desc" data-label="Descrição">${textInput(`meses.${m}.trans.${i}.desc`,t.desc||'Transferência')}</td>
-    <td data-label="Valor">${numInput(`meses.${m}.trans.${i}.valor`,t.valor)}</td>
-    <td data-label="Origem">${selectInput(`meses.${m}.trans.${i}.origem`,t.origem||'',opcoesConta(t.origem))}</td>
-    <td data-label="Destino">${selectInput(`meses.${m}.trans.${i}.destino`,t.destino||'',opcoesConta(t.destino))}</td>
-    <td data-label="Data">${textInput(`meses.${m}.trans.${i}.data`,t.data||'')}</td>
-    <td class="c-del" data-label=""><button class="btn danger small" data-action="removeTrans" data-m="${m}" data-i="${i}">✕</button></td>
-  </tr>`).join('');
+  if(lancMes!==m){lancOpen.clear();lancMes=m;}
+  // Lista única: entradas, saídas e transferências juntas.
+  // Ordem: por data (ou, sem data, pela data de criação). Lançamentos antigos sem data nem
+  // carimbo ficam primeiro, na ordem em que sempre apareceram (entradas, saídas, transferências).
+  const itens=[];
+  manR.forEach((o,i)=>itens.push({side:'rec',i,o}));
+  manD.forEach((o,i)=>itens.push({side:'desp',i,o}));
+  trans.forEach((o,i)=>itens.push({side:'trans',i,o}));
+  itens.forEach((it,n)=>{it.n=n;it.ts=String(it.o.criadoEm||'');it.dk=String(it.o.data||'').slice(0,10)||it.ts.slice(0,10);});
+  itens.sort((a,b)=>{
+    if(!a.dk&&!b.dk)return a.n-b.n;
+    if(!a.dk)return -1; if(!b.dk)return 1;
+    if(a.dk!==b.dk)return a.dk<b.dk?-1:1;
+    if(a.ts!==b.ts)return a.ts<b.ts?-1:1;
+    return a.n-b.n;
+  });
+  const somaLado=side=>round2(itens.filter(x=>x.side===side).reduce((a,x)=>a+(Number(x.o.valor)||0),0));
+  const qtdLado=side=>itens.filter(x=>x.side===side).length;
+  const visiveis=itens.filter(x=>lancFiltro==='todos'||x.side===lancFiltro);
+  const lancRow=(it)=>{
+    const o=it.o,key=it.side+':'+it.i,open=lancOpen.has(key),P=`meses.${m}.${it.side}.${it.i}`;
+    let ico,desc,sinal,c3,c4,c5,del,sumContas,sumStatus='',badges='';
+    if(it.side==='rec'){
+      ico='in';desc=o.desc;sinal='+ ';
+      c3=['Categoria',selectInput(P+'.cat',o.cat,state.catR)];
+      c4=['Conta',contaSel(P+'.conta',o.conta,['',...opcoesConta(o.conta)])];
+      c5=selectInput(P+'.status',o.status,statusOptR);del='removeRec';
+      sumContas=contaIcoNome(o.conta);
+      if(o.recId)badges+='<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>';
+    }else if(it.side==='desp'){
+      ico='out';desc=o.desc;sinal='− ';
+      c3=['Subcategoria',selectInput(P+'.sub',o.sub,['',...subNames])];
+      c4=['Conta',contaSel(P+'.conta',o.conta,['',...opcoesConta(o.conta)])];
+      c5=selectInput(P+'.status',o.status,statusOptD);del='removeDesp';
+      sumContas=contaIcoNome(o.conta);
+      if(o.recId)badges+='<span title="Lançamento recorrente" style="margin-right:4px">🔁</span>';
+      if(o.parcela)badges+=`<span title="Parcela ${o.parcela.atual} de ${o.parcela.total}" style="margin-right:4px">🔢</span>`;
+    }else{
+      ico='tr';desc=o.desc||'Transferência';sinal='';
+      c3=['Destino',`<span class="cwrap"><span class="lseta" title="Conta de destino">→</span>${contaSel(P+'.destino',o.destino||'',opcoesConta(o.destino))}</span>`];
+      c4=['Origem',contaSel(P+'.origem',o.origem||'',opcoesConta(o.origem))];
+      c5='<span class="muted" title="Transferências são sempre efetivadas">efetivada</span>';del='removeTrans';
+      sumContas=`${contaIcoNome(o.origem)}<span class="lseta">→</span>${contaIcoNome(o.destino)}`;
+    }
+    if(it.side!=='trans'){
+      const feito=/^(recebido|pago)$/i.test(String(o.status||'').trim());
+      sumStatus=`<span class="lstat ${feito?'ok':'pend'}" title="${escAttr(o.status||'')}">${feito?'✓':'◷'}</span>`;
+    }
+    return `<div class="lrow ${it.side}${open?' open':''}" data-lkey="${key}">
+    <div class="lsum" data-action="toggleLanc">${tipoIco(ico)}<span class="ldesc">${escHtml(desc||'(sem descrição)')}</span><span class="lval ${it.side==='rec'?'in':(it.side==='desp'?'out':'')}" title="${escAttr(fmt(o.valor))}">${sinal}${fmt(o.valor).replace(/R\$\s*/,'')}</span><span class="lcontas">${sumContas}</span>${sumStatus}<span class="lchev" aria-hidden="true">▾</span></div>
+    <div class="ldet">
+      <div class="lcell c1" data-label="Descrição">${tipoIco(ico)}${badges}${textInput(P+'.desc',desc)}</div>
+      <div class="lcell c2" data-label="Valor">${numInput(P+'.valor',o.valor)}</div>
+      <div class="lcell c3" data-label="${c3[0]}">${c3[1]}</div>
+      <div class="lcell c4" data-label="${c4[0]}">${c4[1]}</div>
+      <div class="lcell c5" data-label="Status">${c5}</div>
+      <div class="lcell c6" data-label="Data">${dateInput(P+'.data',o.data,m)}</div>
+      <div class="lcell c7"><button class="btn danger small" data-action="${del}" data-m="${m}" data-i="${it.i}">✕</button></div>
+    </div></div>`;
+  };
+  const chip=(f,ico,nome,qtd)=>`<button type="button" class="lchip ${lancFiltro===f?'on':''}" data-action="lancFiltro" data-f="${f}">${ico}${nome} <b>${qtd}</b></button>`;
+  const lancCard=`<div class="card lanc-card">
+    <div class="cardhead"><h3>Lançamentos</h3><div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn small" data-action="addRec" data-m="${m}">${tipoIco('in')}Entrada</button>
+      <button class="btn small" data-action="addDesp" data-m="${m}">${tipoIco('out')}Saída</button>
+      <button class="btn small" data-action="addTrans" data-m="${m}">${tipoIco('tr')}Transferência</button></div></div>
+    <div class="lchips">${chip('todos','','Todos',itens.length)}${chip('rec',tipoIco('in'),'Entradas',qtdLado('rec'))}${chip('desp',tipoIco('out'),'Saídas',qtdLado('desp'))}${chip('trans',tipoIco('tr'),'Transf.',qtdLado('trans'))}</div>
+    <div class="ltot"><span>${tipoIco('in')}${fmt(somaLado('rec'))}</span><span>${tipoIco('out')}${fmt(somaLado('desp'))}</span><span>${tipoIco('tr')}${fmt(somaLado('trans'))}</span></div>
+    <details class="hint" style="margin-bottom:8px"><summary style="cursor:pointer">Como esta lista funciona</summary>🔁 lançamento recorrente · 🔢 parcela de compra parcelada · ✓ efetivado · ◷ pendente. Os totais (↓ entradas, ↑ saídas, ⇄ transferências) somam tudo o que está na lista, inclusive Ajustes; as transferências só movimentam dinheiro entre contas e não entram nos totais do topo. Ordem: por data (ou data de criação); lançamentos antigos sem data ficam primeiro, na ordem em que foram lançados. No celular, toque numa linha para abrir e editar.</details>
+    <div class="scrollx"><div class="lgrid">
+      <div class="lhead"><div>Descrição</div><div>Valor</div><div>Categoria / Destino</div><div>Conta / Origem</div><div>Status</div><div>Data</div><div></div></div>
+      ${visiveis.map(lancRow).join('')||'<div class="muted" style="padding:10px">Nenhum lançamento neste filtro.</div>'}
+    </div></div>
+  </div>`;
 
   const metaCat = state.catD.map((cat,ci)=>{
     const real=c.catReal[ci][m], meta=c.catMeta[ci][m];
@@ -1198,7 +1308,7 @@ function renderMonth(m){
       <td><span class="bar"><span class="barfill ${over?'over':''}" style="width:${pctBar}%"></span></span> ${label}</td></tr>`;
   }).join('');
 
-  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&!(Number(c.snaps[m][i])||0))?'':`<tr><td>${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&!(Number(c.snaps[m][i])||0))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
 
   const ano=state.meta.ano||new Date().getFullYear();
   const monthNav=`<div class="month-nav">
@@ -1215,9 +1325,9 @@ function renderMonth(m){
   });
   const totFatura=round2(cartaoLinhas.reduce((a,x)=>a+x.fatura,0));
   const cartaoCard=cartoes.length?`<div class="card"><h3>💳 Cartões de Crédito — fatura do mês</h3>
-    <div class="hint" style="margin-bottom:6px">Soma das despesas menos as receitas/estornos lançados em cada cartão neste mês, inclusive os ainda "A Pagar" — é a estimativa do total da fatura.</div>
-    <div class="scrollx"><table class="tbl"><thead><tr><th>Cartão</th><th>Despesas</th><th>Receitas/Estornos</th><th>Total da fatura</th></tr></thead>
-    <tbody>${cartaoLinhas.map(x=>`<tr><td>${escHtml(x.nome)}</td><td>${fmt(x.desp)}</td><td>${fmt(x.rec)}</td><td><b>${fmt(x.fatura)}</b></td></tr>`).join('')}
+    <div class="hint" style="margin-bottom:6px">Soma das saídas menos as entradas/estornos lançados em cada cartão neste mês, inclusive os ainda "A Pagar" — é a estimativa do total da fatura.</div>
+    <div class="scrollx"><table class="tbl"><thead><tr><th>Cartão</th><th>Saídas</th><th>Entradas/Estornos</th><th>Total da fatura</th></tr></thead>
+    <tbody>${cartaoLinhas.map(x=>`<tr><td>${contaIcoNome(x.nome)}${escHtml(x.nome)}</td><td>${fmt(x.desp)}</td><td>${fmt(x.rec)}</td><td><b>${fmt(x.fatura)}</b></td></tr>`).join('')}
     <tr><td><b>Total</b></td><td></td><td></td><td><b>${fmt(totFatura)}</b></td></tr></tbody></table></div></div>`:'';
 
   return `
@@ -1225,37 +1335,19 @@ function renderMonth(m){
   <div class="msticky"><div>Caixa Atual<b>${fmt(c.cxFinal[m])}</b></div><div>Caixa Final<b>${fmt(c.cxFinalProj[m])}</b></div></div>
   <div class="kpis">
     <div class="kpi"><span>Saldo Inicial</span><b>${fmt(saldoIni)}</b></div>
-    <div class="kpi"><span>Total de Receitas (projeção)</span><b class="pos">${fmt(c.totalReceitas[m])}</b></div>
-    <div class="kpi"><span>Total de Despesas (projeção)</span><b class="neg">${fmt(c.totalDespesas[m])}</b></div>
+    <div class="kpi"><span>Entradas (projeção, sem Ajustes)</span><b class="pos">${fmt(c.totalReceitas[m])}</b></div>
+    <div class="kpi"><span>Saídas (projeção, sem Ajustes)</span><b class="neg">${fmt(c.totalDespesas[m])}</b></div>
     <div class="kpi"><span>Saldo Geral (real)</span><b>${fmt(c.saldoGeralReal[m])}</b></div>
     <div class="kpi"><span>Caixa Atual (sem invest.)</span><b>${fmt(c.cxFinal[m])}</b></div>
     <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinalProj[m])}</b></div>
     <div class="kpi"><span>Saldo Investido (real)</span><b>${fmt(c.investSaldo[m])}</b></div>
   </div>
 
-  <div class="card"><h3>Receitas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl lanc">
+  <div class="card"><h3>${tipoIco('in')}Entradas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl lanc">
   <thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th></tr></thead>
   <tbody>${autoRows}</tbody></table></div></div>
 
-  <div class="card">
-    <div class="cardhead"><h3>Receitas Manuais</h3><button class="btn small" data-action="addRec" data-m="${m}">+ Receita</button></div>
-    <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma receita recorrente (configure em ⚙️ Configuração).</div>
-    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
-    <tbody>${manRRows || '<tr><td colspan="7" class="muted">Nenhuma receita manual lançada.</td></tr>'}</tbody></table></div>
-  </div>
-
-  <div class="card">
-    <div class="cardhead"><h3>Despesas</h3><button class="btn small" data-action="addDesp" data-m="${m}">+ Despesa</button></div>
-    <div class="hint" style="margin-bottom:6px">🔁 marca lançamentos gerados a partir de uma despesa recorrente (configure em ⚙️ Configuração). 🔢 marca uma parcela de uma compra parcelada.</div>
-    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Subcategoria</th><th>Conta</th><th>Status</th><th>Data</th><th></th></tr></thead>
-    <tbody>${manDRows || '<tr><td colspan="7" class="muted">Nenhuma despesa lançada.</td></tr>'}</tbody></table></div>
-  </div>
-
-  <div class="card">
-    <div class="cardhead"><div><h3>🔄 Transferências entre contas</h3><div class="hint">Transferências não contam como receita ou despesa: apenas movimentam seu dinheiro entre contas.</div></div><button class="btn small" data-action="addTrans" data-m="${m}">+ Transferência</button></div>
-    <div class="scrollx"><table class="tbl lanc"><thead><tr><th>Descrição</th><th>Valor</th><th>Conta de origem</th><th>Conta de destino</th><th>Data</th><th></th></tr></thead>
-    <tbody>${transRows || '<tr><td colspan="6" class="muted">Nenhuma transferência lançada.</td></tr>'}</tbody></table></div>
-  </div>
+  ${lancCard}
 
   ${cartaoCard}
 
@@ -1308,15 +1400,15 @@ function renderInvestimentos(){
     return `<div class="card"><h3>📈 Investimentos</h3><p class="hint">Nenhuma conta do tipo "Investimento" cadastrada ainda. Crie uma em Configurações → Contas, marcando o tipo como "Investimento", para acompanhar o rendimento aqui.</p></div>`;
   }
   const headPct=`<tr><th>Conta</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}<th>% Ano</th><th>Média Mensal</th></tr>`;
-  const bodyPct=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.pctMes.map((v,m)=>`<td>${r.baseMes[m]>0?fmtPct(v):'—'}</td>`).join('')}<td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
+  const bodyPct=rows.map(r=>`<tr><td>${contaIcoNome(r.nome)}${escHtml(r.nome)}</td>${r.pctMes.map((v,m)=>`<td>${r.baseMes[m]>0?fmtPct(v):'—'}</td>`).join('')}<td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
   const totPctMes=[...Array(12).keys()].map(m=>{const base=rows.reduce((a,r)=>a+(r.baseMes[m]||0),0),rend=rows.reduce((a,r)=>a+(r.baseMes[m]>0?r.rendMes[m]:0),0);return base>0?{v:round2(rend/base*100),ok:true}:{v:0,ok:false};});
   let acumTot=1;totPctMes.forEach(x=>{if(x.ok)acumTot*=1+x.v/100;});
   const okTot=totPctMes.filter(x=>x.ok);
   const totalPctRow=`<tr class="calc"><td>Todas as contas</td>${totPctMes.map(x=>`<td>${x.ok?fmtPct(x.v):'—'}</td>`).join('')}<td>${fmtPct(round2((acumTot-1)*100))}</td><td>${fmtPct(okTot.length?round2(okTot.reduce((a,x)=>a+x.v,0)/okTot.length):0)}</td></tr>`;
-  const bodyRend=rows.map(r=>`<tr><td>${escHtml(r.nome)}</td>${r.rendMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td><b>${fmt(r.rendAno)}</b></td><td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
+  const bodyRend=rows.map(r=>`<tr><td>${contaIcoNome(r.nome)}${escHtml(r.nome)}</td>${r.rendMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td><b>${fmt(r.rendAno)}</b></td><td><b>${fmtPct(r.pctAno)}</b></td><td>${fmtPct(r.mediaMensal)}</td></tr>`).join('');
   const ranking=[...rows].sort((a,b)=>b.pctAno-a.pctAno);
   const medalhas=['🥇','🥈','🥉'];
-  const rankingHtml=ranking.map((r,idx)=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${medalhas[idx]||'▪️'} ${escHtml(r.nome)}</span><span><b>${fmtPct(r.pctAno)} ao ano</b> (${fmtPct(r.mediaMensal)} médio/mês)</span></div>`).join('');
+  const rankingHtml=ranking.map((r,idx)=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${medalhas[idx]||'▪️'} ${contaIcoNome(r.nome)}${escHtml(r.nome)}</span><span><b>${fmtPct(r.pctAno)} ao ano</b> (${fmtPct(r.mediaMensal)} médio/mês)</span></div>`).join('');
   return `
   <div class="card"><h3>🏆 Ranking de Rendimento (${state.meta.ano})</h3>
   ${rankingHtml}
@@ -1324,12 +1416,12 @@ function renderInvestimentos(){
   </div>
   <div class="card"><h3>💼 Saldo e movimentação no ano</h3><div class="scrollx"><table class="tbl">
   <thead><tr><th>Conta</th><th>Saldo inicial</th><th>Aportes/resgates líquidos</th><th>Rendimento (Juros recebido)</th><th>Juros ainda a receber</th><th>Saldo atual (fim do ano)</th></tr></thead>
-  <tbody>${rows.map(r=>`<tr><td>${escHtml(r.nome)}</td><td>${fmt(r.saldoInicioAno)}</td><td>${fmt(r.aportes)}</td><td>${fmt(r.rendAno)}</td><td>${fmt(r.jurosPend)}</td><td><b>${fmt(r.saldoAtual)}</b></td></tr>`).join('')}</tbody></table></div>
-  <p class="hint">Saldo atual = saldo inicial + aportes/resgates (transferências e outros lançamentos nessa conta) + rendimento. Só entra no rendimento o que está como <b>Recebido</b> — receitas "Juros" ainda marcadas "A Receber" aparecem na coluna ao lado, mas não contam no ranking nem no saldo.</p></div>
+  <tbody>${rows.map(r=>`<tr><td>${contaIcoNome(r.nome)}${escHtml(r.nome)}</td><td>${fmt(r.saldoInicioAno)}</td><td>${fmt(r.aportes)}</td><td>${fmt(r.rendAno)}</td><td>${fmt(r.jurosPend)}</td><td><b>${fmt(r.saldoAtual)}</b></td></tr>`).join('')}</tbody></table></div>
+  <p class="hint">Saldo atual = saldo inicial + aportes/resgates (transferências e outros lançamentos nessa conta) + rendimento. Só entra no rendimento o que está como <b>Recebido</b> — entradas "Juros" ainda marcadas "A Receber" aparecem na coluna ao lado, mas não contam no ranking nem no saldo.</p></div>
   <div class="card"><h3>📈 Rendimento Mensal por Conta (R$)</h3><div class="scrollx"><table class="tbl">
   <thead>${head}</thead><tbody>${bodyRend}</tbody>
   </table></div>
-  <p class="hint">O rendimento de cada mês é a soma das Receitas lançadas com categoria <b>"Juros"</b> creditadas naquela conta (só as marcadas como "Recebido"). O % de cada mês usa como base o saldo da conta no início daquele mês (mês com saldo inicial zero não gera %, e meses ainda por vir ficam de fora da média e do % do ano); aportes e resgates não entram nessa conta, então o % reflete só o rendimento — não a variação por você ter colocado ou tirado dinheiro. Se uma conta não aparecer aqui, confira se ela está marcada como tipo "Investimento" em Configurações.</p>
+  <p class="hint">O rendimento de cada mês é a soma das Entradas lançadas com categoria <b>"Juros"</b> creditadas naquela conta (só as marcadas como "Recebido"). O % de cada mês usa como base o saldo da conta no início daquele mês (mês com saldo inicial zero não gera %, e meses ainda por vir ficam de fora da média e do % do ano); aportes e resgates não entram nessa conta, então o % reflete só o rendimento — não a variação por você ter colocado ou tirado dinheiro. Se uma conta não aparecer aqui, confira se ela está marcada como tipo "Investimento" em Configurações.</p>
   </div>
   <div class="card"><h3>📊 Rendimento Mensal por Conta (%)</h3><div class="scrollx"><table class="tbl">
   <thead>${headPct}</thead><tbody>${bodyPct}${totalPctRow}</tbody>
@@ -1350,12 +1442,12 @@ function renderResumo(){
   }).join('');
   const totalPorMes=Array(12).fill(0);state.catD.forEach((cat,ci)=>c.catReal[ci].forEach((v,m)=>totalPorMes[m]=round2(totalPorMes[m]+v)));
 
-  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&c.snaps.every(sn=>!(Number(sn[i])||0)))?'':`<tr><td>${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[11][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&c.snaps.every(sn=>!(Number(sn[i])||0)))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[11][i])}</td></tr>`).join('');
 
   return `
   <div class="kpis">
-    <div class="kpi"><span>Receitas do Ano</span><b class="pos">${fmt(totRec)}</b></div>
-    <div class="kpi"><span>Despesas do Ano</span><b class="neg">${fmt(totDesp)}</b></div>
+    <div class="kpi"><span>Entradas do Ano (sem Ajustes)</span><b class="pos">${fmt(totRec)}</b></div>
+    <div class="kpi"><span>Saídas do Ano (sem Ajustes)</span><b class="neg">${fmt(totDesp)}</b></div>
     <div class="kpi"><span>Resultado (Lucro)</span><b class="${lucro>=0?'pos':'neg'}">${fmt(lucro)}</b></div>
     <div class="kpi"><span>Saldo Geral Final (real)</span><b>${fmt(saldoFinal)}</b></div>
     <div class="kpi"><span>Caixa (sem invest.) no fim do ano (real)</span><b>${fmt(c.cxFinal[11])}</b></div>
@@ -1363,15 +1455,15 @@ function renderResumo(){
   </div>
 
   <div class="grid2">
-    <div class="card"><h3>Receitas x Despesas por Mês</h3><div class="chartbox"><canvas id="chRD"></canvas></div></div>
+    <div class="card"><h3>Entradas x Saídas por Mês (sem Ajustes)</h3><div class="chartbox"><canvas id="chRD"></canvas></div></div>
     <div class="card"><h3>Evolução do Saldo Geral</h3><div class="chartbox"><canvas id="chSaldo"></canvas></div></div>
   </div>
   <div class="grid2">
-    <div class="card"><h3>Despesas por Categoria (Ano)</h3><div class="chartbox"><canvas id="chPie"></canvas></div></div>
+    <div class="card"><h3>Saídas por Categoria (Ano)</h3><div class="chartbox"><canvas id="chPie"></canvas></div></div>
     <div class="card"><h3>Saldo Final por Conta</h3><div class="scrollx"><table class="tbl"><thead><tr><th>Conta</th><th>Tipo</th><th>Saldo</th></tr></thead><tbody>${contaRows}</tbody></table></div></div>
   </div>
 
-  <div class="card"><h3>Despesas por Categoria x Mês</h3><div class="scrollx"><table class="tbl">
+  <div class="card"><h3>Saídas por Categoria x Mês</h3><div class="scrollx"><table class="tbl">
   <thead><tr><th>Categoria</th>${MESES.map(m=>`<th>${m.slice(0,3)}</th>`).join('')}<th>Total</th></tr></thead>
   <tbody>${catRows}<tr class="calc"><td>Total</td>${totalPorMes.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(round2(totalPorMes.reduce((a,b)=>a+b,0)))}</td></tr></tbody>
   </table></div></div>
@@ -1382,8 +1474,8 @@ function renderCharts(){
   ['chRD','chSaldo','chPie'].forEach(id=>{if(charts[id]){charts[id].destroy();delete charts[id];}});
   const ctx1=document.getElementById('chRD');
   if(ctx1) charts.chRD=new Chart(ctx1,{type:'bar',data:{labels:MESES.map(m=>m.slice(0,3)),datasets:[
-    {label:'Receitas',data:c.totalReceitas,backgroundColor:'#22c55e'},
-    {label:'Despesas',data:c.totalDespesas,backgroundColor:'#ef4444'}
+    {label:'Entradas',data:c.totalReceitas,backgroundColor:'#22c55e'},
+    {label:'Saídas',data:c.totalDespesas,backgroundColor:'#ef4444'}
   ]},options:{responsive:true,maintainAspectRatio:false}});
   const ctx2=document.getElementById('chSaldo');
   if(ctx2) charts.chSaldo=new Chart(ctx2,{type:'line',data:{labels:MESES.map(m=>m.slice(0,3)),datasets:[
@@ -1413,7 +1505,15 @@ function updateActiveTab(){document.querySelectorAll('.tabbtn').forEach(b=>b.cla
 function themeNow(){let t=null;try{t=localStorage.getItem('cf-theme');}catch(e){}if(t==='dark'||t==='light')return t;return (window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}
 function applyTheme(){const t=themeNow();document.documentElement.setAttribute('data-theme',t);const b=document.getElementById('themeBtn');if(b){b.textContent=t==='dark'?'☀️':'🌙';b.title=t==='dark'?'Mudar para tema claro':'Mudar para tema escuro';}}
 function applyChartTheme(){if(typeof Chart==='undefined'||!Chart.defaults)return;const cs=getComputedStyle(document.documentElement);Chart.defaults.color=cs.getPropertyValue('--muted').trim()||'#55657a';Chart.defaults.borderColor=cs.getPropertyValue('--border').trim()||'#e2e8f0';}
-function renderCurrent(){applyTheme();applyChartTheme();
+function lancAfterRender(){
+  if(!lancFocusKey)return;
+  const el=document.querySelector(`[data-lkey="${lancFocusKey}"]`);lancFocusKey=null;
+  if(!el)return;
+  el.scrollIntoView({block:'center'});
+  if(window.innerWidth>760){const inp=el.querySelector('.ldet input[type=text]');if(inp){inp.focus();inp.select();}}
+}
+function renderCurrent(){_renderCurrent0();lancAfterRender();}
+function _renderCurrent0(){applyTheme();applyChartTheme();
   syncRecorrentes();
   const app=document.getElementById('app');
   if(currentTab==='home'){app.innerHTML=renderDashboard();renderDashboardCharts();}
@@ -1437,10 +1537,10 @@ function searchLancamentos(query){
   let c; try{c=computeAll();}catch(e){c=null;}
   const results=[];
   for(let m=0;m<12;m++){
-    (state.meses[m].rec||[]).forEach(r=>{if(matchesQuery(r.desc,q)||matchesQuery(r.cat,q)||matchesQuery(r.conta,q))results.push({tipo:'Receita',m,desc:r.desc,valor:r.valor,extra:r.cat});});
-    (state.meses[m].desp||[]).forEach(d=>{if(matchesQuery(d.desc,q)||matchesQuery(d.sub,q)||matchesQuery(d.conta,q))results.push({tipo:'Despesa',m,desc:d.desc,valor:d.valor,extra:d.sub});});
+    (state.meses[m].rec||[]).forEach(r=>{if(matchesQuery(r.desc,q)||matchesQuery(r.cat,q)||matchesQuery(r.conta,q))results.push({tipo:'Entrada',m,desc:r.desc,valor:r.valor,extra:r.cat});});
+    (state.meses[m].desp||[]).forEach(d=>{if(matchesQuery(d.desc,q)||matchesQuery(d.sub,q)||matchesQuery(d.conta,q))results.push({tipo:'Saída',m,desc:d.desc,valor:d.valor,extra:d.sub});});
     (state.meses[m].trans||[]).forEach(t=>{if(matchesQuery(t.desc,q)||matchesQuery(t.origem,q)||matchesQuery(t.destino,q))results.push({tipo:'Transferência',m,desc:t.desc,valor:t.valor,extra:`${t.origem||''} → ${t.destino||''}`});});
-    if(c&&c.autoRec&&c.autoRec[m]){(c.autoRec[m]||[]).forEach(a=>{if(a.conta&&(matchesQuery(a.desc,q)||matchesQuery(a.cat,q)))results.push({tipo:'Receita Automática',m,desc:a.desc,valor:a.valor,extra:a.cat});});}
+    if(c&&c.autoRec&&c.autoRec[m]){(c.autoRec[m]||[]).forEach(a=>{if(a.conta&&(matchesQuery(a.desc,q)||matchesQuery(a.cat,q)))results.push({tipo:'Entrada Automática',m,desc:a.desc,valor:a.valor,extra:a.cat});});}
   }
   return results.slice(0,30);
 }
@@ -1491,7 +1591,7 @@ function renderQuickAddModal(){
       <div class="qa-field"><label>Status</label><select class="inp" data-qa="status">${['Pago','A Pagar'].map(s=>`<option value="${s}" ${s===qa.status?'selected':''}>${s}</option>`).join('')}</select></div>
       <div class="qa-field"><label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" data-qa="parcelado" ${qa.parcelado?'checked':''} style="width:15px;height:15px"> 🔢 Compra parcelada</label></div>
       ${qa.parcelado?`<div class="qa-field"><label>Número de parcelas</label><input type="number" min="2" max="48" step="1" class="inp" data-qa="parcelas" data-num="1" value="${qa.parcelas||2}"></div>
-      <p class="hint" style="margin:-4px 0 4px">O valor acima é o valor de <b>cada parcela</b>. Vou criar uma despesa em ${qa.parcelas||2} meses seguidos a partir do mês escolhido, com "(1/${qa.parcelas||2})", "(2/${qa.parcelas||2})" etc. na descrição.</p>`:''}`;
+      <p class="hint" style="margin:-4px 0 4px">O valor acima é o valor de <b>cada parcela</b>. Vou criar uma saída em ${qa.parcelas||2} meses seguidos a partir do mês escolhido, com "(1/${qa.parcelas||2})", "(2/${qa.parcelas||2})" etc. na descrição.</p>`:''}`;
   }else if(qa.tipo==='Receita'){
     fields=`<div class="qa-field"><label>Categoria</label><select class="inp" data-qa="cat">${state.catR.map(c=>`<option value="${escAttr(c)}" ${c===qa.cat?'selected':''}>${escHtml(c)}</option>`).join('')}</select></div>
       <div class="qa-field"><label>Conta</label><select class="inp" data-qa="conta">${['',...opcoesConta(qa.conta)].map(c=>`<option value="${escAttr(c)}" ${c===qa.conta?'selected':''}>${c?escHtml(c):'—'}</option>`).join('')}</select></div>
@@ -1503,8 +1603,8 @@ function renderQuickAddModal(){
   root.innerHTML=`<div class="qa-modal">
     <h3>⚡ Lançamento Rápido</h3>
     <div class="qa-type-tabs">
-      <button type="button" data-action="qaSetTipo" data-tipo="Despesa" class="${qa.tipo==='Despesa'?'active':''}">Despesa</button>
-      <button type="button" data-action="qaSetTipo" data-tipo="Receita" class="${qa.tipo==='Receita'?'active':''}">Receita</button>
+      <button type="button" data-action="qaSetTipo" data-tipo="Despesa" class="${qa.tipo==='Despesa'?'active':''}">Saída</button>
+      <button type="button" data-action="qaSetTipo" data-tipo="Receita" class="${qa.tipo==='Receita'?'active':''}">Entrada</button>
       <button type="button" data-action="qaSetTipo" data-tipo="Transferência" class="${qa.tipo==='Transferência'?'active':''}">Transferência</button>
     </div>
     <div class="qa-field"><label>Mês</label>${monthSelect}</div>
@@ -1533,22 +1633,22 @@ function submitQuickAdd(){
       let criadas=0,pendentes=0;
       for(let i=0;i<parcelas;i++){
         const alvo=m+i;
-        const entrada={desc:`${desc} (${i+1}/${parcelas})`,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:'',parcela:{grupo,atual:i+1,total:parcelas}};
+        const entrada={desc:`${desc} (${i+1}/${parcelas})`,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:'',criadoEm:stampNow(),parcela:{grupo,atual:i+1,total:parcelas}};
         if(alvo<=11){state.meses[alvo].desp.push(entrada);criadas++;}
         else{if(!Array.isArray(state.parcelasPendentes))state.parcelasPendentes=[];state.parcelasPendentes.push({...entrada,mesAlvo:alvo-12});pendentes++;}
       }
-      logChange(`Despesa parcelada "${desc}" criada em ${parcelas}x de ${fmt(valor)} (${criadas} parcela(s) em ${state.meta.ano}${pendentes?`, ${pendentes} programada(s) para ${state.meta.ano+1} quando o ano virar`:''})`);
+      logChange(`Saída parcelada "${desc}" criada em ${parcelas}x de ${fmt(valor)} (${criadas} parcela(s) em ${state.meta.ano}${pendentes?`, ${pendentes} programada(s) para ${state.meta.ano+1} quando o ano virar`:''})`);
     }else{
-      state.meses[m].desp.push({desc,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:qa.data||''});
-      logChange(`Despesa "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
+      state.meses[m].desp.push({desc,valor,sub:qa.sub||state.subD[0]?.nome||'',conta:qa.conta||'',status:qa.status||'A Pagar',data:qa.data||'',criadoEm:stampNow()}); lancFocusKey='desp:'+(state.meses[m].desp.length-1);
+      logChange(`Saída "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
     }
   }else if(qa.tipo==='Receita'){
-    state.meses[m].rec.push({desc,valor,cat:qa.cat||state.catR[0]||'',conta:qa.conta||'',status:qa.status||'A Receber',data:qa.data||''});
-    logChange(`Receita "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
+    state.meses[m].rec.push({desc,valor,cat:qa.cat||state.catR[0]||'',conta:qa.conta||'',status:qa.status||'A Receber',data:qa.data||'',criadoEm:stampNow()}); lancFocusKey='rec:'+(state.meses[m].rec.length-1);
+    logChange(`Entrada "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
   }else{
     if(qa.conta&&qa.destino&&qa.conta===qa.destino){alert('Escolha contas de origem e destino diferentes.');return;}
     if(!state.meses[m].trans)state.meses[m].trans=[];
-    state.meses[m].trans.push({desc,valor,origem:qa.conta||state.contas[0]?.nome||'',destino:qa.destino||state.contas[1]?.nome||'',data:qa.data||''});
+    state.meses[m].trans.push({desc,valor,origem:qa.conta||state.contas[0]?.nome||'',destino:qa.destino||state.contas[1]?.nome||'',data:qa.data||'',criadoEm:stampNow()}); lancFocusKey='trans:'+(state.meses[m].trans.length-1);
     logChange(`Transferência "${desc}" (${fmt(valor)}, ${MESES[m]}) criada via lançamento rápido`);
   }
   currentTab='m'+m;
@@ -1629,32 +1729,34 @@ document.addEventListener('click',e=>{
     case 'addConta': state.contas.push({nome:'Nova Conta',tipo:'Pagamento',saldo:0}); state.planner.despI.push(Array(12).fill(0)); logChange('Nova conta criada'); break;
     case 'removeConta': { const c=state.contas[i]; if(c&&contaEmUso(c.nome)){alert(`A conta "${c.nome}" tem lançamentos, metas ou histórico vinculados e não pode ser excluída sem alterar seus saldos passados.\n\nDesmarque "Ativa" para tirá-la das listas e telas, mantendo o histórico.`);return;} if(!confirmDelete(`Excluir a conta "${c?.nome||''}"? Ela não tem nenhum lançamento vinculado.`))return; state.contas.splice(i,1); state.planner.despI.splice(i,1); logChange(`Conta "${c?.nome||''}" (saldo ${fmt(c?.saldo)}) excluída`); break; }
     case 'addCatR': state.catR.push('Nova Categoria'); break;
-    case 'removeCatR': { const c=state.catR[i]; if(!confirmDelete(`Excluir a categoria de receita "${c}"?`))return; state.catR.splice(i,1); logChange(`Categoria de receita "${c}" excluída`); break; }
+    case 'removeCatR': { const c=state.catR[i]; if(!confirmDelete(`Excluir a categoria de entrada "${c}"?`))return; state.catR.splice(i,1); logChange(`Categoria de entrada "${c}" excluída`); break; }
     case 'addCatD': state.catD.push('Nova Categoria'); break;
-    case 'removeCatD': { const c=state.catD[i]; if(!confirmDelete(`Excluir a categoria de despesa "${c}"? Subcategorias vinculadas a ela deixarão de ser contabilizadas no orçamento.`))return; state.catD.splice(i,1); logChange(`Categoria de despesa "${c}" excluída`); break; }
+    case 'removeCatD': { const c=state.catD[i]; if(!confirmDelete(`Excluir a categoria de saída "${c}"? Subcategorias vinculadas a ela deixarão de ser contabilizadas no orçamento.`))return; state.catD.splice(i,1); logChange(`Categoria de saída "${c}" excluída`); break; }
     case 'addSub': state.subD.push({nome:'Nova Subcategoria',cat:state.catD[0]||''}); state.planner.despD.push(Array(12).fill(0)); break;
     case 'removeSub': { const s=state.subD[i]; if(!confirmDelete(`Excluir a subcategoria "${s?.nome}"?`))return; state.subD.splice(i,1); state.planner.despD.splice(i,1); logChange(`Subcategoria "${s?.nome}" excluída`); break; }
     case 'addFaixa': getPath(state,path).push({de:0,ate:0,pct:0,ded:0}); break;
     case 'removeFaixa': { if(!confirmDelete('Excluir esta faixa de cálculo?'))return; getPath(state,path).splice(i,1); logChange(`Faixa de cálculo removida em "${path}"`); break; }
-    case 'addRec': state.meses[m].rec.push({desc:'Nova Receita',valor:0,cat:state.catR[0]||'',conta:'',status:'A Receber',data:''}); break;
-    case 'removeRec': { const r=state.meses[m].rec[i]; if(!confirmDelete(`Excluir a receita "${r?.desc}" (${fmt(r?.valor)})?`))return; state.meses[m].rec.splice(i,1); logChange(`Receita "${r?.desc}" (${fmt(r?.valor)}, ${MESES[m]}) excluída`); break; }
-    case 'addDesp': state.meses[m].desp.push({desc:'Nova Despesa',valor:0,sub:state.subD[0]?.nome||'',conta:'',status:'A Pagar',data:''}); break;
-    case 'removeDesp': { const d=state.meses[m].desp[i]; if(!confirmDelete(`Excluir a despesa "${d?.desc}" (${fmt(d?.valor)})?`))return; state.meses[m].desp.splice(i,1); logChange(`Despesa "${d?.desc}" (${fmt(d?.valor)}, ${MESES[m]}) excluída`); break; }
+    case 'addRec': state.meses[m].rec.push({desc:'Nova Entrada',valor:0,cat:state.catR[0]||'',conta:'',status:'A Receber',data:'',criadoEm:stampNow()}); lancFocusKey='rec:'+(state.meses[m].rec.length-1); lancOpen.add(lancFocusKey); break;
+    case 'removeRec': { const r=state.meses[m].rec[i]; if(!confirmDelete(`Excluir a entrada "${r?.desc}" (${fmt(r?.valor)})?`))return; state.meses[m].rec.splice(i,1); lancOpen.clear(); logChange(`Entrada "${r?.desc}" (${fmt(r?.valor)}, ${MESES[m]}) excluída`); break; }
+    case 'addDesp': state.meses[m].desp.push({desc:'Nova Saída',valor:0,sub:state.subD[0]?.nome||'',conta:'',status:'A Pagar',data:'',criadoEm:stampNow()}); lancFocusKey='desp:'+(state.meses[m].desp.length-1); lancOpen.add(lancFocusKey); break;
+    case 'removeDesp': { const d=state.meses[m].desp[i]; if(!confirmDelete(`Excluir a saída "${d?.desc}" (${fmt(d?.valor)})?`))return; state.meses[m].desp.splice(i,1); lancOpen.clear(); logChange(`Saída "${d?.desc}" (${fmt(d?.valor)}, ${MESES[m]}) excluída`); break; }
     case 'addTrans':
       if(!state.meses[m].trans) state.meses[m].trans=[];
-      state.meses[m].trans.push({desc:'Transferência',valor:0,origem:state.contas[0]?.nome||'',destino:state.contas[1]?.nome||'',data:''}); break;
-    case 'removeTrans': { const tr=state.meses[m].trans[i]; if(!confirmDelete(`Excluir a transferência "${tr?.desc}" (${fmt(tr?.valor)})?`))return; state.meses[m].trans.splice(i,1); logChange(`Transferência "${tr?.desc}" (${fmt(tr?.valor)}, ${MESES[m]}) excluída`); break; }
+      state.meses[m].trans.push({desc:'Transferência',valor:0,origem:state.contas[0]?.nome||'',destino:state.contas[1]?.nome||'',data:'',criadoEm:stampNow()}); lancFocusKey='trans:'+(state.meses[m].trans.length-1); lancOpen.add(lancFocusKey); break;
+    case 'removeTrans': { const tr=state.meses[m].trans[i]; if(!confirmDelete(`Excluir a transferência "${tr?.desc}" (${fmt(tr?.valor)})?`))return; state.meses[m].trans.splice(i,1); lancOpen.clear(); logChange(`Transferência "${tr?.desc}" (${fmt(tr?.valor)}, ${MESES[m]}) excluída`); break; }
     case 'advanceYear': advanceYear(); return;
+    case 'toggleLanc': { const row=btn.closest('.lrow'); if(row){ row.classList.toggle('open'); const k=row.dataset.lkey; if(row.classList.contains('open'))lancOpen.add(k); else lancOpen.delete(k);} return; }
+    case 'lancFiltro': lancFiltro=btn.dataset.f||'todos'; renderCurrent(); return;
     case 'toggleTheme': { const n=themeNow()==='dark'?'light':'dark'; try{localStorage.setItem('cf-theme',n);}catch(e){} applyTheme(); renderCurrent(); return; }
     case 'importApply': applyImportPlan(); return;
     case 'importCancel': importPending=null; renderCurrent(); return;
     case 'googleSignIn': signInGoogle(); return;
     case 'googleSignOut': if(confirmDelete('Desconectar do Google Drive? Você pode conectar novamente quando quiser — os dados salvos no Drive não são apagados.'))signOutGoogle(); return;
     case 'driveSyncNow': saveToDrive(); return;
-    case 'addRecorrenteR': state.recorrentes.rec.push({id:'r'+Date.now()+Math.floor(Math.random()*1000),nome:'Nova Receita Recorrente',valor:0,cat:state.catR[0]||'',conta:'',ativo:true,gerado:[]}); logChange('Nova receita recorrente criada'); break;
-    case 'removeRecorrenteR': { const t=state.recorrentes.rec[i]; if(!confirmDelete(`Excluir a receita recorrente "${t?.nome}"? Os lançamentos já gerados em meses anteriores NÃO serão apagados.`))return; state.recorrentes.rec.splice(i,1); logChange(`Receita recorrente "${t?.nome}" excluída (lançamentos já gerados permanecem)`); break; }
-    case 'addRecorrenteD': state.recorrentes.desp.push({id:'r'+Date.now()+Math.floor(Math.random()*1000),nome:'Nova Despesa Recorrente',valor:0,sub:state.subD[0]?.nome||'',conta:'',ativo:true,gerado:[]}); logChange('Nova despesa recorrente criada'); break;
-    case 'removeRecorrenteD': { const t=state.recorrentes.desp[i]; if(!confirmDelete(`Excluir a despesa recorrente "${t?.nome}"? Os lançamentos já gerados em meses anteriores NÃO serão apagados.`))return; state.recorrentes.desp.splice(i,1); logChange(`Despesa recorrente "${t?.nome}" excluída (lançamentos já gerados permanecem)`); break; }
+    case 'addRecorrenteR': state.recorrentes.rec.push({id:'r'+Date.now()+Math.floor(Math.random()*1000),nome:'Nova Entrada Recorrente',valor:0,cat:state.catR[0]||'',conta:'',ativo:true,gerado:[]}); logChange('Nova entrada recorrente criada'); break;
+    case 'removeRecorrenteR': { const t=state.recorrentes.rec[i]; if(!confirmDelete(`Excluir a entrada recorrente "${t?.nome}"? Os lançamentos já gerados em meses anteriores NÃO serão apagados.`))return; state.recorrentes.rec.splice(i,1); logChange(`Entrada recorrente "${t?.nome}" excluída (lançamentos já gerados permanecem)`); break; }
+    case 'addRecorrenteD': state.recorrentes.desp.push({id:'r'+Date.now()+Math.floor(Math.random()*1000),nome:'Nova Saída Recorrente',valor:0,sub:state.subD[0]?.nome||'',conta:'',ativo:true,gerado:[]}); logChange('Nova saída recorrente criada'); break;
+    case 'removeRecorrenteD': { const t=state.recorrentes.desp[i]; if(!confirmDelete(`Excluir a saída recorrente "${t?.nome}"? Os lançamentos já gerados em meses anteriores NÃO serão apagados.`))return; state.recorrentes.desp.splice(i,1); logChange(`Saída recorrente "${t?.nome}" excluída (lançamentos já gerados permanecem)`); break; }
     case 'clearLog': if(confirmDelete('Limpar todo o histórico de alterações? Essa ação não pode ser desfeita.')){state.log=[];} break;
     case 'openQuickAdd': openQuickAdd(); return;
     case 'qaSetTipo': qa.tipo=btn.dataset.tipo; applyQaTipoDefaults(); renderQuickAddModal(); return;
