@@ -48,6 +48,9 @@ table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
 table.tbl th,table.tbl td{padding:5px 7px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
 table.tbl th{background:var(--soft);}
 .grid2.top{align-items:start;}.grid2.top>.card{margin-bottom:0;}.grid2.top{margin-bottom:18px;}
+table.tbl.compacta{min-width:0;width:100%;}
+table.tbl.compacta td:first-child{white-space:normal;overflow-wrap:anywhere;}
+table.tbl.compacta td:last-child,table.tbl.compacta th:last-child{text-align:right;white-space:nowrap;}
 table.tbl.lanc th{border-bottom:1px solid var(--border);}
 table.tbl.lanc td{border-bottom:none;padding:1px 4px;}
 table.tbl.lanc tbody tr:hover td{background:var(--soft);}
@@ -74,7 +77,6 @@ input[type=color].cor-in{width:34px;height:28px;padding:0;border:1px solid var(-
 .lseta{font-weight:700;margin:0 4px;color:var(--muted);}
 .lval.in{color:var(--green-text);}.lval.out{color:var(--red);}
 .lstat{font-weight:700;width:18px;text-align:center;}.lstat.ok{color:var(--green-text);}.lstat.pend{color:var(--over-text);}
-.msticky{display:none;}
 @media(max-width:760px){
   .lhead{display:none;}.lgrid{min-width:0;}
   .lrow{border:1px solid var(--border);border-radius:12px;margin:0 0 6px;padding:0;background:var(--card);overflow:hidden;}
@@ -93,8 +95,6 @@ input[type=color].cor-in{width:34px;height:28px;padding:0;border:1px solid var(-
   .lcell{display:block;}.lcell::before{content:attr(data-label);display:block;font-size:10.5px;color:var(--muted);margin-bottom:2px;}
   .lcell.c1{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;}.lcell.c1::before{flex:0 0 100%;}.lcell.c1 .tico{display:none;}
   .lcell.c7{grid-column:1/-1;display:flex;justify-content:flex-end;}.lcell.c7::before{display:none;}
-  .msticky{display:flex;position:sticky;top:0;z-index:40;gap:8px;justify-content:space-around;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 10px;margin:0 0 10px;box-shadow:0 2px 8px rgba(15,23,42,.08);}
-  .msticky div{text-align:center;font-size:11px;color:var(--muted);white-space:nowrap;}.msticky b{display:block;font-size:14px;color:var(--text);}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}.kpi{min-width:0;}.kpi b,.kpi span{overflow-wrap:anywhere;}
   .kpis .kpi{padding:8px 6px;}.kpis .kpi span{font-size:11px;}.kpis .kpi b{font-size:15px;}.kpis{gap:8px;}
 }
@@ -117,7 +117,13 @@ canvas{max-width:100%;}
 .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}.metric{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}.metric .label{font-size:12px;color:var(--muted)}.metric .value{font-size:22px;font-weight:700;margin-top:7px}.metric .subvalue{font-size:11px;color:var(--muted);margin-top:5px}
 @media(max-width:900px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.metric-grid{grid-template-columns:1fr}}
-.status-list{display:flex;flex-direction:column;gap:9px}.status-item{display:flex;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:12.5px}.badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}.badge.ok{background:var(--ok-bg);color:var(--ok-fg)}.badge.warn{background:var(--warn-bg);color:var(--warn-fg)}.badge.danger{background:var(--danger-bg);color:var(--danger-fg)}.quick-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.quick-actions .btn{background:var(--btn-bg);color:var(--primary-dark)}
+.status-list{display:flex;flex-direction:column;gap:9px}
+.status-item>span:first-child{min-width:0;overflow-wrap:anywhere;flex:1;}.status-item>span:last-child{white-space:nowrap;text-align:right;}
+.orc-item{padding:10px;border:1px solid var(--border);border-radius:10px;}
+.orc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;font-weight:600;}
+.orc-top .badge{white-space:nowrap;flex:0 0 auto;}
+.orc-item .bar{display:block;width:100%;height:8px;}
+.orc-val{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:12.5px;color:var(--muted);flex-wrap:wrap;}.orc-val b{color:var(--text);}.status-item{display:flex;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:12.5px}.badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}.badge.ok{background:var(--ok-bg);color:var(--ok-fg)}.badge.warn{background:var(--warn-bg);color:var(--warn-fg)}.badge.danger{background:var(--danger-bg);color:var(--danger-fg)}.quick-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.quick-actions .btn{background:var(--btn-bg);color:var(--primary-dark)}
 .nav-sep{width:1px;background:var(--border);margin:3px 4px}
 
 .goal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px}.goal-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.goal-name{font-weight:700}.goal-meta{font-size:12px;color:var(--muted);margin-top:4px}.progress{height:12px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:10px 0}.progress>span{display:block;height:100%;background:linear-gradient(90deg,#4f46e5,#7c3aed)}.goal-actions{display:flex;gap:8px;flex-wrap:wrap}.goal-summary{font-size:12px;color:var(--muted)}
@@ -181,6 +187,12 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   /* No celular o cabeçalho rola junto com a página (antes ficava grudado e ocupava a tela toda);
      só a barra de Caixa Atual/Final fica fixa no topo. */
   header.top{position:static;padding:10px 12px;gap:6px;}
+  .kpis.orc-kpis{display:block;}
+  .chartbox.pie{height:420px;}
+  .orc-kpis .kpi{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:8px 4px;border:0;border-bottom:1px solid var(--border);border-radius:0;background:transparent;box-shadow:none;}
+  .orc-kpis .kpi:last-child{border-bottom:0;}
+  .orc-kpis .kpi b{font-size:15px;}
+  .orc-kpis .kpi span{margin:0;}
   .month-nav-btn{min-width:0;padding:6px 8px;font-size:12px;}
   header.top h1{font-size:16px;}
   .actions{flex-wrap:wrap;width:100%;gap:6px;}
@@ -218,7 +230,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   </div>
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de Setembro</h3><span class="badge ok">Dentro do planejado</span></div>
-    <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>R$&nbsp;5.911,00</b></div><div class="kpi"><span>Realizado</span><b>R$&nbsp;0,00</b></div><div class="kpi"><span>Restante</span><b class="pos">R$&nbsp;5.911,00</b></div></div>
+    <div class="kpis orc-kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>R$&nbsp;5.911,00</b></div><div class="kpi"><span>Realizado</span><b>R$&nbsp;0,00</b></div><div class="kpi"><span>Restante</span><b class="pos">R$&nbsp;5.911,00</b></div></div>
     <div class="status-list" style="margin-top:14px"><div class="status-item"><span>Moradia</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.146,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Alimentação</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.200,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Lazer</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;600,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Educação</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;200,00 <span class="badge ok">0%</span></span></div><div class="status-item"><span>Transporte</span><span><b>R$&nbsp;0,00</b> / R$&nbsp;1.200,00 <span class="badge ok">0%</span></span></div></div></div>
     <div class="card"><div class="cardhead"><h3>🔔 Pendências do mês</h3><span class="badge warn">15 pendência(s)</span></div>
     <div class="kpis pending-totals" style="grid-template-columns:repeat(2,1fr);margin:0 0 14px">
@@ -229,7 +241,7 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   </div>
   <div class="grid2">
     <div class="card"><h3>📈 Evolução do saldo</h3><div class="chartbox"><canvas id="chDashSaldo" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
-    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
+    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox pie"><canvas id="chDashPie" width="490" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 490.5px;"></canvas></div></div>
   </div></main>
 <button id="fabQuickAdd" class="fab" data-action="openQuickAdd" title="Novo lançamento rápido">+</button>
 <div id="quickAddOverlay" class="qa-overlay" style="display:none">
@@ -251,6 +263,7 @@ function opcoesConta(valorAtual){
   if(valorAtual&&!nomes.includes(valorAtual))nomes.push(valorAtual);
   return nomes;
 }
+function mesRef(){const now=new Date(),ano=state.meta.ano||now.getFullYear();return Math.max(0,Math.min(11,now.getFullYear()===ano?now.getMonth():(now.getFullYear()>ano?11:0)));}
 function contaEmUso(nome){
   const q=JSON.stringify(nome);
   return [state.meses,state.recorrentes,state.salario,state.historico,state.metas,state.parcelasPendentes].some(part=>part!==undefined&&JSON.stringify(part).includes(q));
@@ -771,8 +784,8 @@ function renderDashboard(){
   </div>
   <div class="grid2">
     <div class="card"><div class="cardhead"><h3>🎯 Orçamento de ${MESES[m]}</h3><span class="badge ${remaining>=0?'ok':'danger'}">${remaining>=0?'Dentro do planejado':'Acima do planejado'}</span></div>
-    <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>${fmt(metaMes)}</b></div><div class="kpi"><span>Realizado</span><b>${fmt(realMes)}</b></div><div class="kpi"><span>Restante</span><b class="${remaining>=0?'pos':'neg'}">${fmt(remaining)}</b></div></div>
-    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const semMeta=!(x.meta>0)&&x.real>0;const cls=(x.pct>100||semMeta)?'danger':x.pct>=80?'warn':'ok';return `<div class="status-item"><span>${escHtml(x.cat)}</span><span><b>${fmt(x.real)}</b> / ${fmt(x.meta)} <span class="badge ${cls}">${cls==='danger'?'▲ ':cls==='warn'?'! ':'✓ '}${semMeta?'sem meta':round2(x.pct)+'%'}</span></span></div>`}).join(''):'<div class="muted">Nenhuma categoria de saída cadastrada.</div>'}</div></div>
+    <div class="kpis orc-kpis" style="grid-template-columns:repeat(3,1fr);margin:0"><div class="kpi"><span>Planejado</span><b>${fmt(metaMes)}</b></div><div class="kpi"><span>Realizado</span><b>${fmt(realMes)}</b></div><div class="kpi"><span>Restante</span><b class="${remaining>=0?'pos':'neg'}">${fmt(remaining)}</b></div></div>
+    <div class="status-list" style="margin-top:14px">${statuses.length?statuses.map(x=>{const semMeta=!(x.meta>0)&&x.real>0;const cls=(x.pct>100||semMeta)?'danger':x.pct>=80?'warn':'ok';return `<div class="orc-item"><div class="orc-top"><span class="orc-nome">${escHtml(x.cat)}</span><span class="badge ${cls}">${cls==='danger'?'▲ ':cls==='warn'?'! ':'✓ '}${semMeta?'sem meta':round2(x.pct).toLocaleString('pt-BR',{maximumFractionDigits:1})+'%'}</span></div><div class="bar"><span class="barfill ${cls==='danger'?'over':''}" style="width:${Math.min(100,semMeta?100:x.pct)}%"></span></div><div class="orc-val"><b>${fmt(x.real)}</b><span>de ${fmt(x.meta)}</span></div></div>`}).join(''):'<div class="muted">Nenhuma categoria de saída cadastrada.</div>'}</div></div>
     <div class="card"><div class="cardhead"><h3>🔔 Pendências do mês</h3><span class="badge ${pending.length?'warn':'ok'}">${pending.length} pendência(s)</span></div>
     <div class="kpis pending-totals" style="grid-template-columns:repeat(2,1fr);margin:0 0 14px">
       <div class="kpi"><span>💚 Total a receber</span><b class="pos">${fmt(totalReceber)}</b></div>
@@ -782,13 +795,36 @@ function renderDashboard(){
   </div>
   <div class="grid2">
     <div class="card"><h3>📈 Evolução do saldo</h3><div class="chartbox"><canvas id="chDashSaldo"></canvas></div></div>
-    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox"><canvas id="chDashPie"></canvas></div></div>
+    <div class="card"><h3>🍰 Saídas por categoria no mês</h3><div class="chartbox pie"><canvas id="chDashPie"></canvas></div></div>
   </div>`;
+}
+/* ---- Gráficos de pizza/rosca com % por categoria ---- */
+// O % é calculado só sobre as fatias que estão visíveis: ao esconder uma categoria
+// clicando na legenda, os percentuais das demais são recalculados.
+function pieShares(chart){
+  const ds=chart.data.datasets[0],vis=ds.data.map((v,i)=>chart.getDataVisibility(i)?(Number(v)||0):0);
+  const soma=vis.reduce((a,b)=>a+b,0);
+  return {soma,share:vis.map(v=>soma?v/soma:0),vis};
+}
+const piePctPlugin={id:'piePct',afterDatasetsDraw(chart){
+  const {soma,share}=pieShares(chart);if(!soma)return;
+  const ctx=chart.ctx;ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 11px sans-serif';
+  chart.getDatasetMeta(0).data.forEach((arc,i)=>{
+    if(!chart.getDataVisibility(i)||share[i]<0.05)return;
+    const r=(arc.innerRadius+arc.outerRadius)/2,ang=(arc.startAngle+arc.endAngle)/2;
+    const x=arc.x+Math.cos(ang)*r,y=arc.y+Math.sin(ang)*r,t=(share[i]*100).toLocaleString('pt-BR',{maximumFractionDigits:0})+'%';
+    ctx.lineWidth=3;ctx.strokeStyle='rgba(0,0,0,.55)';ctx.strokeText(t,x,y);ctx.fillStyle='#fff';ctx.fillText(t,x,y);
+  });ctx.restore();}};
+function pieOpts(totals){
+  return {responsive:true,maintainAspectRatio:false,plugins:{
+    legend:{position:'bottom'},
+    tooltip:{callbacks:{label:(c)=>{const {share}=pieShares(c.chart);return ` ${c.label}: ${fmt(c.parsed)} (${(share[c.dataIndex]*100).toLocaleString('pt-BR',{maximumFractionDigits:1})}%)`;}}}
+  }};
 }
 function renderDashboardCharts(){
  const c=computeAll(); ['chDashSaldo','chDashPie'].forEach(id=>{if(charts[id]){charts[id].destroy();delete charts[id];}});
  const a=document.getElementById('chDashSaldo'); if(a) charts.chDashSaldo=new Chart(a,{type:'line',data:{labels:MESES.map(x=>x.slice(0,3)),datasets:[{label:'Saldo Geral (real)',data:c.saldoGeralReal,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,.12)',fill:true,tension:.3}]},options:{responsive:true,maintainAspectRatio:false}});
- const b=document.getElementById('chDashPie'); const totals=state.catD.map((cat,ci)=>round2(c.catReal[ci].reduce((x,y)=>x+y,0))); if(b) charts.chDashPie=new Chart(b,{type:'doughnut',data:{labels:state.catD,datasets:[{data:totals,backgroundColor:PALETTE}]},options:{responsive:true,maintainAspectRatio:false}});
+ const b=document.getElementById('chDashPie'); const mrefP=mesRef(); const totals=state.catD.map((cat,ci)=>round2(Number(c.catReal[ci][mrefP])||0)); if(b) charts.chDashPie=new Chart(b,{type:'doughnut',data:{labels:state.catD,datasets:[{data:totals,backgroundColor:PALETTE}]},options:pieOpts(totals),plugins:[piePctPlugin]});
 }
 
 /* ---- Render: Metas Financeiras ---- */
@@ -1285,9 +1321,9 @@ function renderMonth(m){
   const chip=(f,ico,nome,qtd)=>`<button type="button" class="lchip ${lancFiltro===f?'on':''}" data-action="lancFiltro" data-f="${f}">${ico}${nome} <b>${qtd}</b></button>`;
   const lancCard=`<div class="card lanc-card">
     <div class="cardhead"><h3>Lançamentos</h3><div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn small" data-action="addRec" data-m="${m}">${tipoIco('in')}Entrada</button>
-      <button class="btn small" data-action="addDesp" data-m="${m}">${tipoIco('out')}Saída</button>
-      <button class="btn small" data-action="addTrans" data-m="${m}">${tipoIco('tr')}Transferência</button></div></div>
+      <button class="btn small" data-action="addRec" data-m="${m}">+ Entrada</button>
+      <button class="btn small" data-action="addDesp" data-m="${m}">+ Saída</button>
+      <button class="btn small" data-action="addTrans" data-m="${m}">+ Transferência</button></div></div>
     <div class="lchips">${chip('todos','','Todos',itens.length)}${chip('rec',tipoIco('in'),'Entradas',qtdLado('rec'))}${chip('desp',tipoIco('out'),'Saídas',qtdLado('desp'))}${chip('trans',tipoIco('tr'),'Transf.',qtdLado('trans'))}</div>
     <div class="ltot"><span>${tipoIco('in')}${fmt(somaLado('rec'))}</span><span>${tipoIco('out')}${fmt(somaLado('desp'))}</span><span>${tipoIco('tr')}${fmt(somaLado('trans'))}</span></div>
     <details class="hint" style="margin-bottom:8px"><summary style="cursor:pointer">Como esta lista funciona</summary>🔁 lançamento recorrente · 🔢 parcela de compra parcelada · ✓ efetivado · ◷ pendente. Os totais (↓ entradas, ↑ saídas, ⇄ transferências) somam tudo o que está na lista, inclusive Ajustes; as transferências só movimentam dinheiro entre contas e não entram nos totais do topo. Ordem: por data (ou data de criação); lançamentos antigos sem data ficam primeiro, na ordem em que foram lançados. No celular, toque numa linha para abrir e editar.</details>
@@ -1308,7 +1344,7 @@ function renderMonth(m){
       <td><span class="bar"><span class="barfill ${over?'over':''}" style="width:${pctBar}%"></span></span> ${label}</td></tr>`;
   }).join('');
 
-  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&!(Number(c.snaps[m][i])||0))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[m][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&!(Number(c.snaps[m][i])||0))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td style="text-align:right;white-space:nowrap">${fmt(c.snaps[m][i])}</td></tr>`).join('');
 
   const ano=state.meta.ano||new Date().getFullYear();
   const monthNav=`<div class="month-nav">
@@ -1332,7 +1368,6 @@ function renderMonth(m){
 
   return `
   ${monthNav}
-  <div class="msticky"><div>Caixa Atual<b>${fmt(c.cxFinal[m])}</b></div><div>Caixa Final<b>${fmt(c.cxFinalProj[m])}</b></div></div>
   <div class="kpis">
     <div class="kpi"><span>Saldo Inicial</span><b>${fmt(saldoIni)}</b></div>
     <div class="kpi"><span>Entradas (projeção, sem Ajustes)</span><b class="pos">${fmt(c.totalReceitas[m])}</b></div>
@@ -1354,8 +1389,8 @@ function renderMonth(m){
   <div class="grid2">
     <div class="card"><h3>Meta x Real por Categoria</h3><div class="scrollx"><table class="tbl">
     <thead><tr><th>Categoria</th><th>Real</th><th>Meta</th><th>% Consumido</th></tr></thead><tbody>${metaCat}</tbody></table></div></div>
-    <div class="card"><h3>Saldo por Conta (atual)</h3><div class="scrollx"><table class="tbl">
-    <thead><tr><th>Conta</th><th>Tipo</th><th>Saldo</th></tr></thead><tbody>${contaRows}</tbody></table></div></div>
+    <div class="card"><h3>Saldo por Conta (atual)</h3><div class="scrollx"><table class="tbl compacta">
+    <thead><tr><th>Conta</th><th style="text-align:right">Saldo</th></tr></thead><tbody>${contaRows}</tbody></table></div></div>
   </div>`;
 }
 
@@ -1442,7 +1477,7 @@ function renderResumo(){
   }).join('');
   const totalPorMes=Array(12).fill(0);state.catD.forEach((cat,ci)=>c.catReal[ci].forEach((v,m)=>totalPorMes[m]=round2(totalPorMes[m]+v)));
 
-  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&c.snaps.every(sn=>!(Number(sn[i])||0)))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td>${escHtml(cn.tipo)}</td><td>${fmt(c.snaps[11][i])}</td></tr>`).join('');
+  const contaRows=state.contas.map((cn,i)=>(!contaAtiva(cn)&&c.snaps.every(sn=>!(Number(sn[i])||0)))?'':`<tr><td>${contaIco(cn)}${escHtml(cn.nome)}${contaAtiva(cn)?'':' <span class="hint">(inativa)</span>'}</td><td style="text-align:right;white-space:nowrap">${fmt(c.snaps[11][i])}</td></tr>`).join('');
 
   return `
   <div class="kpis">
@@ -1459,8 +1494,8 @@ function renderResumo(){
     <div class="card"><h3>Evolução do Saldo Geral</h3><div class="chartbox"><canvas id="chSaldo"></canvas></div></div>
   </div>
   <div class="grid2">
-    <div class="card"><h3>Saídas por Categoria (Ano)</h3><div class="chartbox"><canvas id="chPie"></canvas></div></div>
-    <div class="card"><h3>Saldo Final por Conta</h3><div class="scrollx"><table class="tbl"><thead><tr><th>Conta</th><th>Tipo</th><th>Saldo</th></tr></thead><tbody>${contaRows}</tbody></table></div></div>
+    <div class="card"><h3>Saídas por Categoria (Ano)</h3><div class="chartbox pie"><canvas id="chPie"></canvas></div></div>
+    <div class="card"><h3>Saldo Final por Conta</h3><div class="scrollx"><table class="tbl compacta"><thead><tr><th>Conta</th><th style="text-align:right">Saldo</th></tr></thead><tbody>${contaRows}</tbody></table></div></div>
   </div>
 
   <div class="card"><h3>Saídas por Categoria x Mês</h3><div class="scrollx"><table class="tbl">
@@ -1484,7 +1519,7 @@ function renderCharts(){
   ]},options:{responsive:true,maintainAspectRatio:false}});
   const ctx3=document.getElementById('chPie');
   const totals=state.catD.map((cat,ci)=>round2(c.catReal[ci].reduce((a,b)=>a+b,0)));
-  if(ctx3) charts.chPie=new Chart(ctx3,{type:'doughnut',data:{labels:state.catD,datasets:[{data:totals,backgroundColor:PALETTE}]},options:{responsive:true,maintainAspectRatio:false}});
+  if(ctx3) charts.chPie=new Chart(ctx3,{type:'doughnut',data:{labels:state.catD,datasets:[{data:totals,backgroundColor:PALETTE}]},options:pieOpts(totals),plugins:[piePctPlugin]});
 }
 
 /* ---- Dispatcher / Nav ---- */
