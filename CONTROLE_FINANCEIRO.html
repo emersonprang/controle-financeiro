@@ -198,6 +198,19 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   .actions{flex-wrap:wrap;width:100%;gap:6px;}
   .actions .btn,.actions .sync-badge{white-space:nowrap;padding:6px 10px;font-size:12px;}
 }
+#toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:90;display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:min(92vw,520px);background:var(--text);color:var(--bg);padding:10px 14px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.3);font-size:13px;transition:opacity .2s,transform .2s;}
+#toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+#toast button{background:transparent;border:1px solid currentColor;color:inherit;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;font-weight:700;}
+@media(max-width:760px){#toast{bottom:84px;}}
+.cf-modal-ov{position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:120;display:flex;align-items:center;justify-content:center;padding:16px;}
+.cf-modal{background:var(--card);color:var(--text);border-radius:14px;max-width:480px;width:100%;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.4);max-height:92vh;overflow:auto;}
+.cf-modal h3{margin:0 0 8px;}.cf-modal p{margin:0 0 12px;font-size:13.5px;line-height:1.45;}
+.cf-opts{display:flex;flex-direction:column;gap:8px;}
+.cf-opts .btn,.cf-opts .btn.ghost{text-align:left;white-space:normal;padding:10px 12px;border:1px solid var(--border);background:var(--soft);color:var(--text);}
+.cf-opts .btn:hover{border-color:var(--primary);}
+.cf-opts .btn small{display:block;font-weight:400;opacity:.85;margin-top:3px;font-size:12px;}
+.bk-list{max-height:340px;overflow:auto;}.bk-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.lrow.auto{background:var(--soft);}
 </style>
 <style id="googleidentityservice_button_styles">.qJTHM{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;color:#202124;direction:ltr;-webkit-touch-callout:none;font-family:Roboto-Regular,arial,sans-serif;-webkit-font-smoothing:antialiased;font-weight:400;margin:0;overflow:hidden;-webkit-text-size-adjust:100%}.ynRLnc{left:-9999px;position:absolute;top:-9999px}.L6cTce{display:none}.bltWBb{overflow-wrap:break-word;word-break:break-word}.hSRGPd{color:#1a73e8;cursor:pointer;font-weight:500;text-decoration:none}.Bz112c-W3lGp{height:16px;width:16px}.Bz112c-E3DyYd{height:20px;width:20px}.Bz112c-r9oPif{height:24px;width:24px}.Bz112c-u2z5K{height:36px;width:36px}.Bz112c-uaxL4e{border-radius:10px}.LgbsSe-Bz112c{display:block}.S9gUrf-YoZ4jf{border:none;margin:0;padding:0}.S9gUrf-YoZ4jf *{border:none;margin:0;padding:0}.fFW7wc-ibnC6b>.aZ2wEe>div{border-color:#4285f4}.P1ekSe-ZMv3u{-webkit-transition:height .2s linear;transition:height .2s linear}.P1ekSe-ZMv3u>div:first-child{background-color:#1a73e8!important;-webkit-transition:width .3s linear;transition:width .3s linear}.P1ekSe-ZMv3u>div:nth-child(2){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.P1ekSe-ZMv3u>div:nth-child(3){background-image:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.7)),to(rgba(255,255,255,.7))),-webkit-gradient(linear,left top,right top,from(#1a73e8),to(#1a73e8))!important;background-image:-webkit-linear-gradient(left,rgba(255,255,255,.7),rgba(255,255,255,.7)),-webkit-linear-gradient(left,#1a73e8,#1a73e8)!important;background-image:linear-gradient(90deg,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(90deg,#1a73e8,#1a73e8)!important}.haAclf{display:inline-block}.nsm7Bb-HzV7m-LgbsSe{border-radius:4px;box-sizing:border-box;-webkit-transition:background-color .218s,border-color .218s;transition:background-color .218s,border-color .218s;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-webkit-appearance:none;background-color:#fff;background-image:none;border:1px solid #dadce0;color:#3c4043;cursor:pointer;font-family:Google Sans,arial,sans-serif;font-size:.875rem;height:40px;letter-spacing:.25px;outline:none;overflow:hidden;padding:0 12px;position:relative;text-align:center;vertical-align:middle;white-space:nowrap;width:auto}.nsm7Bb-HzV7m-LgbsSe.TzA9Ye-LgbsSe{font-size:14px}@media screen and (-ms-high-contrast:active){.nsm7Bb-HzV7m-LgbsSe{border:2px solid windowText;color:windowText}}@media screen and (preferes-contrast:more){.nsm7Bb-HzV7m-LgbsSe{color:#000}}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe{font-size:.875rem;height:32px;letter-spacing:.25px;padding:0 10px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.TzA9Ye-LgbsSe{font-size:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe{font-size:.6875rem;height:20px;letter-spacing:.3px;padding:0 8px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.TzA9Ye-LgbsSe{font-size:11px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe{padding:0;width:40px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe{width:32px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe{width:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK{border-radius:20px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe{border-radius:16px}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe{border-radius:10px}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc{border:1px solid #8e918f;background-color:#131314;color:#e3e3e3}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc{border:none;color:#fff}.nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc{background-color:#1a73e8}.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{background-color:#202124;color:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc{color:#fff}}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:18px;margin-right:8px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:14px;min-width:14px;width:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{height:10px;min-width:10px;width:10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin-left:8px;margin-right:-4px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:10px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:8px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c{padding:4px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:3px;border-bottom-left-radius:3px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center;background-color:#fff;height:36px;margin-left:-10px;margin-right:12px;min-width:36px;width:36px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c{margin:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:28px;margin-left:-8px;margin-right:10px;min-width:28px;width:28px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{height:16px;margin-left:-6px;margin-right:8px;min-width:16px;width:16px}.nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:3px;margin-left:2px;margin-right:0;padding:0}.nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:14px}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:8px}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;height:100%;position:relative;width:100%}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX{-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:1;-webkit-box-flex:1;flex-grow:1;font-family:Google Sans,arial,sans-serif;font-weight:500;overflow:hidden;text-overflow:ellipsis;vertical-align:top}.nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-weight:300}.nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId{-webkit-flex-grow:0;-webkit-box-flex:0;flex-grow:0}.nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe{-webkit-transition:background-color .218s;transition:background-color .218s;bottom:0;left:0;position:absolute;right:0;top:0}.nsm7Bb-HzV7m-LgbsSe:focus,.nsm7Bb-HzV7m-LgbsSe:hover{box-shadow:none;border-color:rgb(210,227,252);outline:none}.nsm7Bb-HzV7m-LgbsSe:focus-within{outline:2px solid #00639b;border-color:transparent}.nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.08)}.nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(66,133,244,.1)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.08)}.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.i5vt6e-to915-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.12)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.24)}.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,.nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe{background:rgba(255,255,255,.32)}.nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY{border-radius:50%;display:-webkit-box;display:-webkit-flex;display:flex;height:20px;margin-left:-4px;margin-right:8px;min-width:20px;width:20px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId{font-family:Roboto;font-size:12px;text-align:left}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS,.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf{overflow:hidden;text-overflow:ellipsis}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;-webkit-box-align:center;align-items:center;color:#5f6368;fill:#5f6368;font-size:11px;font-weight:400}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.i5vt6e-to915-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#c4c7c5;fill:#c4c7c5}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#e8eaed;fill:#e8eaed}@media screen and (prefers-contrast:more){.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff,.nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff{color:#000;fill:#000}}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c{height:18px;margin:-3px -3px -3px 2px;min-width:18px;width:18px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-bottom-right-radius:3px;margin-left:12px;margin-right:-10px}.nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf{border-radius:18px}.L5Fo6c-sM5MNb{border:0;display:block;left:0;position:relative;top:0}.L5Fo6c-bF1uUb{border-radius:4px;bottom:0;cursor:pointer;left:0;position:absolute;right:0;top:0}.L5Fo6c-bF1uUb:focus{border:none;outline:none}sentinel{}</style></head>
 <body>
@@ -212,8 +225,6 @@ body.sidebar-collapsed{padding-left:68px;}body.sidebar-collapsed nav#nav{width:6
   </div>
   <div class="actions">
     <div id="syncBadge" class="sync-badge" title="Sincronização com Google Drive"><span class="sync-dot" id="syncDot"></span><span id="syncText">Não conectado</span></div>
-    <button class="btn ghost" data-action="reset">↺ Restaurar Padrão</button>
-    <button class="btn ghost" data-action="download">⬇️ Baixar Cópia</button>
     <button class="btn ghost" data-action="toggleTheme" id="themeBtn" title="Alternar tema claro/escuro">🌙</button>
     <button class="btn" data-action="save">💾 Salvar</button>
   </div>
@@ -373,15 +384,14 @@ function normalizeDate(val){
   if(br) return `${br[3]}-${String(br[2]).padStart(2,'0')}-${String(br[1]).padStart(2,'0')}`;
   return '';
 }
-function dateInput(path,val,m){
+function dateInput(path,val,m,soMes){
+  // Lançamentos: qualquer data do ano; escolher outro mês move o lançamento para esse mês.
+  // soMes=true (entradas da folha): só datas do próprio mês.
   const year=(state&&state.meta&&state.meta.ano)?state.meta.ano:new Date().getFullYear();
-  const month=String(m+1).padStart(2,'0');
-  const min=`${year}-${month}-01`;
-  const last=new Date(year,m+1,0).getDate();
-  const max=`${year}-${month}-${String(last).padStart(2,'0')}`;
-  let v=normalizeDate(val);
-  if(v && (v<min || v>max)) v='';
-  return `<input type="date" class="inp date-month" data-path="${escAttr(path)}" data-month="${m}" min="${min}" max="${max}" value="${v}">`;
+  const v=normalizeDate(val)||'';
+  let mn=`${year}-01-01`,mx=`${year}-12-31`,tt='Mudar para uma data de outro mês move o lançamento para aquele mês';
+  if(soMes){const mm=String(m+1).padStart(2,'0'),ult=new Date(year,m+1,0).getDate();mn=`${year}-${mm}-01`;mx=`${year}-${mm}-${String(ult).padStart(2,'0')}`;tt='Data de recebimento neste mês';}
+  return `<input type="date" class="inp date-month" data-path="${escAttr(path)}" data-month="${m}" min="${mn}" max="${mx}" value="${v}" title="${tt}">`;
 }
 function selectInput(path,val,opts){return `<select class="inp" data-path="${escAttr(path)}">${opts.map(o=>`<option value="${escAttr(o)}" ${o===val?'selected':''}>${o?escHtml(o):'—'}</option>`).join('')}</select>`;}
 
@@ -711,6 +721,7 @@ function advanceYear(){
   const anoAtual=state.meta.ano||new Date().getFullYear();
   const anoProximo=anoAtual+1;
   if(!confirm(`Encerrar ${anoAtual} e iniciar ${anoProximo}?\n\nOs saldos finais de dezembro de cada conta serão usados como saldo inicial de ${anoProximo}. Os lançamentos e a folha de ${anoAtual} ficam guardados no histórico do próprio arquivo (não são apagados) e as categorias, contas, metas e o orçamento planejado são mantidos para o novo ano.\n\nEssa ação não pode ser desfeita automaticamente. Recomendado: use "Baixar Cópia" antes de continuar.`))return;
+  backupEvento('antes-de-avancar-ano');
   const c=computeAll();
   const finalSnap=c.snaps[11]||state.contas.map(x=>Number(x.saldo)||0);
   if(!Array.isArray(state.historico))state.historico=[];
@@ -897,6 +908,7 @@ function buildImportPlan(data,opts){
 }
 function applyImportPlan(){
   if(!importPending||importPending.plan.bloqueio)return;
+  backupEvento('antes-de-importar');
   let add=0,fill=0;
   importPending.plan.meses.forEach(row=>{
     const mm=state.meses[row.mi];
@@ -954,6 +966,34 @@ let lancFiltro='todos',lancMes=-1,lancFocusKey=null;const lancOpen=new Set();
 const stampNow=()=>new Date().toISOString();
 const TICO={in:['↓','Entrada'],out:['↑','Saída'],tr:['⇄','Transferência entre contas']};
 const tipoIco=k=>`<span class="tico ${k}" title="${TICO[k][1]}" aria-label="${TICO[k][1]}">${TICO[k][0]}</span>`;
+function showToast(msg,acoes){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t);}
+  t.innerHTML='';const sp=document.createElement('span');sp.textContent=msg;t.appendChild(sp);
+  (acoes||[]).forEach(a=>{const b=document.createElement('button');b.type='button';b.textContent=a.txt;b.onclick=()=>{t.classList.remove('show');a.fn();};t.appendChild(b);});
+  t.classList.add('show');clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.classList.remove('show'),9000);
+}
+function moverLancamento(m0,side,idx,m1,novaData){
+  const src=state.meses[m0][side],item=src&&src[idx];if(!item)return;
+  const dataAnt=item.data||'',recIdAnt=item.recId,custAnt=item.customizado;
+  src.splice(idx,1);
+  if(item.recId!==undefined){delete item.recId;delete item.customizado;} // vira lançamento comum (o recorrente já foi gerado neste mês)
+  item.data=novaData;
+  if(!Array.isArray(state.meses[m1][side]))state.meses[m1][side]=[];
+  state.meses[m1][side].push(item);
+  const tipo={rec:'Entrada',desp:'Saída',trans:'Transferência'}[side];
+  logChange(`${tipo} "${item.desc||''}" (${fmt(item.valor)}) movida de ${MESES[m0]} para ${MESES[m1]} (data ${novaData})`);
+  lancOpen.clear();persist();renderCurrent();
+  showToast(`${tipo} movida para ${MESES[m1]}.`,[
+    {txt:'Desfazer',fn:()=>{
+      const arr1=state.meses[m1][side],k=arr1.indexOf(item);if(k>=0)arr1.splice(k,1);
+      item.data=dataAnt;if(recIdAnt!==undefined){item.recId=recIdAnt;item.customizado=custAnt;}
+      state.meses[m0][side].splice(Math.min(idx,state.meses[m0][side].length),0,item);
+      logChange(`${tipo} "${item.desc||''}": movimentação para ${MESES[m1]} desfeita (voltou para ${MESES[m0]})`);
+      lancOpen.clear();persist();renderCurrent();}},
+    {txt:'Ver em '+MESES[m1],fn:()=>{currentTab='m'+m1;renderCurrent();}}
+  ]);
+}
 function renderConfig(){
   const saldoInicialCalculado=round2(state.contas.reduce((total,conta)=>total+(Number(conta.saldo)||0),0));
   state.meta.saldoInicial=saldoInicialCalculado;
@@ -976,7 +1016,7 @@ function renderConfig(){
       <button class="btn" data-action="googleSignIn">🔑 Entrar com Google</button>`:`
       <div class="kpis" style="grid-template-columns:repeat(2,1fr);margin:0 0 10px">
         <div class="kpi" style="text-align:left;padding:14px"><span>Conta conectada</span><b style="font-size:14px">${escHtml(gUserEmail||'—')}</b></div>
-        <div class="kpi" style="text-align:left;padding:14px"><span>Status</span><b style="font-size:14px">${gSyncStatus==='synced'?'✅ Sincronizado':gSyncStatus==='connecting'?'🔄 Sincronizando…':'⚠️ Erro de sincronização'}${gLastSync?` <span class="hint">(última vez às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})})</span>`:''}</b></div>
+        <div class="kpi" style="text-align:left;padding:14px"><span>Status</span><b style="font-size:14px">${gSyncStatus==='synced'?'✅ Sincronizado':gSyncStatus==='connecting'?'🔄 Sincronizando…':gSyncStatus==='conflict'?'⚠️ Conflito de versões':'⚠️ Erro de sincronização'}${gLastSync?` <span class="hint">(última vez às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})})</span>`:''}</b></div>
       </div>
       ${gSyncStatus==='error'&&gLastError?`<div class="drive-setup-box" style="border-color:#fca5a5;background:#fef2f2;color:#991b1b;margin-bottom:10px">⚠️ Detalhe técnico do erro: ${escHtml(gLastError)}</div>`:''}
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1072,7 +1112,15 @@ function renderConfig(){
     <div class="scrollx"><table class="tbl log-table"><thead><tr><th>Quando</th><th>O que mudou</th></tr></thead><tbody>
     ${(state.log&&state.log.length)?state.log.slice(0,50).map(l=>`<tr><td style="white-space:nowrap">${new Date(l.ts).toLocaleString('pt-BR')}</td><td>${escHtml(l.desc)}</td></tr>`).join(''):'<tr><td colspan="2" class="muted">Nenhuma alteração registrada ainda.</td></tr>'}
     </tbody></table></div>
-  </div>`;
+  </div>
+  ${(()=>{if(gAccessToken&&gDriveFileId&&!gBackupsLoaded&&!gBackupsLoading){gBackupsLoading=true;refreshBackups().catch(()=>{}).finally(()=>{gBackupsLoading=false;if(currentTab==='config')renderCurrent();});}return renderBackupCard();})()}
+  <div class="card"><h3>💾 Cópia e restauração dos dados</h3>
+    <p class="hint">Estes botões ficam só aqui para ninguém clicar sem querer.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div><button class="btn" data-action="download">⬇️ Baixar Cópia</button><div class="hint" style="margin-top:4px">Baixa um arquivo .html com todos os seus dados embutidos. Guarde onde quiser (computador, e-mail, outro serviço de nuvem).</div></div>
+      <div><button class="btn danger" data-action="reset">↺ Restaurar Padrão</button><div class="hint" style="margin-top:4px"><b>Apaga todos os seus dados</b> e volta ao modelo inicial do app (o histórico de alterações é mantido). Se estiver conectado ao Google Drive, uma cópia é guardada antes em Backups.</div></div>
+    </div></div>
+`;
 }
 
 /* ---- Render: Salário ---- */
@@ -1249,38 +1297,45 @@ function renderMonth(m){
   const contaNames=state.contas.map(x=>x.nome);
   const subNames=state.subD.map(x=>x.nome);
 
-  const autoRows=auto.map((a,i)=>{
-    const fields=['rConta','fConta','dConta'][i], stF=['rStatus','fStatus','dStatus'][i], dtF=['rData','fData','dData'][i];
-    return `<tr><td class="c-desc" data-label="Descrição">${tipoIco('in')}${a.desc}</td><td data-label="Valor">${fmt(a.valor)}</td><td data-label="Categoria">${a.cat}</td>
-      <td data-label="Conta">${contaSel(`salario.meses.${m}.${fields}`,a.conta,['',...opcoesConta(a.conta)])}</td>
-      <td data-label="Status">${selectInput(`salario.meses.${m}.${stF}`,a.status,statusOptR)}</td>
-      <td data-label="Data">${dateInput(`salario.meses.${m}.${dtF}`,a.data,m)}</td></tr>`;
-  }).join('');
-
   const trans=state.meses[m].trans||[];
   if(lancMes!==m){lancOpen.clear();lancMes=m;}
   // Lista única: entradas, saídas e transferências juntas.
   // Ordem: por data (ou, sem data, pela data de criação). Lançamentos antigos sem data nem
   // carimbo ficam primeiro, na ordem em que sempre apareceram (entradas, saídas, transferências).
   const itens=[];
+  auto.forEach((o,i)=>itens.push({side:'auto',i,o,pin:true}));
   manR.forEach((o,i)=>itens.push({side:'rec',i,o}));
   manD.forEach((o,i)=>itens.push({side:'desp',i,o}));
   trans.forEach((o,i)=>itens.push({side:'trans',i,o}));
   itens.forEach((it,n)=>{it.n=n;it.ts=String(it.o.criadoEm||'');it.dk=String(it.o.data||'').slice(0,10)||it.ts.slice(0,10);});
   itens.sort((a,b)=>{
+    if(a.pin||b.pin){if(a.pin&&b.pin)return a.i-b.i;return a.pin?-1:1;}
     if(!a.dk&&!b.dk)return a.n-b.n;
     if(!a.dk)return -1; if(!b.dk)return 1;
     if(a.dk!==b.dk)return a.dk<b.dk?-1:1;
     if(a.ts!==b.ts)return a.ts<b.ts?-1:1;
     return a.n-b.n;
   });
-  const somaLado=side=>round2(itens.filter(x=>x.side===side).reduce((a,x)=>a+(Number(x.o.valor)||0),0));
-  const qtdLado=side=>itens.filter(x=>x.side===side).length;
-  const visiveis=itens.filter(x=>lancFiltro==='todos'||x.side===lancFiltro);
+  const tipoDe=x=>x.side==='auto'?'rec':x.side;
+  const somaLado=side=>round2(itens.filter(x=>tipoDe(x)===side).reduce((a,x)=>a+(Number(x.o.valor)||0),0));
+  const qtdLado=side=>itens.filter(x=>tipoDe(x)===side).length;
+  const visiveis=itens.filter(x=>lancFiltro==='todos'||tipoDe(x)===lancFiltro);
   const lancRow=(it)=>{
     const o=it.o,key=it.side+':'+it.i,open=lancOpen.has(key),P=`meses.${m}.${it.side}.${it.i}`;
     let ico,desc,sinal,c3,c4,c5,del,sumContas,sumStatus='',badges='';
-    if(it.side==='rec'){
+    let c2=numInput(P+'.valor',o.valor),c6=dateInput(P+'.data',o.data,m),delHtml='';
+    if(it.side==='auto'){
+      const PS=`salario.meses.${m}`,fConta=['rConta','fConta','dConta'][it.i],fSt=['rStatus','fStatus','dStatus'][it.i],fDt=['rData','fData','dData'][it.i];
+      ico='in';desc=o.desc;sinal='+ ';
+      c2=`<span title="Calculado na aba Salário" style="font-weight:600">${fmt(o.valor)}</span>`;
+      c3=['Categoria',`<span>${escHtml(o.cat)}</span>`];
+      c4=['Conta',contaSel(`${PS}.${fConta}`,o.conta,['',...opcoesConta(o.conta)])];
+      c5=selectInput(`${PS}.${fSt}`,o.status,statusOptR);
+      c6=dateInput(`${PS}.${fDt}`,o.data,m,true);
+      sumContas=contaIcoNome(o.conta);
+      badges='<span title="Vem da aba Salário (fixada no topo)" style="margin-right:4px">📌</span>';
+      del='';
+    }else if(it.side==='rec'){
       ico='in';desc=o.desc;sinal='+ ';
       c3=['Categoria',selectInput(P+'.cat',o.cat,state.catR)];
       c4=['Conta',contaSel(P+'.conta',o.conta,['',...opcoesConta(o.conta)])];
@@ -1302,20 +1357,21 @@ function renderMonth(m){
       c5='<span class="muted" title="Transferências são sempre efetivadas">efetivada</span>';del='removeTrans';
       sumContas=`${contaIcoNome(o.origem)}<span class="lseta">→</span>${contaIcoNome(o.destino)}`;
     }
+    if(del)delHtml=`<button class="btn danger small" data-action="${del}" data-m="${m}" data-i="${it.i}">✕</button>`;
     if(it.side!=='trans'){
       const feito=/^(recebido|pago)$/i.test(String(o.status||'').trim());
       sumStatus=`<span class="lstat ${feito?'ok':'pend'}" title="${escAttr(o.status||'')}">${feito?'✓':'◷'}</span>`;
     }
     return `<div class="lrow ${it.side}${open?' open':''}" data-lkey="${key}">
-    <div class="lsum" data-action="toggleLanc">${tipoIco(ico)}<span class="ldesc">${escHtml(desc||'(sem descrição)')}</span><span class="lval ${it.side==='rec'?'in':(it.side==='desp'?'out':'')}" title="${escAttr(fmt(o.valor))}">${sinal}${fmt(o.valor).replace(/R\$\s*/,'')}</span><span class="lcontas">${sumContas}</span>${sumStatus}<span class="lchev" aria-hidden="true">▾</span></div>
+    <div class="lsum" data-action="toggleLanc">${tipoIco(ico)}<span class="ldesc">${escHtml(desc||'(sem descrição)')}</span><span class="lval ${(it.side==='rec'||it.side==='auto')?'in':(it.side==='desp'?'out':'')}" title="${escAttr(fmt(o.valor))}">${sinal}${fmt(o.valor).replace(/R\$\s*/,'')}</span><span class="lcontas">${sumContas}</span>${sumStatus}<span class="lchev" aria-hidden="true">▾</span></div>
     <div class="ldet">
-      <div class="lcell c1" data-label="Descrição">${tipoIco(ico)}${badges}${textInput(P+'.desc',desc)}</div>
-      <div class="lcell c2" data-label="Valor">${numInput(P+'.valor',o.valor)}</div>
+      <div class="lcell c1" data-label="Descrição">${tipoIco(ico)}${badges}${it.side==='auto'?`<span style="font-weight:600">${escHtml(desc)}</span>`:textInput(P+'.desc',desc)}</div>
+      <div class="lcell c2" data-label="Valor">${c2}</div>
       <div class="lcell c3" data-label="${c3[0]}">${c3[1]}</div>
       <div class="lcell c4" data-label="${c4[0]}">${c4[1]}</div>
       <div class="lcell c5" data-label="Status">${c5}</div>
-      <div class="lcell c6" data-label="Data">${dateInput(P+'.data',o.data,m)}</div>
-      <div class="lcell c7"><button class="btn danger small" data-action="${del}" data-m="${m}" data-i="${it.i}">✕</button></div>
+      <div class="lcell c6" data-label="Data">${c6}</div>
+      <div class="lcell c7">${delHtml}</div>
     </div></div>`;
   };
   const chip=(f,ico,nome,qtd)=>`<button type="button" class="lchip ${lancFiltro===f?'on':''}" data-action="lancFiltro" data-f="${f}">${ico}${nome} <b>${qtd}</b></button>`;
@@ -1326,7 +1382,7 @@ function renderMonth(m){
       <button class="btn small" data-action="addTrans" data-m="${m}">+ Transferência</button></div></div>
     <div class="lchips">${chip('todos','','Todos',itens.length)}${chip('rec',tipoIco('in'),'Entradas',qtdLado('rec'))}${chip('desp',tipoIco('out'),'Saídas',qtdLado('desp'))}${chip('trans',tipoIco('tr'),'Transf.',qtdLado('trans'))}</div>
     <div class="ltot"><span>${tipoIco('in')}${fmt(somaLado('rec'))}</span><span>${tipoIco('out')}${fmt(somaLado('desp'))}</span><span>${tipoIco('tr')}${fmt(somaLado('trans'))}</span></div>
-    <details class="hint" style="margin-bottom:8px"><summary style="cursor:pointer">Como esta lista funciona</summary>🔁 lançamento recorrente · 🔢 parcela de compra parcelada · ✓ efetivado · ◷ pendente. Os totais (↓ entradas, ↑ saídas, ⇄ transferências) somam tudo o que está na lista, inclusive Ajustes; as transferências só movimentam dinheiro entre contas e não entram nos totais do topo. Ordem: por data (ou data de criação); lançamentos antigos sem data ficam primeiro, na ordem em que foram lançados. No celular, toque numa linha para abrir e editar.</details>
+    <details class="hint" style="margin-bottom:8px"><summary style="cursor:pointer">Como esta lista funciona</summary>📌 entrada da folha (vem da aba Salário, fica fixa no topo e conta como entrada) · 🔁 lançamento recorrente · 🔢 parcela de compra parcelada · ✓ efetivado · ◷ pendente. Os totais (↓ entradas, ↑ saídas, ⇄ transferências) somam tudo o que está na lista, inclusive Ajustes; as transferências só movimentam dinheiro entre contas e não entram nos totais do topo. Ordem: por data (ou data de criação); lançamentos antigos sem data ficam primeiro, na ordem em que foram lançados. No celular, toque numa linha para abrir e editar. Mudar a <b>data</b> para outro mês move o lançamento para aquele mês (com opção de desfazer).</details>
     <div class="scrollx"><div class="lgrid">
       <div class="lhead"><div>Descrição</div><div>Valor</div><div>Categoria / Destino</div><div>Conta / Origem</div><div>Status</div><div>Data</div><div></div></div>
       ${visiveis.map(lancRow).join('')||'<div class="muted" style="padding:10px">Nenhum lançamento neste filtro.</div>'}
@@ -1377,10 +1433,6 @@ function renderMonth(m){
     <div class="kpi"><span>Caixa Final (sem invest.)</span><b>${fmt(c.cxFinalProj[m])}</b></div>
     <div class="kpi"><span>Saldo Investido (real)</span><b>${fmt(c.investSaldo[m])}</b></div>
   </div>
-
-  <div class="card"><h3>${tipoIco('in')}Entradas Automáticas (Folha)</h3><div class="scrollx"><table class="tbl lanc">
-  <thead><tr><th>Descrição</th><th>Valor</th><th>Categoria</th><th>Conta</th><th>Status</th><th>Data</th></tr></thead>
-  <tbody>${autoRows}</tbody></table></div></div>
 
   ${lancCard}
 
@@ -1719,6 +1771,16 @@ document.addEventListener('change',e=>{
   const path=t.dataset.path;if(!path)return;
   let val = t.type==='checkbox' ? t.checked : t.value;
   if(t.dataset.num)val=parseFloat(val)||0;
+  const mDt=path.match(/^meses\.(\d+)\.(rec|desp|trans)\.(\d+)\.data$/);
+  if(mDt&&val){
+    const m0=parseInt(mDt[1]),side=mDt[2],idx=parseInt(mDt[3]),ano=state.meta.ano||new Date().getFullYear();
+    const dm=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(val));
+    if(dm){
+      if(parseInt(dm[1])!==ano){alert(`A data precisa estar em ${ano}, o ano em edição. Para lançar em outro ano use "Avançar de Ano" ou crie o lançamento lá.`);renderCurrent();return;}
+      const m1=parseInt(dm[2])-1;
+      if(m1!==m0&&m1>=0&&m1<=11){moverLancamento(m0,side,idx,m1,String(val));return;}
+    }
+  }
   const oldVal=getPath(state,path);
   const mAtv=path.match(/^contas\.(\d+)\.ativa$/);
   if(mAtv&&val===false){
@@ -1782,6 +1844,10 @@ document.addEventListener('click',e=>{
     case 'advanceYear': advanceYear(); return;
     case 'toggleLanc': { const row=btn.closest('.lrow'); if(row){ row.classList.toggle('open'); const k=row.dataset.lkey; if(row.classList.contains('open'))lancOpen.add(k); else lancOpen.delete(k);} return; }
     case 'lancFiltro': lancFiltro=btn.dataset.f||'todos'; renderCurrent(); return;
+    case 'backupManual': backupManual(); return;
+    case 'restaurarBackup': restaurarBackup(btn.dataset.id); return;
+    case 'restaurarLocalAnterior': restaurarVersaoLocalAnterior(); return;
+    case 'abrirConflito': mostrarModalConflito(); return;
     case 'toggleTheme': { const n=themeNow()==='dark'?'light':'dark'; try{localStorage.setItem('cf-theme',n);}catch(e){} applyTheme(); renderCurrent(); return; }
     case 'importApply': applyImportPlan(); return;
     case 'importCancel': importPending=null; renderCurrent(); return;
@@ -1802,6 +1868,7 @@ document.addEventListener('click',e=>{
     case 'nextMonth': { const mm=parseInt(currentTab.slice(1)); if(mm<11)currentTab='m'+(mm+1); break; }
     case 'reset':
       if(confirm('Restaurar todos os dados para o padrão inicial? Isso apaga as edições feitas.')){
+        backupEvento('antes-de-restaurar-padrao');
         const oldLog=Array.isArray(state.log)?state.log:[];
         state=buildDefault();
         state.log=oldLog;
@@ -1818,7 +1885,17 @@ document.addEventListener('click',e=>{
 /* ---- Persistência ---- */
 const STORAGE_KEY='controle_financeiro_state';
 const STORAGE_KEY_LEGACY='controle_financeiro_2026';
-function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}scheduleDriveSave();}
+// Só conta como alteração (e só dispara envio ao Drive) quando os dados realmente mudaram.
+// Antes, qualquer redesenho de tela regravava e reenviava tudo, o que faria dois aparelhos
+// brigarem por versão só por navegar entre abas.
+let gLastPersistedText=null;
+function persist(){
+  const txt=JSON.stringify(state);
+  if(txt===gLastPersistedText)return;
+  gLastPersistedText=txt;
+  try{localStorage.setItem(STORAGE_KEY,txt);}catch(e){}
+  markDirty(true);scheduleDriveSave();
+}
 function migrateState(s){
   if(!s.meta)s.meta={};
   if(!s.meta.ano)s.meta.ano=2026;
@@ -1895,9 +1972,9 @@ let driveSaveTimer=null;
 function renderSyncBadge(){
   const dot=document.getElementById('syncDot'), txt=document.getElementById('syncText'), badge=document.getElementById('syncBadge');
   if(!dot||!txt||!badge)return;
-  badge.classList.toggle('err',gSyncStatus==='error');
-  dot.className='sync-dot'+(gSyncStatus==='synced'?' on':gSyncStatus==='connecting'?' busy':gSyncStatus==='error'?' err':'');
-  const labels={offline:'Não conectado',connecting:'Sincronizando…',synced: gLastSync?`Sincronizado às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`:'Sincronizado',error:'Erro de sincronização'};
+  badge.classList.toggle('err',gSyncStatus==='error'||gSyncStatus==='conflict');
+  dot.className='sync-dot'+(gSyncStatus==='synced'?' on':gSyncStatus==='connecting'?' busy':(gSyncStatus==='error'||gSyncStatus==='conflict')?' err':'');
+  const labels={offline:'Não conectado',connecting:'Sincronizando…',synced: gLastSync?`Sincronizado às ${gLastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`:'Sincronizado',error:'Erro de sincronização',conflict:'Conflito — toque para resolver'};
   txt.textContent=labels[gSyncStatus]||'';
 }
 async function readApiError(resp){
@@ -1930,8 +2007,10 @@ async function handleGoogleToken(resp){
   try{
     await fetchGoogleUserInfo();
     await ensureDriveFile();
-    await loadFromDrive();
+    const r=await sincronizarNoLogin();
+    if(r==='conflito'){renderSyncBadge();renderCurrent();return;}
     gSyncStatus='synced';gLastSync=new Date();gLastError=null;
+    refreshBackups().then(()=>{if(currentTab==='config')renderCurrent();}).catch(()=>{});
   }catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';}
   renderSyncBadge();
   renderCurrent();
@@ -1975,15 +2054,6 @@ async function ensureDriveFile(){
   if(gDriveFileLink)localStorage.setItem('gdrive_file_link',gDriveFileLink);
   if(gDriveFileId)localStorage.setItem('gdrive_file_id',gDriveFileId);
 }
-async function loadFromDrive(){
-  if(!gDriveFileId)throw new Error('Nenhum arquivo do Drive identificado para carregar');
-  const r=await fetch(`https://www.googleapis.com/drive/v3/files/${gDriveFileId}?alt=media`,{headers:{Authorization:`Bearer ${gAccessToken}`}});
-  if(!r.ok)throw new Error('Falha ao carregar do Drive: '+await readApiError(r));
-  const text=await r.text();
-  if(!text.trim())return;
-  const remote=JSON.parse(text);
-  if(remote&&remote.contas)state=migrateState(remote);
-}
 async function withFreshToken(fn){
   if(gAccessToken&&Date.now()<gTokenExpiry)return fn();
   if(!gTokenClient){gLastError='Cliente de login do Google não inicializado — tente recarregar a página';gSyncStatus='error';renderSyncBadge();return;}
@@ -2004,18 +2074,29 @@ async function withFreshToken(fn){
 }
 async function doSaveToDrive(){
   if(!gAccessToken){gLastError='Não há uma sessão ativa do Google — conecte-se novamente.';gSyncStatus='error';renderSyncBadge();return;}
+  if(gConflict){return;} // aguardando você decidir qual versão manter
   if(!gDriveFileId){
     gSyncStatus='connecting';renderSyncBadge();
     try{await ensureDriveFile();}catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';renderSyncBadge();return;}
   }
   gSyncStatus='connecting';renderSyncBadge();
   try{
-    const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${gDriveFileId}?uploadType=media`,{
+    // 1) alguém (outro aparelho/aba) salvou depois do que eu carreguei? Então não sobrescreve: pergunta.
+    const head=await driveHead();
+    if(head.rev!==gBaseRev){abrirConflito(head,'salvar');return;}
+    // 2) backup semanal da versão que está no Drive, antes de sobrescrevê-la
+    await maybeWeeklyBackup();
+    // 3) grava, marcando a nova revisão
+    const texto=JSON.stringify(state),rev=gBaseRev+1,boundary='-------cf'+Date.now();
+    const meta={appProperties:{rev:String(rev),device:DEVICE_ID}};
+    const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${gDriveFileId}?uploadType=multipart&fields=id,modifiedTime`,{
       method:'PATCH',
-      headers:{Authorization:`Bearer ${gAccessToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify(state)
+      headers:{Authorization:`Bearer ${gAccessToken}`,'Content-Type':`multipart/related; boundary=${boundary}`},
+      body:multipartBody(meta,texto,boundary)
     });
     if(!r.ok)throw new Error('Falha ao salvar no Drive: '+await readApiError(r));
+    setBaseRev(rev);gLastSyncedText=texto;
+    if(JSON.stringify(state)===texto)markDirty(false); // se você editou durante o envio, continua pendente
     gLastSync=new Date();gSyncStatus='synced';gLastError=null;
   }catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';}
   renderSyncBadge();
@@ -2025,6 +2106,198 @@ function scheduleDriveSave(){
   if(!GOOGLE_CONFIGURED||!gAccessToken)return;
   clearTimeout(driveSaveTimer);
   driveSaveTimer=setTimeout(saveToDrive,2000);
+}
+
+/* ---- Sincronização segura: revisão, conflitos e backups ---- */
+const DEVICE_ID=(()=>{try{let d=localStorage.getItem('cf-device');if(!d){d=Math.random().toString(36).slice(2,8);localStorage.setItem('cf-device',d);}return d;}catch(e){return 'x'+Math.random().toString(36).slice(2,6);}})();
+const BACKUP_PREFIX='controle-financeiro-backup-',BACKUP_KEEP=15,BACKUP_EVERY_DAYS=7;
+let gBaseRev=(()=>{try{return parseInt(localStorage.getItem('cf-base-rev')||'0')||0;}catch(e){return 0;}})();
+let gLastSyncedText=null,gConflict=null,gBackups=[],gBackupsLoaded=false,gBackupsLoading=false,gChecking=false;
+function setBaseRev(n){gBaseRev=n;try{localStorage.setItem('cf-base-rev',String(n));}catch(e){}}
+function hasBaseRev(){try{return localStorage.getItem('cf-base-rev')!==null;}catch(e){return false;}}
+function markDirty(v){try{if(v)localStorage.setItem('cf-dirty','1');else localStorage.removeItem('cf-dirty');}catch(e){}}
+function isDirty(){try{return localStorage.getItem('cf-dirty')==='1';}catch(e){return false;}}
+const dAuth=()=>({Authorization:`Bearer ${gAccessToken}`});
+function multipartBody(meta,content,boundary){return `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(meta)}\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n${content}\r\n--${boundary}--`;}
+async function driveHead(){
+  const r=await fetch(`https://www.googleapis.com/drive/v3/files/${gDriveFileId}?fields=modifiedTime,appProperties,trashed`,{headers:dAuth()});
+  if(!r.ok)throw new Error('Falha ao verificar o arquivo no Drive: '+await readApiError(r));
+  const d=await r.json();
+  return {rev:parseInt(d.appProperties&&d.appProperties.rev||'0')||0,device:(d.appProperties&&d.appProperties.device)||'',modifiedTime:d.modifiedTime||''};
+}
+async function driveReadRemote(){
+  const r=await fetch(`https://www.googleapis.com/drive/v3/files/${gDriveFileId}?alt=media`,{headers:dAuth()});
+  if(!r.ok)throw new Error('Falha ao carregar do Drive: '+await readApiError(r));
+  const text=await r.text();let remote=null;
+  if(text.trim()){try{remote=JSON.parse(text);}catch(e){throw new Error('O arquivo do Drive não está em um formato válido.');}}
+  return {text,remote};
+}
+function guardarVersaoLocalAnterior(){try{localStorage.setItem('cf-prev-state',JSON.stringify(state));localStorage.setItem('cf-prev-at',new Date().toISOString());}catch(e){}}
+async function aplicarRemoto(head){
+  const {text,remote}=await driveReadRemote();
+  if(!(remote&&remote.contas))return false;
+  state=migrateState(remote);
+  gLastSyncedText=text;setBaseRev(head.rev);markDirty(false);
+  gLastPersistedText=JSON.stringify(state);
+  try{localStorage.setItem(STORAGE_KEY,gLastPersistedText);}catch(e){}
+  buildNav();renderCurrent();
+  return true;
+}
+async function sincronizarNoLogin(){
+  const head=await driveHead();
+  const {text,remote}=await driveReadRemote();
+  const remotoTemDados=!!(remote&&remote.contas),sujo=isDirty();
+  if(sujo&&remotoTemDados&&(head.rev!==gBaseRev||!hasBaseRev())){gLastSyncedText=text;abrirConflito(head,'login');return 'conflito';}
+  if(sujo){gLastSyncedText=text||null;setBaseRev(head.rev);scheduleDriveSave();return 'ok';}
+  if(remotoTemDados){
+    if(JSON.stringify(state)!==JSON.stringify(migrateState(JSON.parse(text))))guardarVersaoLocalAnterior();
+    await aplicarRemoto(head);return 'ok';
+  }
+  setBaseRev(head.rev);gLastSyncedText=null;scheduleDriveSave();return 'ok';
+}
+/* conflito: o Drive mudou desde que este aparelho carregou, e aqui há alterações não enviadas */
+function abrirConflito(head,origem){
+  gConflict={head,origem};gSyncStatus='conflict';gLastError=null;renderSyncBadge();
+  mostrarModalConflito();
+  if(currentTab==='config')renderCurrent();
+}
+function fecharModalConflito(){const m=document.getElementById('cfModal');if(m)m.remove();}
+function mostrarModalConflito(){
+  if(!gConflict)return;fecharModalConflito();
+  const h=gConflict.head,quando=h.modifiedTime?new Date(h.modifiedTime).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'—';
+  const ov=document.createElement('div');ov.id='cfModal';ov.className='cf-modal-ov';
+  ov.innerHTML=`<div class="cf-modal" role="dialog" aria-modal="true" aria-labelledby="cfTitulo"><h3 id="cfTitulo">⚠️ O arquivo no Drive mudou</h3>
+    <p>Outro aparelho (ou outra aba) salvou alterações no Google Drive em <b>${quando}</b>, e este aparelho também tem alterações que ainda não foram enviadas. Se eu salvasse agora, uma das versões apagaria a outra. O que você prefere?</p>
+    <div class="cf-opts">
+      <button type="button" class="btn" id="cfUsarDrive"><b>☁️ Usar a versão do Drive</b><small>Descarta as alterações feitas aqui. Uma cópia delas é guardada como backup antes.</small></button>
+      <button type="button" class="btn" id="cfManter"><b>📱 Manter esta versão e sobrescrever o Drive</b><small>Descarta o que foi salvo no outro aparelho. Uma cópia dele é guardada como backup antes.</small></button>
+      <button type="button" class="btn ghost" id="cfDepois"><b>Decidir depois</b><small>Nada é enviado nem apagado. Suas alterações continuam salvas neste aparelho.</small></button>
+    </div></div>`;
+  document.body.appendChild(ov);
+  document.getElementById('cfUsarDrive').onclick=()=>resolverConflito('drive');
+  document.getElementById('cfManter').onclick=()=>resolverConflito('local');
+  document.getElementById('cfDepois').onclick=()=>fecharModalConflito();
+}
+async function resolverConflito(escolha){
+  const c=gConflict;if(!c)return;fecharModalConflito();
+  gSyncStatus='connecting';renderSyncBadge();
+  try{
+    await withFreshToken(async()=>{
+      if(escolha==='drive'){
+        await criarBackupDrive('versao-local-descartada',JSON.stringify(state));
+        guardarVersaoLocalAnterior();
+        gConflict=null;
+        await aplicarRemoto(c.head);
+        gSyncStatus='synced';gLastSync=new Date();gLastError=null;
+        showToast('Dados do Drive carregados. Uma cópia do que estava aqui foi guardada em Backups.');
+      }else{
+        const {text}=await driveReadRemote();
+        if(text.trim())await criarBackupDrive('versao-drive-substituida',text);
+        setBaseRev(c.head.rev);gConflict=null;
+        await doSaveToDrive();
+        showToast('Drive atualizado com a versão deste aparelho. A versão anterior foi guardada em Backups.');
+      }
+    });
+  }catch(e){console.error(e);gLastError=e?.message||String(e);gSyncStatus='error';}
+  renderSyncBadge();renderCurrent();
+}
+/* verificação periódica: outro aparelho salvou algo mais novo? */
+async function checkRemoteChanges(){
+  if(!gAccessToken||!gDriveFileId||gConflict||gChecking||Date.now()>=gTokenExpiry)return;
+  gChecking=true;
+  try{
+    const head=await driveHead();
+    if(head.rev===gBaseRev)return;
+    if(isDirty()||driveSaveTimer){abrirConflito(head,'verificacao');return;}
+    guardarVersaoLocalAnterior();
+    if(await aplicarRemoto(head)){gLastSync=new Date();gSyncStatus='synced';renderSyncBadge();showToast('Dados atualizados com as mudanças feitas em outro aparelho.');}
+  }catch(e){console.warn('verificação do Drive falhou',e);}
+  finally{gChecking=false;}
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkRemoteChanges();});
+setInterval(()=>{if(document.visibilityState==='visible')checkRemoteChanges();},120000);
+/* backups no Drive */
+const BACKUP_TAGS={semanal:'Automático (semanal)',manual:'Manual','antes-de-restaurar':'Antes de restaurar','versao-local-descartada':'Versão local descartada (conflito)','versao-drive-substituida':'Versão do Drive substituída (conflito)','antes-de-avancar-ano':'Antes de avançar o ano','antes-de-importar':'Antes de importar planilha','antes-de-restaurar-padrao':'Antes de restaurar o padrão'};
+async function refreshBackups(){
+  if(!gAccessToken)return;
+  const q=encodeURIComponent(`name contains '${BACKUP_PREFIX}' and trashed=false`);
+  const r=await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&spaces=drive&orderBy=createdTime%20desc&pageSize=100&fields=files(id,name,createdTime,size,appProperties)`,{headers:dAuth()});
+  if(!r.ok)throw new Error('Falha ao listar backups: '+await readApiError(r));
+  gBackups=((await r.json()).files||[]);gBackupsLoaded=true;
+}
+async function criarBackupDrive(tag,texto){
+  if(!gAccessToken||!texto)return null;
+  const d=new Date(),pad=n=>String(n).padStart(2,'0');
+  const nome=`${BACKUP_PREFIX}${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}-${tag}.json`;
+  const boundary='-------cfb'+Date.now();
+  const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,createdTime',{
+    method:'POST',headers:{Authorization:`Bearer ${gAccessToken}`,'Content-Type':`multipart/related; boundary=${boundary}`},
+    body:multipartBody({name:nome,mimeType:'application/json',appProperties:{backup:'1',tag}},texto,boundary)});
+  if(!r.ok)throw new Error('Falha ao criar backup: '+await readApiError(r));
+  const f=await r.json();
+  await refreshBackups();await podarBackups();
+  return f;
+}
+async function podarBackups(){
+  const extras=gBackups.slice(BACKUP_KEEP);
+  for(const f of extras){try{await fetch(`https://www.googleapis.com/drive/v3/files/${f.id}`,{method:'PATCH',headers:{...dAuth(),'Content-Type':'application/json'},body:JSON.stringify({trashed:true})});}catch(e){}}
+  if(extras.length)await refreshBackups();
+}
+async function maybeWeeklyBackup(){
+  try{
+    if(!gBackupsLoaded)await refreshBackups();
+    const novo=gBackups[0],idade=novo?Date.now()-new Date(novo.createdTime).getTime():Infinity;
+    if(idade>BACKUP_EVERY_DAYS*86400000&&gLastSyncedText)await criarBackupDrive('semanal',gLastSyncedText);
+  }catch(e){console.warn('backup semanal falhou',e);}
+}
+function backupEvento(tag){ // sem esperar: o texto é capturado agora, antes da alteração
+  if(!gAccessToken||!gDriveFileId||gConflict)return;
+  const texto=JSON.stringify(state);
+  withFreshToken(()=>criarBackupDrive(tag,texto)).catch(e=>console.warn('backup falhou',e));
+}
+async function backupManual(){
+  try{await withFreshToken(()=>criarBackupDrive('manual',JSON.stringify(state)));showToast('Backup criado no Google Drive.');}
+  catch(e){alert('Não foi possível criar o backup: '+(e?.message||e));}
+  renderCurrent();
+}
+async function restaurarBackup(id){
+  const f=gBackups.find(x=>x.id===id);if(!f)return;
+  const quando=new Date(f.createdTime).toLocaleString('pt-BR');
+  if(!confirm(`Restaurar o backup de ${quando}?\n\nOs dados atuais serão substituídos pelos desse backup. Antes disso, uma cópia dos dados atuais é guardada como backup ("Antes de restaurar"), então dá para voltar atrás.`))return;
+  try{
+    await withFreshToken(async()=>{
+      const r=await fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media`,{headers:dAuth()});
+      if(!r.ok)throw new Error(await readApiError(r));
+      const dados=JSON.parse(await r.text());
+      if(!(dados&&dados.contas))throw new Error('Este backup não tem dados válidos.');
+      await criarBackupDrive('antes-de-restaurar',JSON.stringify(state));
+      guardarVersaoLocalAnterior();
+      state=migrateState(dados);
+      buildNav();persist();
+      showToast('Backup restaurado. Sincronizando com o Drive…');
+    });
+  }catch(e){alert('Não foi possível restaurar: '+(e?.message||e));}
+  renderCurrent();
+}
+function restaurarVersaoLocalAnterior(){
+  let prev=null;try{prev=localStorage.getItem('cf-prev-state');}catch(e){}
+  if(!prev)return;
+  if(!confirm('Voltar para a versão que estava neste aparelho antes da última atualização vinda do Drive?\n\nOs dados atuais serão trocados por ela.'))return;
+  try{const atual=JSON.stringify(state);state=migrateState(JSON.parse(prev));try{localStorage.setItem('cf-prev-state',atual);localStorage.setItem('cf-prev-at',new Date().toISOString());}catch(e){}buildNav();persist();renderCurrent();showToast('Versão anterior restaurada.');}
+  catch(e){alert('A cópia local anterior não pôde ser lida.');}
+}
+function renderBackupCard(){
+  const conectado=!!gAccessToken&&!!gDriveFileId;
+  let prevAt=null;try{prevAt=localStorage.getItem('cf-prev-at');}catch(e){}
+  const fmtD=iso=>new Date(iso).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const tam=b=>b?`${Math.max(1,Math.round(Number(b)/1024))} KB`:'—';
+  const conflito=gConflict?`<div class="drive-setup-box" style="margin-bottom:10px;border-color:var(--over);color:var(--text)">⚠️ O arquivo do Drive foi alterado em outro aparelho e aqui também há alterações não enviadas. Nada está sendo salvo até você decidir. <button class="btn small" data-action="abrirConflito" style="margin-left:6px">Resolver agora</button></div>`:'';
+  return `<div class="card"><div class="cardhead"><h3>🛟 Backups e versões</h3>${conectado?`<button class="btn small" data-action="backupManual">+ Criar backup agora</button>`:''}</div>
+    ${conflito}
+    <p class="hint">${conectado?`O app guarda uma cópia datada no seu Google Drive no máximo uma vez por semana (a versão que estava no Drive antes de ser sobrescrita) e também antes de ações arriscadas: restaurar, resolver conflito, avançar de ano e importar planilha. Ficam os ${BACKUP_KEEP} mais recentes (os antigos vão para a lixeira do Drive).`:'Conecte sua conta Google (card ao lado) para ter backups automáticos no Drive. Sem conexão, use "Baixar Cópia" (card "Cópia e restauração", logo abaixo) de tempos em tempos.'}</p>
+    ${conectado?`<div class="bk-list">${gBackups.length?gBackups.map(f=>`<div class="bk-item"><div><b style="white-space:nowrap">${fmtD(f.createdTime)}</b><br><small class="muted">${escHtml(BACKUP_TAGS[(f.appProperties&&f.appProperties.tag)||'']||'Backup')} · ${tam(f.size)}</small></div><button class="btn small" data-action="restaurarBackup" data-id="${escAttr(f.id)}">Restaurar</button></div>`).join(''):`<div class="muted" style="padding:8px 0">${gBackupsLoaded?'Nenhum backup ainda — o primeiro é criado no próximo salvamento depois de 7 dias, ou use o botão acima.':'Carregando…'}</div>`}</div>`:''}
+    ${prevAt?`<p class="hint" style="margin-top:10px">🕘 Existe uma cópia local da versão que estava neste aparelho antes da última atualização vinda do Drive (${fmtD(prevAt)}). <button class="btn small" data-action="restaurarLocalAnterior" style="margin-left:6px">Restaurar versão local anterior</button></p>`:''}
+  </div>`;
 }
 function signInGoogle(){
   if(!GOOGLE_CONFIGURED){alert('A sincronização com o Google Drive ainda não foi configurada neste arquivo. Veja as instruções no card "☁️ Sincronização" em Configuração.');return;}
@@ -2054,6 +2327,7 @@ function init(){
   if(!Array.isArray(state.metas)) state.metas=[{nome:'Viagem Europa',meta:25000,conta:'RDB CX Reserva'},{nome:'Reserva de Emergência',meta:30000,conta:'RDB CX Reserva'},{nome:'Manutenção',meta:5000,conta:'RDB CX Manu'}];
   if(!Array.isArray(state.log)) state.log=[];
   if(!Array.isArray(state.historico)) state.historico=[];
+  gLastPersistedText=JSON.stringify(state);
   buildNav();
   currentTab='home';
   renderCurrent();
@@ -2069,6 +2343,7 @@ function init(){
     if(e.key==='Escape'){ if(qa) closeQuickAdd(); closeSearch(); }
   });
   renderSyncBadge();
+  const sb=document.getElementById('syncBadge');if(sb)sb.addEventListener('click',()=>{if(gConflict)mostrarModalConflito();});
   if(typeof google!=='undefined'&&google.accounts){ initGoogleAuth(); }
   else{ window.addEventListener('load',()=>setTimeout(initGoogleAuth,300)); }
 }
